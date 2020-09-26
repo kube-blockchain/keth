@@ -1,7 +1,6 @@
 '''Handlers for the Ethereum operator
 '''
 # pylint: disable=missing-function-docstring
-import os
 import datetime
 import kopf
 
