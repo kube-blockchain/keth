@@ -10,7 +10,6 @@ FROM python:3.8 as build
 WORKDIR /app
 COPY requirements.txt ./
 RUN pip3 install -r requirements.txt
-COPY *.yaml ./
 COPY *.py ./
 EXPOSE 8080
 CMD kopf run --liveness=http://0.0.0.0:8080/healthz handlers.py
