@@ -8,7 +8,7 @@ on:
       - v*
   pull_request:
 env:
-  IMAGE_NAME: kube-blockchain/keth
+  IMAGE_NAME: keth
 jobs:
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
   # test:
