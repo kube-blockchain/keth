@@ -1,4 +1,4 @@
-'''Handlers for the Ethereum operator
+'''Handlers for the keth operator
 '''
 # pylint: disable=missing-function-docstring
 import datetime

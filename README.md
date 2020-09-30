@@ -1,3 +1,3 @@
-# keth - Kubernetes Ethereum
+# Kubernetes Ethereum
 
 Kubernetes implementation of the Ethereum protocol.
