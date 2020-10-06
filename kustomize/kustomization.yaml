@@ -4,6 +4,7 @@ kind: Kustomization
 commonLabels:
   app: keth
   kubernetes.io/app: keth
+namespace: keth
 resources:
   - cluster-role.yaml
   - cluster-role-binding.yaml
