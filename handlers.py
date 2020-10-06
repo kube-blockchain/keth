@@ -5,7 +5,7 @@ import datetime
 import kopf
 
 
-GROUP = 'ethereum.kube-blockchain.io'
+GROUP = 'kube-blockchain.io'
 VERSION = 'v1'
 PLURAL = 'ethereum'
 
@@ -22,7 +22,5 @@ def get_current_timestamp(**_):
 @kopf.on.resume(GROUP, VERSION, PLURAL)
 @kopf.on.create(GROUP, VERSION, PLURAL)
 @kopf.on.update(GROUP, VERSION, PLURAL)
-def ensure_deployment(spec, name, namespace, logger, **_):
-    logger.info('spec %s', spec)
-    logger.info('name %s', name)
-    logger.info('namespace %s', namespace)
+def ensure_deployment(logger, **_):
+    logger.info('ensure_deployment')
