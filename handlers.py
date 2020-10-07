@@ -50,19 +50,11 @@ def ensure_config_map_genesis(name, namespace):
     kubernetes.config.load_incluster_config()
     client = kubernetes.client.CoreV1Api()
     try:
-        client.create_namespaced_config_map(
-            namespace,
-            resource,
-        )
+        client.create_namespaced_config_map(namespace, resource)
     except ApiException as error:
         if error.status != 409:
             raise
-
-        client.patch_namespaced_config_map(
-            name,
-            namespace,
-            resource,
-        )
+        client.patch_namespaced_config_map(name, namespace, resource)
 
 
 def ensure_service_geth_api(name, namespace):
@@ -80,19 +72,11 @@ def ensure_service_geth_api(name, namespace):
     kubernetes.config.load_incluster_config()
     client = kubernetes.client.CoreV1Api()
     try:
-        client.create_namespaced_service(
-            namespace,
-            resource,
-        )
+        client.create_namespaced_service(namespace, resource)
     except ApiException as error:
         if error.status != 409:
             raise
-
-        client.patch_namespaced_service(
-            name,
-            namespace,
-            resource,
-        )
+        client.patch_namespaced_service(name, namespace, resource)
 
 
 def ensure_statefulset_geth_api(name, namespace):
@@ -110,16 +94,8 @@ def ensure_statefulset_geth_api(name, namespace):
     kubernetes.config.load_incluster_config()
     client = kubernetes.client.AppsV1Api()
     try:
-        client.create_namespaced_stateful_set(
-            namespace,
-            resource,
-        )
+        client.create_namespaced_stateful_set(namespace, resource)
     except ApiException as error:
         if error.status != 409:
             raise
-
-        client.patch_namespaced_stateful_set(
-            name,
-            namespace,
-            resource,
-        )
+        client.patch_namespaced_stateful_set(name, namespace, resource)
