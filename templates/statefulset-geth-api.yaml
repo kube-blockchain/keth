@@ -23,7 +23,7 @@ spec:
             - |
               geth \
                 --datadir=/root/.ethereum \
-                --ethstats="${POD_NAME}.${POD_NAMESPACE}:${ETHSTATS_SECRET}@${ETHSTATS_SVC}" \
+                --ethstats="${{POD_NAME}}.${{POD_NAMESPACE}}:${{ETHSTATS_SECRET}}@${{ETHSTATS_SVC}}" \
                 --ropsten \
                 --rpc \
                 --rpcaddr=0.0.0.0 \
@@ -76,7 +76,7 @@ spec:
             - containerPort: 30303
               name: discovery-tcp
               protocol: TCP
-          resources: {}
+          resources: {{}}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
@@ -92,7 +92,7 @@ spec:
       #     image: ethereum/client-go:v1.9.15
       #     imagePullPolicy: IfNotPresent
       #     name: import-geth-account
-      #     resources: {}
+      #     resources: {{}}
       #     terminationMessagePath: /dev/termination-log
       #     terminationMessagePolicy: File
       #     volumeMounts:
@@ -103,7 +103,7 @@ spec:
       #         readOnly: true
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: {}
+      securityContext: {{}}
       terminationGracePeriodSeconds: 10
       # volumes:
       #   - configMap:
