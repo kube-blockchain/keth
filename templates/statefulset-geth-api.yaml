@@ -83,18 +83,19 @@ spec:
             - mountPath: /root/.ethereum
               name: data
       dnsPolicy: ClusterFirst
-      # initContainers:
-      #   - args:
-      #       - -c
+      initContainers:
+        - args:
+            - -c
+            - ls
       #       - geth account import --password /root/.ethereum/account/accountSecret /root/.ethereum/account/accountPrivateKey || true
-      #     command:
-      #       - /bin/sh
-      #     image: ethereum/client-go:v1.9.15
-      #     imagePullPolicy: IfNotPresent
-      #     name: import-geth-account
-      #     resources: {{}}
-      #     terminationMessagePath: /dev/termination-log
-      #     terminationMessagePolicy: File
+          command:
+            - /bin/sh
+          image: ethereum/client-go:v1.9.15
+          imagePullPolicy: IfNotPresent
+          name: import-geth-account
+          resources: {{}}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
       #     volumeMounts:
       #       - mountPath: /root/.ethereum
       #         name: data
