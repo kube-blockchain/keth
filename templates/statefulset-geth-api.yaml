@@ -10,12 +10,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      component: geth-api
-  serviceName: geth-api
+      component: {name}
+  serviceName: {name}
   template:
     metadata:
       labels:
-        component: geth-api
+        component: {name}
     spec:
       containers:
         - args:
@@ -101,10 +101,10 @@ spec:
       #       - mountPath: /root/.ethereum/account
       #         name: account
       #         readOnly: true
-      # restartPolicy: Always
-      # schedulerName: default-scheduler
-      # securityContext: {}
-      # terminationGracePeriodSeconds: 10
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 10
       # volumes:
       #   - configMap:
       #       defaultMode: 420
@@ -123,4 +123,4 @@ spec:
         resources:
           requests:
             storage: 70Gi
-        storageClassName: gp2
+        # storageClassName: gp2
