@@ -83,7 +83,7 @@ def ensure_statefulset_geth_api(name, namespace):
     template_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         'templates',
-        'statefulset-geth-api',
+        'statefulset-geth-api.yaml',
     )
     with open(template_file, 'r') as template:
         resource = yaml.safe_load(template.read().format(
