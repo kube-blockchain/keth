@@ -5,47 +5,50 @@ metadata:
   name: test
   namespace: keth
 spec:
-  api:
-    port: 8585
-    replicas: 3
-  bootnode:
-    replicas: 1
-  miner:
-    replicas: 3
-  ethstats:
-    port: 80
-    replicas: 1
-    secret: ethstats
   account:
-    secret: account
-  # https://geth.ethereum.org/docs/interface/command-line-options
-  genesis:
-    alloc:
-      - address: "0xa4792107A80519BD4Bec1B6540f3826a3b514AB1"
-        balance": 1000000000000000000000000000000
-      - address: "0x2Bd51E9bA2A8F88e9495F44C9EFe933725Cf80FD"
-        balance": 1000000000000000000000000000000
-      - address: "0x0bCDE7FE18F96548cc19144359E56416E632Cb5E"
-        balance": 1000000000000000000000000000000
-    coinbase": "0x0000000000000000000000000000000000000000"
-    config:
-      byzantiumBlock: 0
-      eip150Block: 0
-      eip155Block: 0
-      eip158Block: 0
-      constantinopleBlock: 0
-      homesteadBlock: 0
-      petersburgBlock: 0
-      chainId: 666
-      clique":
-        period": 5
-        epoch": 30000
-      ethash: {}
-    difficulty: "0x0400"
-    extraData": "0x"
-    gasLimit: "0x8000000"
-    mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000"
-    nonce": "0x000000000000002a"
-    parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
-    timestamp": "0x00"
-  networkId: 666
+    secret: geth-account
+  storageClassName: gp2
+  # api:
+  #   port: 8585
+  #   replicas: 3
+  # bootnode:
+  #   replicas: 1
+  # miner:
+  #   replicas: 3
+  # ethstats:
+  #   port: 80
+  #   replicas: 1
+  #   secret: ethstats
+  # account:
+  #   secret: account
+  # # https://geth.ethereum.org/docs/interface/command-line-options
+  # genesis:
+  #   alloc:
+  #     - address: "0xa4792107A80519BD4Bec1B6540f3826a3b514AB1"
+  #       balance": 1000000000000000000000000000000
+  #     - address: "0x2Bd51E9bA2A8F88e9495F44C9EFe933725Cf80FD"
+  #       balance": 1000000000000000000000000000000
+  #     - address: "0x0bCDE7FE18F96548cc19144359E56416E632Cb5E"
+  #       balance": 1000000000000000000000000000000
+  #   coinbase": "0x0000000000000000000000000000000000000000"
+  #   config:
+  #     byzantiumBlock: 0
+  #     eip150Block: 0
+  #     eip155Block: 0
+  #     eip158Block: 0
+  #     constantinopleBlock: 0
+  #     homesteadBlock: 0
+  #     petersburgBlock: 0
+  #     chainId: 666
+  #     clique":
+  #       period": 5
+  #       epoch": 30000
+  #     ethash: {}
+  #   difficulty: "0x0400"
+  #   extraData": "0x"
+  #   gasLimit: "0x8000000"
+  #   mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  #   nonce": "0x000000000000002a"
+  #   parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  #   timestamp": "0x00"
+  # networkId: 666

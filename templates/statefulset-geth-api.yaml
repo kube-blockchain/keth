@@ -87,7 +87,7 @@ spec:
         - args:
             - -c
             - ls
-      #       - geth account import --password /root/.ethereum/account/accountSecret /root/.ethereum/account/accountPrivateKey || true
+          #       - geth account import --password /root/.ethereum/account/accountSecret /root/.ethereum/account/accountPrivateKey || true
           command:
             - /bin/sh
           image: ethereum/client-go:v1.9.15
@@ -96,25 +96,25 @@ spec:
           resources: {{}}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
-      #     volumeMounts:
-      #       - mountPath: /root/.ethereum
-      #         name: data
-      #       - mountPath: /root/.ethereum/account
-      #         name: account
-      #         readOnly: true
+      #   volumeMounts:
+      #     - mountPath: /root/.ethereum
+      #       name: data
+      #     - mountPath: /root/.ethereum/account
+      #       name: account
+      #       readOnly: true
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {{}}
       terminationGracePeriodSeconds: 10
-      # volumes:
-      #   - configMap:
-      #       defaultMode: 420
-      #       name: geth-config
-      #     name: config
-      #   - name: account
-      #     secret:
-      #       defaultMode: 420
-      #       secretName: geth-account
+      volumes:
+        # - configMap:
+        #     defaultMode: 420
+        #     name: geth-config
+        #   name: config
+        - name: account
+          secret:
+            defaultMode: 420
+            secretName: {accountSecret}
   volumeClaimTemplates:
     - metadata:
         name: data
@@ -124,4 +124,4 @@ spec:
         resources:
           requests:
             storage: 10Gi
-        # storageClassName: gp2
+        storageClassName: {storageClassName}
