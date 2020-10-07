@@ -2,5 +2,20 @@
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    component: {name}
   name: {name}
   namespace: {namespace}
+spec:
+  ports:
+    - name: rpc
+      port: 8545
+      protocol: TCP
+      targetPort: 8545
+    - name: ws
+      port: 8546
+      protocol: TCP
+      targetPort: 8546
+  selector:
+    component: {name}
+  type: ClusterIP

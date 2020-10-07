@@ -21,6 +21,8 @@ rules:
     resources:
       - configmaps
       - deployments
+      - services
+      - statefulsets
     verbs:
       - create
       - delete
