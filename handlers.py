@@ -32,7 +32,8 @@ def ensure_deployment(name, namespace, logger, **_):
 
     config_map_genesis_tpl = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
-        "templates/config-map-genesis.yaml",
+        "templates",
+        "config-map-genesis.yaml",
     )
     config_map_genesis_name = f'{name}-genesis'
     with open(config_map_genesis_tpl, 'r') as template:
