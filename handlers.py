@@ -42,7 +42,7 @@ def ensure_deployment(name, namespace, logger, **_):
         ))
     kopf.adopt(config_map_genesis)
     kubernetes.config.load_incluster_config()
-    apps = kubernetes.client.AppsV1Api()
+    # apps = kubernetes.client.AppsV1Api()
     core = kubernetes.client.CoreV1Api()
     try:
         core.create_namespaced_config_map(
