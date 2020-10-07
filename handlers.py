@@ -78,7 +78,7 @@ def ensure_service_geth_api(name, namespace):
         ))
     kopf.adopt(resource)
     kubernetes.config.load_incluster_config()
-    client = kubernetes.client.AppsV1Api()
+    client = kubernetes.client.CoreV1Api()
     try:
         client.create_namespaced_service(
             namespace,
