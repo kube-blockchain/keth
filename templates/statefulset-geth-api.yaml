@@ -122,5 +122,5 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 70Gi
+            storage: 10Gi
         # storageClassName: gp2
