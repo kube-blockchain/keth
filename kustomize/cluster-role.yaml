@@ -4,13 +4,30 @@ metadata:
   name: keth
 rules:
   - apiGroups:
-      - apps
+      - kube-blockchain.io
     resources:
-      - deployments
+      - ethereum
     verbs:
+      - create
+      - delete
       - get
       - list
       - patch
+      - update
+      - watch
+  - apiGroups:
+      - ""
+      - apps
+    resources:
+      - configmaps
+      - deployments
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
       - watch
   - apiGroups:
       - ""
@@ -19,3 +36,9 @@ rules:
       - events
     verbs:
       - create
+  - apiGroups:
+      - ""
+    resources:
+      - pods/log
+    verbs:
+      - get

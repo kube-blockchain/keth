@@ -11,3 +11,4 @@ resources:
   - crd.yaml
   - deployment.yaml
   - service-account.yaml
+  - sample.yaml
