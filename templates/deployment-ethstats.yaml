@@ -37,11 +37,11 @@ spec:
             - containerPort: 3000
               name: http
               protocol: TCP
-          resources: {}
+          resources: {{}}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: {}
+      securityContext: {{}}
       terminationGracePeriodSeconds: 30

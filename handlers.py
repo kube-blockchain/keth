@@ -31,9 +31,9 @@ def ensure_deployment(logger, name, namespace, spec, **_):
     logger.info('ensure_deployment')
 
     ensure_config_map_genesis(f'{name}-genesis', namespace)
-    ensure_deployment_ethstats(f'{name}-geth-api', namespace, spec)
+    ensure_deployment_ethstats(f'{name}-ethstats', namespace, spec)
     ensure_statefulset_geth_api(f'{name}-geth-api', namespace, spec)
-    ensure_service_ethstats(f'{name}-geth-api', namespace)
+    ensure_service_ethstats(f'{name}-ethstats', namespace)
     ensure_service_geth_api(f'{name}-geth-api', namespace)
 
 
