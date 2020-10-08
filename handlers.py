@@ -32,7 +32,7 @@ def ensure_deployment(logger, name, namespace, spec, **_):
 
     ensure_config_map_genesis(f'{name}-genesis', namespace)
     ensure_service_geth_api(f'{name}-geth-api', namespace)
-    ensure_statefulset_geth_api(f'{name}-geth-api', namespace, spec)
+    ensure_statefulset_geth_api(f'{name}-geth-api', namespace)
 
 
 def ensure_config_map_genesis(name, namespace):
@@ -79,25 +79,25 @@ def ensure_service_geth_api(name, namespace):
         client.patch_namespaced_service(name, namespace, resource)
 
 
-def ensure_statefulset_geth_api(name, namespace, spec):
+def ensure_statefulset_geth_api(name, namespace):
     template_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         'templates',
         'statefulset-geth-api.yaml',
     )
-    with open(template_file, 'r') as template:
-        resource = yaml.safe_load(template.read().format(
-            accountSecret=spec['account']['secret'],
-            name=name,
-            namespace=namespace,
-            storageClassName=spec['storageClassName'],
-        ))
-    kopf.adopt(resource)
-    kubernetes.config.load_incluster_config()
-    client = kubernetes.client.AppsV1Api()
-    try:
-        client.create_namespaced_stateful_set(namespace, resource)
-    except ApiException as error:
-        if error.status != 409:
-            raise
-        client.patch_namespaced_stateful_set(name, namespace, resource)
+    # with open(template_file, 'r') as template:
+    #     resource = yaml.safe_load(template.read().format(
+    #         accountSecret=spec['account']['secret'],
+    #         name=name,
+    #         namespace=namespace,
+    #         storageClassName=spec['storageClassName'],
+    #     ))
+    # kopf.adopt(resource)
+    # kubernetes.config.load_incluster_config()
+    # client = kubernetes.client.AppsV1Api()
+    # try:
+    #     client.create_namespaced_stateful_set(namespace, resource)
+    # except ApiException as error:
+    #     if error.status != 409:
+    #         raise
+    #     client.patch_namespaced_stateful_set(name, namespace, resource)
