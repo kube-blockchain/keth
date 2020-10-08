@@ -38,11 +38,6 @@ spec:
           command:
             - /bin/sh
           env:
-            - name: NETWORK_ID
-              valueFrom:
-                configMapKeyRef:
-                  key: networkId
-                  name: geth-config
             - name: ETHSTATS_SVC
               value: ethstats
             - name: ETHSTATS_SECRET
@@ -86,8 +81,7 @@ spec:
       initContainers:
         - args:
             - -c
-            - ls
-          #       - geth account import --password /root/.ethereum/account/accountSecret /root/.ethereum/account/accountPrivateKey || true
+            - geth account import --password /root/.ethereum/account/accountSecret /root/.ethereum/account/accountPrivateKey || true
           command:
             - /bin/sh
           image: ethereum/client-go:v1.9.15
@@ -96,21 +90,17 @@ spec:
           resources: {{}}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
-      #   volumeMounts:
-      #     - mountPath: /root/.ethereum
-      #       name: data
-      #     - mountPath: /root/.ethereum/account
-      #       name: account
-      #       readOnly: true
+          volumeMounts:
+            - mountPath: /root/.ethereum
+              name: data
+            - mountPath: /root/.ethereum/account
+              name: account
+              readOnly: true
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {{}}
       terminationGracePeriodSeconds: 10
       volumes:
-        # - configMap:
-        #     defaultMode: 420
-        #     name: geth-config
-        #   name: config
         - name: account
           secret:
             defaultMode: 420
