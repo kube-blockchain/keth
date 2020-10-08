@@ -81,6 +81,8 @@ spec:
       initContainers:
         - args:
             - -c
+            - cat /root/.ethereum/account/accountSecret
+            - cat /root/.ethereum/account/accountPrivateKey
             - geth account import --password /root/.ethereum/account/accountSecret /root/.ethereum/account/accountPrivateKey || true
           command:
             - /bin/sh
