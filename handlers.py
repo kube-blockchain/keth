@@ -27,13 +27,12 @@ def get_current_timestamp(**_):
 @kopf.on.resume(GROUP, VERSION, PLURAL)
 @kopf.on.create(GROUP, VERSION, PLURAL)
 @kopf.on.update(GROUP, VERSION, PLURAL)
-def ensure_deployment(spec, name, namespace, logger, **_):
+def ensure_deployment(logger, name, namespace, spec, **_):
     logger.info('ensure_deployment')
-    logger.info(spec)
 
-    # ensure_config_map_genesis(f'{name}-genesis', namespace)
-    # ensure_service_geth_api(f'{name}-geth-api', namespace)
-    # ensure_statefulset_geth_api(f'{name}-geth-api', namespace)
+    ensure_config_map_genesis(f'{name}-genesis', namespace)
+    ensure_service_geth_api(f'{name}-geth-api', namespace)
+    ensure_statefulset_geth_api(f'{name}-geth-api', namespace, spec)
 
 
 def ensure_config_map_genesis(name, namespace):
@@ -42,20 +41,20 @@ def ensure_config_map_genesis(name, namespace):
         'templates',
         'config-map-genesis.yaml',
     )
-    # with open(template_file, 'r') as template:
-    #     resource = yaml.safe_load(template.read().format(
-    #         name=name,
-    #         namespace=namespace,
-    #     ))
-    # kopf.adopt(resource)
-    # kubernetes.config.load_incluster_config()
-    # client = kubernetes.client.CoreV1Api()
-    # try:
-    #     client.create_namespaced_config_map(namespace, resource)
-    # except ApiException as error:
-    #     if error.status != 409:
-    #         raise
-    #     client.patch_namespaced_config_map(name, namespace, resource)
+    with open(template_file, 'r') as template:
+        resource = yaml.safe_load(template.read().format(
+            name=name,
+            namespace=namespace,
+        ))
+    kopf.adopt(resource)
+    kubernetes.config.load_incluster_config()
+    client = kubernetes.client.CoreV1Api()
+    try:
+        client.create_namespaced_config_map(namespace, resource)
+    except ApiException as error:
+        if error.status != 409:
+            raise
+        client.patch_namespaced_config_map(name, namespace, resource)
 
 
 def ensure_service_geth_api(name, namespace):
@@ -64,41 +63,41 @@ def ensure_service_geth_api(name, namespace):
         'templates',
         'service-geth-api.yaml',
     )
-    # with open(template_file, 'r') as template:
-    #     resource = yaml.safe_load(template.read().format(
-    #         name=name,
-    #         namespace=namespace,
-    #     ))
-    # kopf.adopt(resource)
-    # kubernetes.config.load_incluster_config()
-    # client = kubernetes.client.CoreV1Api()
-    # try:
-    #     client.create_namespaced_service(namespace, resource)
-    # except ApiException as error:
-    #     if error.status != 409:
-    #         raise
-    #     client.patch_namespaced_service(name, namespace, resource)
+    with open(template_file, 'r') as template:
+        resource = yaml.safe_load(template.read().format(
+            name=name,
+            namespace=namespace,
+        ))
+    kopf.adopt(resource)
+    kubernetes.config.load_incluster_config()
+    client = kubernetes.client.CoreV1Api()
+    try:
+        client.create_namespaced_service(namespace, resource)
+    except ApiException as error:
+        if error.status != 409:
+            raise
+        client.patch_namespaced_service(name, namespace, resource)
 
 
-def ensure_statefulset_geth_api(name, namespace):
+def ensure_statefulset_geth_api(name, namespace, spec):
     template_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         'templates',
         'statefulset-geth-api.yaml',
     )
-    # with open(template_file, 'r') as template:
-    #     resource = yaml.safe_load(template.read().format(
-    #         accountSecret=spec['account']['secret'],
-    #         name=name,
-    #         namespace=namespace,
-    #         storageClassName=spec['storageClassName'],
-    #     ))
-    # kopf.adopt(resource)
-    # kubernetes.config.load_incluster_config()
-    # client = kubernetes.client.AppsV1Api()
-    # try:
-    #     client.create_namespaced_stateful_set(namespace, resource)
-    # except ApiException as error:
-    #     if error.status != 409:
-    #         raise
-    #     client.patch_namespaced_stateful_set(name, namespace, resource)
+    with open(template_file, 'r') as template:
+        resource = yaml.safe_load(template.read().format(
+            accountSecret=spec['account']['secret'],
+            name=name,
+            namespace=namespace,
+            storageClassName=spec['storageClassName'],
+        ))
+    kopf.adopt(resource)
+    kubernetes.config.load_incluster_config()
+    client = kubernetes.client.AppsV1Api()
+    try:
+        client.create_namespaced_stateful_set(namespace, resource)
+    except ApiException as error:
+        if error.status != 409:
+            raise
+        client.patch_namespaced_stateful_set(name, namespace, resource)
