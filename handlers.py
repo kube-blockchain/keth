@@ -75,11 +75,11 @@ def ensure_deployment_ethstats(name, namespace, spec):
     kubernetes.config.load_incluster_config()
     client = kubernetes.client.AppsV1Api()
     try:
-        client.create_namespaced_stateful_set(namespace, resource)
+        client.create_namespaced_deployment(namespace, resource)
     except ApiException as error:
         if error.status != 409:
             raise
-        client.patch_namespaced_stateful_set(name, namespace, resource)
+        client.patch_namespaced_deployment(name, namespace, resource)
 
 def ensure_service_ethstats(name, namespace):
     template_file = os.path.join(
