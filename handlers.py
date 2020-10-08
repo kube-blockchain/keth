@@ -29,6 +29,7 @@ def get_current_timestamp(**_):
 @kopf.on.update(GROUP, VERSION, PLURAL)
 def ensure_deployment(logger, name, namespace, spec, **_):
     logger.info('ensure_deployment')
+    logger.info(spec)
 
     ensure_config_map_genesis(f'{name}-genesis', namespace)
     ensure_service_geth_api(f'{name}-geth-api', namespace)
