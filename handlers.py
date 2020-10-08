@@ -58,6 +58,7 @@ def ensure_config_map_genesis(name, namespace):
             raise
         client.patch_namespaced_config_map(name, namespace, resource)
 
+
 def ensure_deployment_ethstats(name, namespace, spec):
     template_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
@@ -80,6 +81,7 @@ def ensure_deployment_ethstats(name, namespace, spec):
         if error.status != 409:
             raise
         client.patch_namespaced_deployment(name, namespace, resource)
+
 
 def ensure_service_ethstats(name, namespace):
     template_file = os.path.join(
