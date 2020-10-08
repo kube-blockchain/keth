@@ -41,20 +41,20 @@ def ensure_config_map_genesis(name, namespace):
         'templates',
         'config-map-genesis.yaml',
     )
-    with open(template_file, 'r') as template:
-        resource = yaml.safe_load(template.read().format(
-            name=name,
-            namespace=namespace,
-        ))
-    kopf.adopt(resource)
-    kubernetes.config.load_incluster_config()
-    client = kubernetes.client.CoreV1Api()
-    try:
-        client.create_namespaced_config_map(namespace, resource)
-    except ApiException as error:
-        if error.status != 409:
-            raise
-        client.patch_namespaced_config_map(name, namespace, resource)
+    # with open(template_file, 'r') as template:
+    #     resource = yaml.safe_load(template.read().format(
+    #         name=name,
+    #         namespace=namespace,
+    #     ))
+    # kopf.adopt(resource)
+    # kubernetes.config.load_incluster_config()
+    # client = kubernetes.client.CoreV1Api()
+    # try:
+    #     client.create_namespaced_config_map(namespace, resource)
+    # except ApiException as error:
+    #     if error.status != 409:
+    #         raise
+    #     client.patch_namespaced_config_map(name, namespace, resource)
 
 
 def ensure_service_geth_api(name, namespace):
@@ -63,20 +63,20 @@ def ensure_service_geth_api(name, namespace):
         'templates',
         'service-geth-api.yaml',
     )
-    with open(template_file, 'r') as template:
-        resource = yaml.safe_load(template.read().format(
-            name=name,
-            namespace=namespace,
-        ))
-    kopf.adopt(resource)
-    kubernetes.config.load_incluster_config()
-    client = kubernetes.client.CoreV1Api()
-    try:
-        client.create_namespaced_service(namespace, resource)
-    except ApiException as error:
-        if error.status != 409:
-            raise
-        client.patch_namespaced_service(name, namespace, resource)
+    # with open(template_file, 'r') as template:
+    #     resource = yaml.safe_load(template.read().format(
+    #         name=name,
+    #         namespace=namespace,
+    #     ))
+    # kopf.adopt(resource)
+    # kubernetes.config.load_incluster_config()
+    # client = kubernetes.client.CoreV1Api()
+    # try:
+    #     client.create_namespaced_service(namespace, resource)
+    # except ApiException as error:
+    #     if error.status != 409:
+    #         raise
+    #     client.patch_namespaced_service(name, namespace, resource)
 
 
 def ensure_statefulset_geth_api(name, namespace):
