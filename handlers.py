@@ -27,13 +27,13 @@ def get_current_timestamp(**_):
 @kopf.on.resume(GROUP, VERSION, PLURAL)
 @kopf.on.create(GROUP, VERSION, PLURAL)
 @kopf.on.update(GROUP, VERSION, PLURAL)
-def ensure_deployment(logger, name, namespace, spec, **_):
+def ensure_deployment(spec, name, namespace, logger, **_):
     logger.info('ensure_deployment')
     logger.info(spec)
 
-    ensure_config_map_genesis(f'{name}-genesis', namespace)
-    ensure_service_geth_api(f'{name}-geth-api', namespace)
-    ensure_statefulset_geth_api(f'{name}-geth-api', namespace)
+    # ensure_config_map_genesis(f'{name}-genesis', namespace)
+    # ensure_service_geth_api(f'{name}-geth-api', namespace)
+    # ensure_statefulset_geth_api(f'{name}-geth-api', namespace)
 
 
 def ensure_config_map_genesis(name, namespace):
