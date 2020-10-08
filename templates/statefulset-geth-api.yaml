@@ -23,7 +23,6 @@ spec:
             - |
               geth \
                 --datadir=/root/.ethereum \
-                --ethstats="${{POD_NAME}}.${{POD_NAMESPACE}}:${{ETHSTATS_SECRET}}@${{ETHSTATS_SVC}}" \
                 --ropsten \
                 --rpc \
                 --rpcaddr=0.0.0.0 \
@@ -35,16 +34,17 @@ spec:
                 --ws \
                 --wsaddr=0.0.0.0 \
                 --wsapi=admin,debug,web3,eth,txpool,personal,clique,miner,net
+            # --ethstats="${{POD_NAME}}.${{POD_NAMESPACE}}:${{ETHSTATS_SECRET}}@${{ETHSTATS_SVC}}" \
           command:
             - /bin/sh
           env:
-            - name: ETHSTATS_SVC
-              value: ethstats
-            - name: ETHSTATS_SECRET
-              valueFrom:
-                secretKeyRef:
-                  key: WS_SECRET
-                  name: ethstats
+            # - name: ETHSTATS_SVC
+            #   value: ethstats
+            # - name: ETHSTATS_SECRET
+            #   valueFrom:
+            #     secretKeyRef:
+            #       key: WS_SECRET
+            #       name: ethstats
             - name: POD_NAME
               valueFrom:
                 fieldRef:
