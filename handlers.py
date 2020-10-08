@@ -31,8 +31,10 @@ def ensure_deployment(logger, name, namespace, spec, **_):
     logger.info('ensure_deployment')
 
     ensure_config_map_genesis(f'{name}-genesis', namespace)
-    ensure_service_geth_api(f'{name}-geth-api', namespace)
+    ensure_deployment_ethstats(f'{name}-geth-api', namespace, spec)
     ensure_statefulset_geth_api(f'{name}-geth-api', namespace, spec)
+    ensure_service_ethstats(f'{name}-geth-api', namespace)
+    ensure_service_geth_api(f'{name}-geth-api', namespace)
 
 
 def ensure_config_map_genesis(name, namespace):
@@ -55,6 +57,50 @@ def ensure_config_map_genesis(name, namespace):
         if error.status != 409:
             raise
         client.patch_namespaced_config_map(name, namespace, resource)
+
+def ensure_deployment_ethstats(name, namespace, spec):
+    template_file = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        'templates',
+        'deployment-ethstats.yaml',
+    )
+    with open(template_file, 'r') as template:
+        resource = yaml.safe_load(template.read().format(
+            ethstatsSecret=spec['ethstats']['secret'],
+            name=name,
+            namespace=namespace,
+            storageClassName=spec['storageClassName'],
+        ))
+    kopf.adopt(resource)
+    kubernetes.config.load_incluster_config()
+    client = kubernetes.client.AppsV1Api()
+    try:
+        client.create_namespaced_stateful_set(namespace, resource)
+    except ApiException as error:
+        if error.status != 409:
+            raise
+        client.patch_namespaced_stateful_set(name, namespace, resource)
+
+def ensure_service_ethstats(name, namespace):
+    template_file = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        'templates',
+        'service-ethstats.yaml',
+    )
+    with open(template_file, 'r') as template:
+        resource = yaml.safe_load(template.read().format(
+            name=name,
+            namespace=namespace,
+        ))
+    kopf.adopt(resource)
+    kubernetes.config.load_incluster_config()
+    client = kubernetes.client.CoreV1Api()
+    try:
+        client.create_namespaced_service(namespace, resource)
+    except ApiException as error:
+        if error.status != 409:
+            raise
+        client.patch_namespaced_service(name, namespace, resource)
 
 
 def ensure_service_geth_api(name, namespace):

@@ -7,6 +7,8 @@ metadata:
 spec:
   account:
     secret: geth-account
+  ethstats:
+    secret: ethstats
   storageClassName: gp2
   # api:
   #   port: 8585
