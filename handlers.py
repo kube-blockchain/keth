@@ -62,7 +62,7 @@ def ensure_config_map_genesis(release, name, namespace):
         client.patch_namespaced_config_map(name, namespace, resource)
 
 
-def ensure_deployment_bootnode(release, name, namespace, spec):
+def ensure_deployment_bootnode(release, name, namespace):
     template_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         'templates',
