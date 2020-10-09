@@ -4,9 +4,9 @@ kind: Deployment
 metadata:
   labels:
     app: ethstats
-    component: {name}
-  name: {name}
-  namespace: {namespace}
+    component: ethstats
+  name: ethstats
+  namespace: deployment
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
