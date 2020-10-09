@@ -4,7 +4,7 @@ kind: StatefulSet
 metadata:
   labels:
     app: geth-api
-    component: {name}-geth-api
+    component: {name}
   name: {name}
   namespace: {namespace}
 spec:
@@ -17,7 +17,7 @@ spec:
     metadata:
       labels:
         app: geth-api
-        component: {name}-geth-api
+        component: {name}
     spec:
       containers:
         - args:
@@ -41,12 +41,12 @@ spec:
             - /bin/sh
           env:
             - name: ETHSTATS_SVC
-              value: {name}-ethstats
+              value: {release}-ethstats
             - name: ETHSTATS_SECRET
               valueFrom:
                 secretKeyRef:
                   key: WS_SECRET
-                  name: ethstats
+                  name: {ethstatsSecret}
             - name: POD_NAME
               valueFrom:
                 fieldRef:

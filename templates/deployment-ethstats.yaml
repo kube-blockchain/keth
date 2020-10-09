@@ -4,8 +4,8 @@ kind: Deployment
 metadata:
   labels:
     app: ethstats
-    component: {name}-ethstats
-  name: {name}-ethstats
+    component: {name}
+  name: {name}
   namespace: {namespace}
 spec:
   progressDeadlineSeconds: 600
@@ -13,7 +13,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      component: {name}-ethstats
+      component: {name}
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -23,7 +23,7 @@ spec:
     metadata:
       labels:
         app: ethstats
-        component: {name}-ethstats
+        component: {name}
     spec:
       containers:
         - env:

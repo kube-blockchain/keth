@@ -30,14 +30,14 @@ def get_current_timestamp(**_):
 def ensure_deployment(logger, name, namespace, spec, **_):
     logger.info('ensure_deployment')
 
-    ensure_config_map_genesis(f'{name}-genesis', namespace)
-    ensure_deployment_ethstats(f'{name}-ethstats', namespace, spec)
-    ensure_statefulset_geth_api(f'{name}-geth-api', namespace, spec)
-    ensure_service_ethstats(f'{name}-ethstats', namespace)
-    ensure_service_geth_api(f'{name}-geth-api', namespace)
+    ensure_config_map_genesis(name, f'{name}-genesis', namespace)
+    ensure_deployment_ethstats(name, f'{name}-ethstats', namespace, spec)
+    ensure_statefulset_geth_api(name, f'{name}-geth-api', namespace, spec)
+    ensure_service_ethstats(name, f'{name}-ethstats', namespace)
+    ensure_service_geth_api(name, f'{name}-geth-api', namespace)
 
 
-def ensure_config_map_genesis(name, namespace):
+def ensure_config_map_genesis(release, name, namespace):
     template_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         'templates',
@@ -47,6 +47,7 @@ def ensure_config_map_genesis(name, namespace):
         resource = yaml.safe_load(template.read().format(
             name=name,
             namespace=namespace,
+            release=release,
         ))
     kopf.adopt(resource)
     kubernetes.config.load_incluster_config()
@@ -59,7 +60,7 @@ def ensure_config_map_genesis(name, namespace):
         client.patch_namespaced_config_map(name, namespace, resource)
 
 
-def ensure_deployment_ethstats(name, namespace, spec):
+def ensure_deployment_ethstats(release, name, namespace, spec):
     template_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         'templates',
@@ -70,6 +71,7 @@ def ensure_deployment_ethstats(name, namespace, spec):
             ethstatsSecret=spec['ethstats']['secret'],
             name=name,
             namespace=namespace,
+            release=release,
             storageClassName=spec['storageClassName'],
         ))
     kopf.adopt(resource)
@@ -83,7 +85,7 @@ def ensure_deployment_ethstats(name, namespace, spec):
         client.patch_namespaced_deployment(name, namespace, resource)
 
 
-def ensure_service_ethstats(name, namespace):
+def ensure_service_ethstats(release, name, namespace):
     template_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         'templates',
@@ -93,6 +95,7 @@ def ensure_service_ethstats(name, namespace):
         resource = yaml.safe_load(template.read().format(
             name=name,
             namespace=namespace,
+            release=release,
         ))
     kopf.adopt(resource)
     kubernetes.config.load_incluster_config()
@@ -105,7 +108,7 @@ def ensure_service_ethstats(name, namespace):
         client.patch_namespaced_service(name, namespace, resource)
 
 
-def ensure_service_geth_api(name, namespace):
+def ensure_service_geth_api(release, name, namespace):
     template_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         'templates',
@@ -115,6 +118,7 @@ def ensure_service_geth_api(name, namespace):
         resource = yaml.safe_load(template.read().format(
             name=name,
             namespace=namespace,
+            release=release,
         ))
     kopf.adopt(resource)
     kubernetes.config.load_incluster_config()
@@ -127,7 +131,7 @@ def ensure_service_geth_api(name, namespace):
         client.patch_namespaced_service(name, namespace, resource)
 
 
-def ensure_statefulset_geth_api(name, namespace, spec):
+def ensure_statefulset_geth_api(release, name, namespace, spec):
     template_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         'templates',
@@ -136,8 +140,10 @@ def ensure_statefulset_geth_api(name, namespace, spec):
     with open(template_file, 'r') as template:
         resource = yaml.safe_load(template.read().format(
             accountSecret=spec['account']['secret'],
+            ethstatsSecret=spec['ethstats']['secret'],
             name=name,
             namespace=namespace,
+            release=release,
             storageClassName=spec['storageClassName'],
         ))
     kopf.adopt(resource)
