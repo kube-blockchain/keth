@@ -15,6 +15,54 @@ VERSION = 'v1'
 PLURAL = 'ethereum'
 
 
+def _ensure_config_map(name, namespace, resource):
+    kopf.adopt(resource)
+    kubernetes.config.load_incluster_config()
+    client = kubernetes.client.CoreV1Api()
+    try:
+        client.create_namespaced_config_map(namespace, resource)
+    except ApiException as error:
+        if error.status != 409:
+            raise
+        client.patch_namespaced_config_map(name, namespace, resource)
+
+
+def _ensure_deployment(name, namespace, resource):
+    kopf.adopt(resource)
+    kubernetes.config.load_incluster_config()
+    client = kubernetes.client.AppsV1Api()
+    try:
+        client.create_namespaced_deployment(namespace, resource)
+    except ApiException as error:
+        if error.status != 409:
+            raise
+        client.patch_namespaced_deployment(name, namespace, resource)
+
+
+def _ensure_service(name, namespace, resource):
+    kopf.adopt(resource)
+    kubernetes.config.load_incluster_config()
+    client = kubernetes.client.CoreV1Api()
+    try:
+        client.create_namespaced_service(namespace, resource)
+    except ApiException as error:
+        if error.status != 409:
+            raise
+        client.patch_namespaced_service(name, namespace, resource)
+
+
+def _ensure_statefulset(name, namespace, resource):
+    kopf.adopt(resource)
+    kubernetes.config.load_incluster_config()
+    client = kubernetes.client.AppsV1Api()
+    try:
+        client.create_namespaced_stateful_set(namespace, resource)
+    except ApiException as error:
+        if error.status != 409:
+            raise
+        client.patch_namespaced_stateful_set(name, namespace, resource)
+
+
 def _template_file(file):
     return os.path.join(
         os.path.dirname(os.path.abspath(__file__)), 'templates', file
@@ -62,15 +110,7 @@ def ensure_config_map_genesis(release, name, namespace):
         namespace=namespace,
         release=release,
     )
-    kopf.adopt(resource)
-    kubernetes.config.load_incluster_config()
-    client = kubernetes.client.CoreV1Api()
-    try:
-        client.create_namespaced_config_map(namespace, resource)
-    except ApiException as error:
-        if error.status != 409:
-            raise
-        client.patch_namespaced_config_map(name, namespace, resource)
+    _ensure_config_map(name, namespace, resource)
 
 
 def ensure_deployment_bootnode(release, name, namespace):
@@ -80,15 +120,7 @@ def ensure_deployment_bootnode(release, name, namespace):
         namespace=namespace,
         release=release,
     )
-    kopf.adopt(resource)
-    kubernetes.config.load_incluster_config()
-    client = kubernetes.client.AppsV1Api()
-    try:
-        client.create_namespaced_deployment(namespace, resource)
-    except ApiException as error:
-        if error.status != 409:
-            raise
-        client.patch_namespaced_deployment(name, namespace, resource)
+    _ensure_deployment(name, namespace, resource)
 
 
 def ensure_deployment_ethstats(name, namespace, spec):
@@ -105,15 +137,7 @@ def ensure_deployment_ethstats(name, namespace, spec):
     container = resource['spec']['template']['spec']['containers'][0]
     container['image'] = spec['ethstats']['container']['image']
 
-    kopf.adopt(resource)
-    kubernetes.config.load_incluster_config()
-    client = kubernetes.client.AppsV1Api()
-    try:
-        client.create_namespaced_deployment(namespace, resource)
-    except ApiException as error:
-        if error.status != 409:
-            raise
-        client.patch_namespaced_deployment(name, namespace, resource)
+    _ensure_deployment(name, namespace, resource)
 
 
 def ensure_service_bootnode(release, name, namespace):
@@ -123,15 +147,7 @@ def ensure_service_bootnode(release, name, namespace):
         namespace=namespace,
         release=release,
     )
-    kopf.adopt(resource)
-    kubernetes.config.load_incluster_config()
-    client = kubernetes.client.CoreV1Api()
-    try:
-        client.create_namespaced_service(namespace, resource)
-    except ApiException as error:
-        if error.status != 409:
-            raise
-        client.patch_namespaced_service(name, namespace, resource)
+    _ensure_service(name, namespace, resource)
 
 
 def ensure_service_ethstats(release, name, namespace):
@@ -141,15 +157,7 @@ def ensure_service_ethstats(release, name, namespace):
         namespace=namespace,
         release=release,
     )
-    kopf.adopt(resource)
-    kubernetes.config.load_incluster_config()
-    client = kubernetes.client.CoreV1Api()
-    try:
-        client.create_namespaced_service(namespace, resource)
-    except ApiException as error:
-        if error.status != 409:
-            raise
-        client.patch_namespaced_service(name, namespace, resource)
+    _ensure_service(name, namespace, resource)
 
 
 def ensure_service_geth_api(release, name, namespace):
@@ -159,15 +167,7 @@ def ensure_service_geth_api(release, name, namespace):
         namespace=namespace,
         release=release,
     )
-    kopf.adopt(resource)
-    kubernetes.config.load_incluster_config()
-    client = kubernetes.client.CoreV1Api()
-    try:
-        client.create_namespaced_service(namespace, resource)
-    except ApiException as error:
-        if error.status != 409:
-            raise
-        client.patch_namespaced_service(name, namespace, resource)
+    _ensure_service(name, namespace, resource)
 
 
 def ensure_statefulset_geth_api(release, name, namespace, spec):
@@ -180,12 +180,4 @@ def ensure_statefulset_geth_api(release, name, namespace, spec):
         release=release,
         storageClassName=spec['geth']['storageClassName'],
     )
-    kopf.adopt(resource)
-    kubernetes.config.load_incluster_config()
-    client = kubernetes.client.AppsV1Api()
-    try:
-        client.create_namespaced_stateful_set(namespace, resource)
-    except ApiException as error:
-        if error.status != 409:
-            raise
-        client.patch_namespaced_stateful_set(name, namespace, resource)
+    _ensure_statefulset(name, namespace, resource)
