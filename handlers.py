@@ -15,6 +15,18 @@ VERSION = 'v1'
 PLURAL = 'ethereum'
 
 
+def _template_file(file):
+    return os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), 'templates', file
+    )
+
+
+def _template_load(file, **kwargs):
+    template_file = _template_file('config-map-genesis.yaml')
+    with open(template_file, 'r') as template:
+        return yaml.safe_load(template.read().format(kwargs))
+
+
 def _timestamp():
     return datetime.datetime.utcnow().isoformat("T") + "Z"
 
@@ -40,17 +52,12 @@ def ensure_deployment(logger, name, namespace, spec, **_):
 
 
 def ensure_config_map_genesis(release, name, namespace):
-    template_file = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)),
-        'templates',
+    resource = _template_load(
         'config-map-genesis.yaml',
+        name=name,
+        namespace=namespace,
+        release=release,
     )
-    with open(template_file, 'r') as template:
-        resource = yaml.safe_load(template.read().format(
-            name=name,
-            namespace=namespace,
-            release=release,
-        ))
     kopf.adopt(resource)
     kubernetes.config.load_incluster_config()
     client = kubernetes.client.CoreV1Api()
@@ -63,11 +70,7 @@ def ensure_config_map_genesis(release, name, namespace):
 
 
 def ensure_deployment_bootnode(release, name, namespace):
-    template_file = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)),
-        'templates',
-        'deployment-bootnode.yaml',
-    )
+    template_file = _template_file('deployment-bootnode.yaml')
     with open(template_file, 'r') as template:
         resource = yaml.safe_load(template.read().format(
             name=name,
@@ -86,11 +89,7 @@ def ensure_deployment_bootnode(release, name, namespace):
 
 
 def ensure_deployment_ethstats(name, namespace, spec):
-    template_file = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)),
-        'templates',
-        'deployment-ethstats.yaml',
-    )
+    template_file = _template_file('deployment-ethstats.yaml')
     with open(template_file, 'r') as template:
         resource = yaml.safe_load(template.read())
 
@@ -100,9 +99,10 @@ def ensure_deployment_ethstats(name, namespace, spec):
     resource['metadata']['namespace'] = namespace
     resource['spec']['replicas'] = spec['ethstats']['replicas']
     resource['spec']['selector']['matchLabels']['component'] = f'{name}-ethstats'
-    resource['spec']['template']['metadata']['labels']['component'] = f'{name}-ethstats'
-    resource['spec']['template']['spec']['containers'][0]['env'][0]['valueFrom']\
-        ['secretKeyRef']['name'] = spec['ethstats']['secret']
+    resource['spec']['template']['metadata'][
+        'labels']['component'] = f'{name}-ethstats'
+    container = resource['spec']['template']['spec']['containers'][0]
+    container['image'] = spec['ethstats']['container']['image']
 
     kopf.adopt(resource)
     kubernetes.config.load_incluster_config()
@@ -116,11 +116,7 @@ def ensure_deployment_ethstats(name, namespace, spec):
 
 
 def ensure_service_bootnode(release, name, namespace):
-    template_file = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)),
-        'templates',
-        'service-bootnode.yaml',
-    )
+    template_file = _template_file('service-bootnode.yaml')
     with open(template_file, 'r') as template:
         resource = yaml.safe_load(template.read().format(
             name=name,
@@ -139,11 +135,7 @@ def ensure_service_bootnode(release, name, namespace):
 
 
 def ensure_service_ethstats(release, name, namespace):
-    template_file = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)),
-        'templates',
-        'service-ethstats.yaml',
-    )
+    template_file = _template_file('service-ethstats.yaml')
     with open(template_file, 'r') as template:
         resource = yaml.safe_load(template.read().format(
             name=name,
@@ -162,11 +154,7 @@ def ensure_service_ethstats(release, name, namespace):
 
 
 def ensure_service_geth_api(release, name, namespace):
-    template_file = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)),
-        'templates',
-        'service-geth-api.yaml',
-    )
+    template_file = _template_file('service-geth-api.yaml')
     with open(template_file, 'r') as template:
         resource = yaml.safe_load(template.read().format(
             name=name,
@@ -185,11 +173,7 @@ def ensure_service_geth_api(release, name, namespace):
 
 
 def ensure_statefulset_geth_api(release, name, namespace, spec):
-    template_file = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)),
-        'templates',
-        'statefulset-geth-api.yaml',
-    )
+    template_file = _template_file('statefulset-geth-api.yaml')
     with open(template_file, 'r') as template:
         resource = yaml.safe_load(template.read().format(
             accountSecret=spec['account']['secret'],

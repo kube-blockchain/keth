@@ -8,6 +8,8 @@ spec:
   account:
     secret: geth-account
   ethstats:
+    container:
+      image: ethereumex/eth-stats-dashboard:latest
     replicas: 2
     secret: ethstats
   geth:
