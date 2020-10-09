@@ -110,6 +110,7 @@ def ensure_config_map_genesis(release, name, namespace):
         namespace=namespace,
         release=release,
     )
+
     _ensure_config_map(name, namespace, resource)
 
 
@@ -120,11 +121,13 @@ def ensure_deployment_bootnode(release, name, namespace):
         namespace=namespace,
         release=release,
     )
+
     _ensure_deployment(name, namespace, resource)
 
 
 def ensure_deployment_ethstats(name, namespace, spec):
     resource = _template_load('deployment-ethstats.yaml')
+    
     resource['metadata']['labels']['app'] = 'ethstats'
     resource['metadata']['labels']['component'] = f'{name}-ethstats'
     resource['metadata']['name'] = f'{name}-ethstats'
@@ -147,6 +150,7 @@ def ensure_service_bootnode(release, name, namespace):
         namespace=namespace,
         release=release,
     )
+
     _ensure_service(name, namespace, resource)
 
 
@@ -157,6 +161,7 @@ def ensure_service_ethstats(release, name, namespace):
         namespace=namespace,
         release=release,
     )
+
     _ensure_service(name, namespace, resource)
 
 
@@ -167,6 +172,7 @@ def ensure_service_geth_api(release, name, namespace):
         namespace=namespace,
         release=release,
     )
+
     _ensure_service(name, namespace, resource)
 
 
@@ -180,4 +186,5 @@ def ensure_statefulset_geth_api(release, name, namespace, spec):
         release=release,
         storageClassName=spec['geth']['storageClassName'],
     )
+
     _ensure_statefulset(name, namespace, resource)
