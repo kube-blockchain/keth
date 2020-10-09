@@ -31,8 +31,10 @@ def ensure_deployment(logger, name, namespace, spec, **_):
     logger.info('ensure_deployment')
 
     ensure_config_map_genesis(name, f'{name}-genesis', namespace)
+    ensure_deployment_bootnode(name, f'{name}-bootnode', namespace, spec)
     ensure_deployment_ethstats(name, f'{name}-ethstats', namespace, spec)
     ensure_statefulset_geth_api(name, f'{name}-geth-api', namespace, spec)
+    ensure_service_bootnode(name, f'{name}-bootnode', namespace)
     ensure_service_ethstats(name, f'{name}-ethstats', namespace)
     ensure_service_geth_api(name, f'{name}-geth-api', namespace)
 
@@ -60,6 +62,29 @@ def ensure_config_map_genesis(release, name, namespace):
         client.patch_namespaced_config_map(name, namespace, resource)
 
 
+def ensure_deployment_bootnode(release, name, namespace, spec):
+    template_file = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        'templates',
+        'deployment-bootnode.yaml',
+    )
+    with open(template_file, 'r') as template:
+        resource = yaml.safe_load(template.read().format(
+            name=name,
+            namespace=namespace,
+            release=release,
+        ))
+    kopf.adopt(resource)
+    kubernetes.config.load_incluster_config()
+    client = kubernetes.client.AppsV1Api()
+    try:
+        client.create_namespaced_deployment(namespace, resource)
+    except ApiException as error:
+        if error.status != 409:
+            raise
+        client.patch_namespaced_deployment(name, namespace, resource)
+
+
 def ensure_deployment_ethstats(release, name, namespace, spec):
     template_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
@@ -83,6 +108,29 @@ def ensure_deployment_ethstats(release, name, namespace, spec):
         if error.status != 409:
             raise
         client.patch_namespaced_deployment(name, namespace, resource)
+
+
+def ensure_service_bootnode(release, name, namespace):
+    template_file = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        'templates',
+        'service-bootnode.yaml',
+    )
+    with open(template_file, 'r') as template:
+        resource = yaml.safe_load(template.read().format(
+            name=name,
+            namespace=namespace,
+            release=release,
+        ))
+    kopf.adopt(resource)
+    kubernetes.config.load_incluster_config()
+    client = kubernetes.client.CoreV1Api()
+    try:
+        client.create_namespaced_service(namespace, resource)
+    except ApiException as error:
+        if error.status != 409:
+            raise
+        client.patch_namespaced_service(name, namespace, resource)
 
 
 def ensure_service_ethstats(release, name, namespace):
