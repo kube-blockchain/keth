@@ -7,6 +7,8 @@ metadata:
 spec:
   account:
     secret: geth-account
+  bootnode:
+    enabled: true
   ethstats:
     container:
       image: ethereumex/eth-stats-dashboard:latest
@@ -17,17 +19,8 @@ spec:
     storageClassName: gp2
   # api:
   #   port: 8585
-  #   replicas: 3
-  # bootnode:
-  #   replicas: 1
-  # miner:
-  #   replicas: 3
   # ethstats:
   #   port: 80
-  #   replicas: 1
-  #   secret: ethstats
-  # account:
-  #   secret: account
   # # https://geth.ethereum.org/docs/interface/command-line-options
   # genesis:
   #   alloc:

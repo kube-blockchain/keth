@@ -127,7 +127,7 @@ def ensure_deployment_bootnode(release, name, namespace):
 
 def ensure_deployment_ethstats(name, namespace, spec):
     resource = _template_load('deployment-ethstats.yaml')
-    
+
     resource['metadata']['labels']['app'] = 'ethstats'
     resource['metadata']['labels']['component'] = f'{name}-ethstats'
     resource['metadata']['name'] = f'{name}-ethstats'
