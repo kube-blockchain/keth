@@ -32,7 +32,7 @@ def ensure_deployment(logger, name, namespace, spec, **_):
 
     ensure_config_map_genesis(name, f'{name}-genesis', namespace)
     ensure_deployment_bootnode(name, f'{name}-bootnode', namespace)
-    ensure_deployment_ethstats(name, f'{name}-ethstats', namespace, spec)
+    ensure_deployment_ethstats(name, namespace, spec)
     ensure_statefulset_geth_api(name, f'{name}-geth-api', namespace, spec)
     ensure_service_bootnode(name, f'{name}-bootnode', namespace)
     ensure_service_ethstats(name, f'{name}-ethstats', namespace)
@@ -85,7 +85,7 @@ def ensure_deployment_bootnode(release, name, namespace):
         client.patch_namespaced_deployment(name, namespace, resource)
 
 
-def ensure_deployment_ethstats(release, name, namespace, spec):
+def ensure_deployment_ethstats(name, namespace, spec):
     template_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         'templates',
@@ -95,12 +95,12 @@ def ensure_deployment_ethstats(release, name, namespace, spec):
         resource = yaml.safe_load(template.read())
 
     resource['metadata']['labels']['app'] = 'ethstats'
-    resource['metadata']['labels']['component'] = f'{release}-ethstats'
-    resource['metadata']['name'] = f'{release}-ethstats'
+    resource['metadata']['labels']['component'] = f'{name}-ethstats'
+    resource['metadata']['name'] = f'{name}-ethstats'
     resource['metadata']['namespace'] = namespace
     resource['spec']['replicas'] = spec['ethstats']['replicas']
-    resource['spec']['selector']['matchLabels']['component'] = f'{release}-ethstats'
-    resource['spec']['template']['metadata']['labels']['component'] = f'{release}-ethstats'
+    resource['spec']['selector']['matchLabels']['component'] = f'{name}-ethstats'
+    resource['spec']['template']['metadata']['labels']['component'] = f'{name}-ethstats'
     resource['spec']['template']['spec']['containers'][0]['env'][0]['valueFrom']\
         ['secretKeyRef']['name'] = spec['ethstats']['secret']
 
