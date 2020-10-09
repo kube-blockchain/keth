@@ -98,7 +98,8 @@ def ensure_deployment_ethstats(name, namespace, spec):
     resource['metadata']['name'] = f'{name}-ethstats'
     resource['metadata']['namespace'] = namespace
     resource['spec']['replicas'] = spec['ethstats']['replicas']
-    resource['spec']['selector']['matchLabels']['component'] = f'{name}-ethstats'
+    resource['spec']['selector']['matchLabels'][
+        'component'] = f'{name}-ethstats'
     resource['spec']['template']['metadata'][
         'labels']['component'] = f'{name}-ethstats'
     container = resource['spec']['template']['spec']['containers'][0]
