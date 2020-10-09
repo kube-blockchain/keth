@@ -98,8 +98,8 @@ def ensure_deployment_ethstats(release, name, namespace, spec):
             namespace=namespace,
             release=release,
         ))
-        resource['metadata']['label']['app'] = 'ethstats'
-        resource['metadata']['label']['component'] = f'{release}-ethstats'
+        resource['metadata']['labels']['app'] = 'ethstats'
+        resource['metadata']['labels']['component'] = f'{release}-ethstats'
         resource['metadata']['name'] = f'{release}-ethstats'
         resource['metadata']['namespace'] = namespace
         resource['spec']['replicas'] = spec['ethstats']['replicas']
