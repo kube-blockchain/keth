@@ -22,7 +22,7 @@ def _template_file(file):
 
 
 def _template_load(file, **kwargs):
-    template_file = _template_file('config-map-genesis.yaml')
+    template_file = _template_file(file)
     with open(template_file, 'r') as template:
         return yaml.safe_load(template.read().format(kwargs))
 
