@@ -31,7 +31,7 @@ def ensure_deployment(logger, name, namespace, spec, **_):
     logger.info('ensure_deployment')
 
     ensure_config_map_genesis(name, f'{name}-genesis', namespace)
-    ensure_deployment_bootnode(name, f'{name}-bootnode', namespace, spec)
+    ensure_deployment_bootnode(name, f'{name}-bootnode', namespace)
     ensure_deployment_ethstats(name, f'{name}-ethstats', namespace, spec)
     ensure_statefulset_geth_api(name, f'{name}-geth-api', namespace, spec)
     ensure_service_bootnode(name, f'{name}-bootnode', namespace)
