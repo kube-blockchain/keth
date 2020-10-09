@@ -8,8 +8,11 @@ spec:
   account:
     secret: geth-account
   ethstats:
+    replicas: 2
     secret: ethstats
-  storageClassName: gp2
+  geth:
+    replicas: 1
+    storageClassName: gp2
   # api:
   #   port: 8585
   #   replicas: 3

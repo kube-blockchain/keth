@@ -72,8 +72,8 @@ def ensure_deployment_ethstats(release, name, namespace, spec):
             name=name,
             namespace=namespace,
             release=release,
-            storageClassName=spec['storageClassName'],
         ))
+        resource['spec']['replicas'] = spec['ethstats']['replicas']
     kopf.adopt(resource)
     kubernetes.config.load_incluster_config()
     client = kubernetes.client.AppsV1Api()
