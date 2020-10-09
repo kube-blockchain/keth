@@ -92,17 +92,18 @@ def ensure_deployment_ethstats(release, name, namespace, spec):
         'deployment-ethstats.yaml',
     )
     with open(template_file, 'r') as template:
-        resource = yaml.safe_load(template.read().format(
-            ethstatsSecret=spec['ethstats']['secret'],
-            name=name,
-            namespace=namespace,
-            release=release,
-        ))
-        resource['metadata']['labels']['app'] = 'ethstats'
-        resource['metadata']['labels']['component'] = f'{release}-ethstats'
-        resource['metadata']['name'] = f'{release}-ethstats'
-        resource['metadata']['namespace'] = namespace
-        resource['spec']['replicas'] = spec['ethstats']['replicas']
+        resource = yaml.safe_load(template.read())
+
+    resource['metadata']['labels']['app'] = 'ethstats'
+    resource['metadata']['labels']['component'] = f'{release}-ethstats'
+    resource['metadata']['name'] = f'{release}-ethstats'
+    resource['metadata']['namespace'] = namespace
+    resource['spec']['replicas'] = spec['ethstats']['replicas']
+    resource['spec']['selector']['matchLabels']['component'] = f'{release}-ethstats'
+    resource['spec']['template']['metadata']['labels']['component'] = f'{release}-ethstats'
+    resource['spec']['template']['spec']['containers'][0]['env'][0]['valueFrom']\
+        ['secretKeyRef']['name'] = spec['ethstats']['secret']
+
     kopf.adopt(resource)
     kubernetes.config.load_incluster_config()
     client = kubernetes.client.AppsV1Api()

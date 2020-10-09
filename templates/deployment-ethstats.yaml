@@ -13,7 +13,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      component: {name}
+      component: ethstats
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -23,7 +23,7 @@ spec:
     metadata:
       labels:
         app: ethstats
-        component: {name}
+        component: ethstats
     spec:
       containers:
         - env:
@@ -31,7 +31,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: WS_SECRET
-                  name: {ethstatsSecret}
+                  name: ethstats
           image: ethereumex/eth-stats-dashboard:latest
           imagePullPolicy: IfNotPresent
           name: ethstats
@@ -39,11 +39,11 @@ spec:
             - containerPort: 3000
               name: http
               protocol: TCP
-          resources: {{}}
+          resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: {{}}
+      securityContext: {}
       terminationGracePeriodSeconds: 30
