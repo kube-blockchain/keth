@@ -144,7 +144,7 @@ def ensure_statefulset_geth_api(release, name, namespace, spec):
             name=name,
             namespace=namespace,
             release=release,
-            storageClassName=spec['storageClassName'],
+            storageClassName=spec['geth']['storageClassName'],
         ))
     kopf.adopt(resource)
     kubernetes.config.load_incluster_config()
