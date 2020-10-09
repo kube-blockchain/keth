@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
+    app: ethstats
     component: {name}-ethstats
   name: {name}-ethstats
   namespace: {namespace}
@@ -21,6 +22,7 @@ spec:
   template:
     metadata:
       labels:
+        app: ethstats
         component: {name}-ethstats
     spec:
       containers:

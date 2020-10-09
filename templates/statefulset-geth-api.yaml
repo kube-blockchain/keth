@@ -3,7 +3,8 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    component: geth-api
+    app: geth-api
+    component: {name}-geth-api
   name: {name}
   namespace: {namespace}
 spec:
@@ -15,7 +16,8 @@ spec:
   template:
     metadata:
       labels:
-        component: {name}
+        app: geth-api
+        component: {name}-geth-api
     spec:
       containers:
         - args:
