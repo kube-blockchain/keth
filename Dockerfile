@@ -6,6 +6,7 @@ RUN pip3 install flake8 pylint
 RUN flake8 *.py
 RUN pylint *.py
 
+
 FROM python:3.8 as build
 WORKDIR /app
 COPY requirements.txt ./
