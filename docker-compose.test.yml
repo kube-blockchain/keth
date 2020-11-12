@@ -1,3 +1,4 @@
 sut:
   build: .
-  command: /app/run_tests.sh
+  command: /app/scripts/test
+  
