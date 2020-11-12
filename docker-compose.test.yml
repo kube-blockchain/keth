@@ -1,4 +1,3 @@
 sut:
   build: .
-  command: /app/scripts/test
-  
+  command: ./scripts/test
