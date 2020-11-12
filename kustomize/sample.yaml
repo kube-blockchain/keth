@@ -15,6 +15,128 @@ spec:
     replicas: 2
     secret: ethstats
   geth:
+    options:
+      account:
+        allowInsecureUnlock: false
+        password: ''
+        signer: ''
+        unlock: []
+      api: {}
+      debugging:
+        fakePOW: false
+        noCompaction: false
+        verbosity: 3
+        vmodule: []
+        backtrace: ''
+        debug: false
+        pprof:
+          address: 127.0.0.1
+          blockProfileRate: 0
+          cpuProfile: ''
+          enabled: false
+          memoryProfileRate: 524288
+          port: 6060
+        trace: ''
+      developer:
+        chain:
+          enabled: false
+          period: 0
+      ethash:
+        cache:
+          directory: ''
+          inMemory: 2
+          onDisk: 3
+          lockMmap: false
+        dag:
+          directory: ~/.ethash
+          inMemory: 1)
+          onDisk: 2
+          lockMmap: false
+      ethereum: {}
+      gasPriceOracle:
+        blocks: 20
+        percentile: 60
+      lightClient:
+        egress: 0
+        ingress: 0
+        noPruning: false
+        serve: 0
+        ultraLight:
+          fraction: 75
+          onlyAnnounce: false
+          servers: []
+      metrics:
+        enabled: false
+        expensive: false
+        address: 127.0.0.1
+        port: 6060
+        influxdb:
+          database: geth
+          enabled: false
+          endpoint: http://localhost:8086
+          password: test
+          tags: host=localhost
+          username: test
+      mining:
+        enabled: false
+        etherbase: ''
+        extradata: ''
+        gas:
+          limit: 8000000
+          price: 1000000000
+          target: 8000000
+        notify: []
+        noVerify: false
+        recommit: 3s
+        threads: 0
+      networking:
+        bootnodes:
+          vx: []
+          v4: []
+          v5: []
+        discovery:
+          dns: (use "" to disable DNS)
+        port: 30303
+        maxPeers: 50
+        maxPendingPeers: 0
+        nat: any
+        noDiscover: false
+        v5Disc: false
+        netRestrict: ''
+        nodeKey: ''
+        nodeKeyHex: ''
+      performance:
+        cache:
+          database: 50
+          gc: 25
+          memory: 1024
+          noPrefetch: false
+          snapshot: 10
+          trie:
+            journal: triecache
+            percent: 15
+            rejournal: 1h0m0s
+      transactionPool:
+        accountQueue: 64
+        accountSlots: 16
+        globalQueue: 1024
+        globalSlots: 4096
+        journal: transactions.rlp
+        lifetime: 3h0m0s
+        locals: []
+        noLocals: false
+        priceBump: 10
+        priceLimit: 1
+        rejournal: 1h0m0s
+      vm:
+        debug: false
+        evm: ''
+        ewasm: ''
+      whisper:
+        enabled: false
+        maxMessageSize: 1048576
+        pow: 0.2
+        restrict-light: true
     replicas: 1
     storageClassName: gp2
   # api:

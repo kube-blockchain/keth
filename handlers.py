@@ -128,6 +128,9 @@ def ensure_deployment_bootnode(release, name, namespace):
 def ensure_deployment_ethstats(name, namespace, spec):
     resource = _template_load('deployment-ethstats.yaml')
 
+    container = resource['spec']['template']['spec']['containers'][0]
+    template_labels = resource['spec']['template']['metadata']['labels']
+
     resource['metadata']['labels']['app'] = 'ethstats'
     resource['metadata']['labels']['component'] = f'{name}-ethstats'
     resource['metadata']['name'] = f'{name}-ethstats'
@@ -135,10 +138,8 @@ def ensure_deployment_ethstats(name, namespace, spec):
     resource['spec']['replicas'] = spec['ethstats']['replicas']
     resource['spec']['selector']['matchLabels'][
         'component'] = f'{name}-ethstats'
-    resource['spec']['template']['metadata'][
-        'labels']['component'] = f'{name}-ethstats'
-    container = resource['spec']['template']['spec']['containers'][0]
     container['image'] = spec['ethstats']['container']['image']
+    template_labels['component'] = f'{name}-ethstats'
 
     _ensure_deployment(name, namespace, resource)
 
