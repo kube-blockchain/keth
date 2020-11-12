@@ -20,4 +20,3 @@ Kubernetes implementation of the Ethereum protocol.
 ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/kubeblockchain/keth?label=image%20version)
 ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/kubeblockchain/keth)
 ![Docker Stars](https://img.shields.io/docker/stars/kubeblockchain/keth)
-
