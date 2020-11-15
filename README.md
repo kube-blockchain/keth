@@ -22,3 +22,10 @@
 ------------------------------------------------------------
 
 Kubernetes implementation of the Ethereum protocol.
+
+```sh
+helm repo add keth https://kube-blockchain.github.io/keth
+helm upgrade keth keth/keth \
+  --install \
+  --namespace keth
+```
