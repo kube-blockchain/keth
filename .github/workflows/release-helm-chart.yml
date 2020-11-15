@@ -1,4 +1,4 @@
-name: Release Healm Chart
+name: Release Helm Chart
 on:
   push:
     branches:
