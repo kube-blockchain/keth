@@ -1,5 +1,4 @@
-name: Release Chart
-
+name: Release Healm Chart
 on:
   push:
     branches:
