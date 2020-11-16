@@ -26,5 +26,5 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
-          charts_dir: chart
+          charts_dir: charts
           version: v1.1.1
