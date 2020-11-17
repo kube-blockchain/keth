@@ -15,7 +15,7 @@ env:
 
 image:
   repository: ghcr.io/kube-blockchain/keth
-  tag: 0.0.1
+  tag: latest
   pullPolicy: IfNotPresent
   imagePullSecrets: []
 
