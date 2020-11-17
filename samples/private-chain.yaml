@@ -2,8 +2,7 @@
 apiVersion: kube-blockchain.io/v1
 kind: Ethereum
 metadata:
-  name: test
-  namespace: keth
+  name: private-net
 spec:
   account:
     secret: geth-account
@@ -141,6 +140,10 @@ spec:
     storageClassName: gp2
   # api:
   #   port: 8585
+  # bootnode:
+  #   replicas: 1
+  # miner:
+  #   replicas: 3
   # ethstats:
   #   port: 80
   # # https://geth.ethereum.org/docs/interface/command-line-options

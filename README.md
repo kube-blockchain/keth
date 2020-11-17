@@ -25,18 +25,21 @@ Kubernetes implementation of the Ethereum protocol.
 
 ```sh
 kubectl create namespace keth
-```
-
-```sh
 helm repo add keth https://kube-blockchain.github.io/keth
 helm repo update
 helm upgrade keth keth/keth \
   --install \
-  --namespace keth \
-  --version 0.0.7
+  --namespace keth
 ```
 
+```sh
+kubectl create namespace samples
+kubectl apply \
+  --filename ./samples/private-chain.yaml \
+  --namespace samples
 ```
+
+```sh
 helm uninstall keth --namespace keth
 kubectl delete namespace keth
 ```

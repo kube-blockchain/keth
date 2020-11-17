@@ -42,8 +42,12 @@ rules:
   resources:
   - ethereum
   verbs:
+  - create
+  - delete
   - get
   - list
+  - patch
+  - update
   - watch
 - apiGroups:
   - kube-blockchain.io
@@ -52,4 +56,33 @@ rules:
   verbs:
   - get
   - update
+# - apiGroups:
+#   - ""
+#   - apps
+#   resources:
+#   - configmaps
+#   - deployments
+#   - services
+#   - statefulsets
+#   verbs:
+#   - create
+#   - delete
+#   - get
+#   - list
+#   - patch
+#   - update
+#   - watch
+# - apiGroups:
+#   - ""
+#   - events.k8s.io
+#   resources:
+#   - events
+#   verbs:
+#   - create
+# - apiGroups:
+#   - ""
+#   resources:
+#   - pods/log
+#   verbs:
+#   - get
 {{- end -}}

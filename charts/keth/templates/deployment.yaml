@@ -6,6 +6,8 @@ metadata:
   namespace: {{ .Release.Namespace | quote }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  # strategy:
+  #   type: Recreate
   selector:
     matchLabels:
       app.kubernetes.io/instance: {{ .Release.Name }}
@@ -31,6 +33,10 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
         ports:
         - name: prometheus
           containerPort: {{ .Values.env.METRICS_PORT }}
