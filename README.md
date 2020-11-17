@@ -28,15 +28,44 @@ kubectl create namespace keth
 helm repo add keth https://kube-blockchain.github.io/keth
 helm repo update
 helm upgrade keth keth/keth \
-  --install \
-  --namespace keth
+  --namespace keth \
+  --install
 ```
 
 ```sh
 kubectl create namespace samples
+```
+
+```sh
+export ACCOUNT_SECRET=<your-account-secret>
+export ACCOUNT_PRIVATEKEY=<your-account-privatekey>
+```
+
+```sh
+kubectl create secret generic geth-account \
+  --namespace samples \
+  --from-literal "accountPrivateKey=${ACCOUNT_PRIVATEKEY}" \
+  --from-literal "accountSecret=${ACCOUNT_SECRET}"
+```
+
+```sh
+export WS_SECRET=<your-ws-secret>
+```
+
+```sh
+kubectl create secret generic ethstats \
+  --namespace samples \
+  --from-literal "WS_SECRET=${WS_SECRET}"
+```
+
+```sh
 kubectl apply \
-  --filename ./samples/private-chain.yaml \
-  --namespace samples
+  --namespace samples \
+  --filename ./samples/private-chain.yaml
+```
+
+```sh
+kubectl delete namespace samples
 ```
 
 ```sh

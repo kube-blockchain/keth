@@ -2,7 +2,7 @@
 apiVersion: kube-blockchain.io/v1
 kind: Ethereum
 metadata:
-  name: private-net
+  name: private-chain
 spec:
   account:
     secret: geth-account
@@ -137,7 +137,7 @@ spec:
         pow: 0.2
         restrict-light: true
     replicas: 1
-    storageClassName: gp2
+    storageClassName: hostpath
   # api:
   #   port: 8585
   # bootnode:
