@@ -31,45 +31,45 @@ spec:
         {{- toYaml .Values.imagePullSecrets | nindent 8 }}
       {{- end }}
       containers:
-      - name: {{ .Chart.Name }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8080
-        ports:
-        - name: prometheus
-          containerPort: {{ .Values.env.METRICS_PORT }}
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        resources:
-          {{- toYaml .Values.resources | nindent 12 }}
-        env:
-        {{- if .Values.customResourceManagerDisabled }}
-        - name: DISABLE_CUSTOM_RESOURCE_MANAGER
-          value: "true"
-        {{- end }}
-        {{- range $name, $value := .Values.env }}
-        {{- if not (empty $value) }}
-        - name: {{ $name | quote }}
-          value: {{ $value | quote }}
-        {{- end }}
-        {{- end }}
-        # Params for env vars populated from k8s secrets
-        {{- range $key, $value := .Values.envVarsFromSecret }}
-        - name: {{ $key }}
-          valueFrom:
-            secretKeyRef:
-              name: {{ $value.secretKeyRef | quote }}
-              key: {{ $value.key | quote }}
-        {{- end }}
-        {{- with .Values.filesFromSecret }}
-        volumeMounts:
-        {{- range $key, $value := . }}
-        - name: {{ $key }}
-          mountPath: {{ $value.mountPath }}
-          readOnly: true
-        {{- end }}
-        {{- end }}
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+          ports:
+            - name: prometheus
+              containerPort: {{ .Values.env.METRICS_PORT }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            {{- if .Values.customResourceManagerDisabled }}
+            - name: DISABLE_CUSTOM_RESOURCE_MANAGER
+              value: "true"
+            {{- end }}
+            {{- range $name, $value := .Values.env }}
+            {{- if not (empty $value) }}
+            - name: {{ $name | quote }}
+              value: {{ $value | quote }}
+            {{- end }}
+            {{- end }}
+            # Params for env vars populated from k8s secrets
+            {{- range $key, $value := .Values.envVarsFromSecret }}
+            - name: {{ $key }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $value.secretKeyRef | quote }}
+                  key: {{ $value.key | quote }}
+            {{- end }}
+          {{- with .Values.filesFromSecret }}
+          volumeMounts:
+            {{- range $key, $value := . }}
+            - name: {{ $key }}
+              mountPath: {{ $value.mountPath }}
+              readOnly: true
+            {{- end }}
+            {{- end }}
       {{- with .Values.dnsConfig }}
       dnsConfig:
         {{- toYaml . | nindent 8 }}
@@ -95,9 +95,9 @@ spec:
       {{- end }}
       {{- with .Values.filesFromSecret }}
       volumes:
-      {{- range $key, $value := . }}
-      - name: {{ $key }}
-        secret:
-          secretName: {{ $value.secret }}
-      {{- end }}
+        {{- range $key, $value := . }}
+        - name: {{ $key }}
+          secret:
+            secretName: {{ $value.secret }}
+        {{- end }}
       {{- end }}

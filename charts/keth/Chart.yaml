@@ -6,13 +6,13 @@ appVersion: 0.0.1
 description: Kubernetes implementation of the Ethereum protocol
 icon: https://kube-blockchain.github.io/keth/images/eth-diamond-rainbow.png
 keywords:
-- blockchain
-- eth
-- ethereum
-- keth
+  - blockchain
+  - eth
+  - ethereum
+  - keth
 home: https://github.com/kube-blockchain/keth
 sources:
-- https://github.com/kube-blockchain/keth
+  - https://github.com/kube-blockchain/keth
 maintainers:
-- name: Scott Thomas
-  email: sthomas@idis.com
+  - name: Scott Thomas
+    email: sthomas@idis.com

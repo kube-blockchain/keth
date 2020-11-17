@@ -17,8 +17,8 @@ spec:
     options:
       account:
         allowInsecureUnlock: false
-        password: ''
-        signer: ''
+        password: ""
+        signer: ""
         unlock: []
       api: {}
       debugging:
@@ -26,23 +26,23 @@ spec:
         noCompaction: false
         verbosity: 3
         vmodule: []
-        backtrace: ''
+        backtrace: ""
         debug: false
         pprof:
           address: 127.0.0.1
           blockProfileRate: 0
-          cpuProfile: ''
+          cpuProfile: ""
           enabled: false
           memoryProfileRate: 524288
           port: 6060
-        trace: ''
+        trace: ""
       developer:
         chain:
           enabled: false
           period: 0
       ethash:
         cache:
-          directory: ''
+          directory: ""
           inMemory: 2
           onDisk: 3
           lockMmap: false
@@ -78,8 +78,8 @@ spec:
           username: test
       mining:
         enabled: false
-        etherbase: ''
-        extradata: ''
+        etherbase: ""
+        extradata: ""
         gas:
           limit: 8000000
           price: 1000000000
@@ -101,9 +101,9 @@ spec:
         nat: any
         noDiscover: false
         v5Disc: false
-        netRestrict: ''
-        nodeKey: ''
-        nodeKeyHex: ''
+        netRestrict: ""
+        nodeKey: ""
+        nodeKeyHex: ""
       performance:
         cache:
           database: 50
@@ -129,8 +129,8 @@ spec:
         rejournal: 1h0m0s
       vm:
         debug: false
-        evm: ''
-        ewasm: ''
+        evm: ""
+        ewasm: ""
       whisper:
         enabled: false
         maxMessageSize: 1048576

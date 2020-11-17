@@ -10,12 +10,12 @@ metadata:
   {{- end }}
 spec:
   endpoints:
-  - interval: {{ .Values.serviceMonitor.interval }}
-    port: prometheus
-    path: /metrics
+    - interval: {{ .Values.serviceMonitor.interval }}
+      port: prometheus
+      path: /metrics
   namespaceSelector:
     matchNames:
-    - {{ .Release.Namespace }}
+      - {{ .Release.Namespace }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "keth.name" . }}

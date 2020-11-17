@@ -9,7 +9,7 @@ spec:
   selector:
     app.kubernetes.io/name: {{ include "keth.name" . }}
   ports:
-  - protocol: TCP
-    port: {{ .Values.env.METRICS_PORT }}
-    name: prometheus
-    targetPort: prometheus
+    - protocol: TCP
+      port: {{ .Values.env.METRICS_PORT }}
+      name: prometheus
+      targetPort: prometheus
