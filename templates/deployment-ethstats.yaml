@@ -26,22 +26,22 @@ spec:
         component: ethstats
     spec:
       containers:
-        - env:
-            - name: WS_SECRET
-              valueFrom:
-                secretKeyRef:
-                  key: WS_SECRET
-                  name: ethstats
-          image: ethereumex/eth-stats-dashboard:latest
-          imagePullPolicy: IfNotPresent
-          name: ethstats
-          ports:
-            - containerPort: 3000
-              name: http
-              protocol: TCP
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
+      - env:
+        - name: WS_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: WS_SECRET
+              name: ethstats
+        image: ethereumex/eth-stats-dashboard:latest
+        imagePullPolicy: IfNotPresent
+        name: ethstats
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

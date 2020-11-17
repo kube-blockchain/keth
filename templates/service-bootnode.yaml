@@ -8,14 +8,14 @@ metadata:
   namespace: {namespace}
 spec:
   ports:
-    - name: discovery
-      port: 30301
-      protocol: UDP
-      targetPort: 30301
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: 80
+  - name: discovery
+    port: 30301
+    protocol: UDP
+    targetPort: 30301
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
   selector:
     component: {name}-bootnode
   sessionAffinity: None

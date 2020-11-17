@@ -20,13 +20,13 @@
 #       app.kubernetes.io/instance: {{ .Release.Name }}
 #   namespaceSelector:
 #     matchNames:
-#       - {{ .Release.Namespace }}
+#     - {{ .Release.Namespace }}
 #   endpoints:
-#     {{- if .Values.prometheus.metricsPort }}
-#     - port: metrics
-#     {{- else }}
-#     - port: http
-#     {{- end }}
-#       interval: {{ .Values.prometheus.serviceMonitor.interval }}
-#       path: /metrics
+#   {{- if .Values.prometheus.metricsPort }}
+#   - port: metrics
+#   {{- else }}
+#   - port: http
+#   {{- end }}
+#     interval: {{ .Values.prometheus.serviceMonitor.interval }}
+#     path: /metrics
 # {{- end -}}
