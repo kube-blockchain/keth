@@ -29,7 +29,14 @@ kubectl create namespace keth
 
 ```sh
 helm repo add keth https://kube-blockchain.github.io/keth
+helm repo update
 helm upgrade keth keth/keth \
   --install \
-  --namespace keth
+  --namespace keth \
+  --version 0.0.7
+```
+
+```
+helm uninstall keth --namespace keth
+kubectl delete namespace keth
 ```
