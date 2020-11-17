@@ -23,23 +23,34 @@
 
 Kubernetes implementation of the Ethereum protocol.
 
-```sh
-kubectl create namespace keth
-```
+## Install Keth
+
+Add the keth helm repository.
 
 ```sh
 helm repo add keth https://kube-blockchain.github.io/keth
-helm repo update
 ```
+
+Install Keth using Helm.
 
 ```sh
 helm upgrade keth keth/keth \
-  --namespace keth \
-  --install
+  --create-namespace \
+  --install \
+  --namespace keth
 ```
 
+Check the status of the release.
+
 ```sh
-kubectl create namespace samples
+kubectl get pods -l "app.kubernetes.io/name=keth,app.kubernetes.io/instance=keth" \
+  --namespace keth
+```
+
+## Deploy a private ethereum network
+
+```sh
+export NAMESPACE=ethereum
 ```
 
 ```sh
@@ -48,31 +59,41 @@ export ACCOUNT_PRIVATEKEY=<your-account-privatekey>
 ```
 
 ```sh
+export WS_SECRET=<your-ws-secret>
+```
+
+```sh
+kubectl create namespace "${NAMESPACE}"
+```
+
+```sh
 kubectl create secret generic geth-account \
-  --namespace samples \
+  --namespace "${NAMESPACE}" \
   --from-literal "accountPrivateKey=${ACCOUNT_PRIVATEKEY}" \
   --from-literal "accountSecret=${ACCOUNT_SECRET}"
 ```
 
 ```sh
-export WS_SECRET=<your-ws-secret>
-```
-
-```sh
 kubectl create secret generic ethstats \
-  --namespace samples \
+  --namespace "${NAMESPACE}" \
   --from-literal "WS_SECRET=${WS_SECRET}"
 ```
 
 ```sh
 kubectl apply \
-  --namespace samples \
+  --namespace "${NAMESPACE}" \
   --filename ./samples/private-chain.yaml
 ```
 
+## Cleanup
+
+Teardown the sample Ethereum network by deleting the namespace.
+
 ```sh
-kubectl delete namespace samples
+kubectl delete namespace "${NAMESPACE}"
 ```
+
+Teardown Keth by uninstalling the Helm release and deleting the namespace.
 
 ```sh
 helm uninstall keth --namespace keth
