@@ -38,7 +38,7 @@ helm upgrade keth keth/keth \
   --create-namespace \
   --install \
   --namespace keth \
-  --set 'image.pullPolicy=Always'
+  --set 'image.tag=latest'
 ```
 
 Check the status of the release.
