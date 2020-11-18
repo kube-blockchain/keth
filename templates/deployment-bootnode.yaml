@@ -4,16 +4,16 @@ kind: Deployment
 metadata:
   labels:
     app: bootnode
-    component: { name }
-  name: { name }
-  namespace: { namespace }
+    component: {name}
+  name: {name}
+  namespace: {namespace}
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      component: { name }
+      component: {name}
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -22,7 +22,7 @@ spec:
   template:
     metadata:
       labels:
-        component: { name }
+        component: {name}
     spec:
       containers:
         - args:
@@ -40,7 +40,7 @@ spec:
             - containerPort: 30301
               name: discovery
               protocol: UDP
-          resources: { {} }
+          resources: {{}}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
@@ -66,7 +66,7 @@ spec:
           ports:
             - containerPort: 80
               protocol: TCP
-          resources: { {} }
+          resources: {{}}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
@@ -80,7 +80,7 @@ spec:
           image: ethereum/client-go:alltools-v1.9.15
           imagePullPolicy: IfNotPresent
           name: genkey
-          resources: { {} }
+          resources: {{}}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
@@ -88,8 +88,8 @@ spec:
               name: data
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: { {} }
+      securityContext: {{}}
       terminationGracePeriodSeconds: 30
       volumes:
-        - emptyDir: { {} }
+        - emptyDir: {{}}
           name: data

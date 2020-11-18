@@ -4,20 +4,20 @@ kind: StatefulSet
 metadata:
   labels:
     app: geth-api
-    component: { name }
-  name: { name }
-  namespace: { namespace }
+    component: {name}
+  name: {name}
+  namespace: {namespace}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: { name }
-  serviceName: { name }
+      component: {name}
+  serviceName: {name}
   template:
     metadata:
       labels:
         app: geth-api
-        component: { name }
+        component: {name}
     spec:
       containers:
         - args:
@@ -46,7 +46,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: WS_SECRET
-                  name: { ethstatsSecret }
+                  name: {ethstatsSecret}
             - name: POD_NAME
               valueFrom:
                 fieldRef:
@@ -73,7 +73,7 @@ spec:
             - containerPort: 30303
               name: discovery-tcp
               protocol: TCP
-          resources: { {} }
+          resources: {{}}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
@@ -89,7 +89,7 @@ spec:
           image: ethereum/client-go:v1.9.15
           imagePullPolicy: IfNotPresent
           name: import-geth-account
-          resources: { {} }
+          resources: {{}}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
@@ -100,13 +100,13 @@ spec:
               readOnly: true
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: { {} }
+      securityContext: {{}}
       terminationGracePeriodSeconds: 10
       volumes:
         - name: account
           secret:
             defaultMode: 420
-            secretName: { accountSecret }
+            secretName: {accountSecret}
   volumeClaimTemplates:
     - metadata:
         name: data
@@ -116,4 +116,4 @@ spec:
         resources:
           requests:
             storage: 10Gi
-        storageClassName: { storageClassName }
+        storageClassName: {storageClassName}
