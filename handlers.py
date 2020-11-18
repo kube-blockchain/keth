@@ -92,6 +92,7 @@ def get_current_timestamp(**_):
 @kopf.on.create(GROUP, VERSION, PLURAL)
 @kopf.on.update(GROUP, VERSION, PLURAL)
 def ensure_deployment(logger, name, namespace, spec, **_):
+    logger.info('attempt 1')
     logger.info('ensure_deployment')
 
     ensure_config_map_genesis(name, f'{name}-genesis', namespace)
