@@ -37,7 +37,8 @@ Install Keth using Helm.
 helm upgrade keth keth/keth \
   --create-namespace \
   --install \
-  --namespace keth
+  --namespace keth \
+  --set 'image.repository.pullPolicy=Always'
 ```
 
 Check the status of the release.

@@ -58,8 +58,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.namespace
           image: ethereum/client-go:v1.9.15
-          # imagePullPolicy: IfNotPresent
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: geth-api
           ports:
             - containerPort: 8545
