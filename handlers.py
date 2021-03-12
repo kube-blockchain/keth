@@ -73,7 +73,8 @@ def _template_load(file, **kwargs):
     template_file = _template_file(file)
     with open(template_file, 'r') as template:
         if kwargs:
-            resource = yaml.safe_load(template.read().format(**kwargs))
+            resource = yaml.safe_load(
+                template.read().format(**kwargs))
         else:
             resource = yaml.safe_load(template.read())
     return resource
