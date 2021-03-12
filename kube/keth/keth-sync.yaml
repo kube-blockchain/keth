@@ -16,6 +16,7 @@ spec:
     remediation:
       retries: -1
   interval: 1m0s
+  releaseName: dev
   upgrade:
     disableWait: true
     remediation:
