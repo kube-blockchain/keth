@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+flux bootstrap github \
+  --branch=main \
+  --namespace=keth \
+  --owner=kube-blockchain \
+  --path="./.kube" \
+  --repository=keth \
+  --watch-all-namespaces=false
