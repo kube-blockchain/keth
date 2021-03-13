@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - Dockerfile
+      - '**.py'
     tags:
       - v*
 env:
