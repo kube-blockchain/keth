@@ -5,8 +5,8 @@ on:
       - main
     paths:
       - charts/keth-operator/**
-    # tags:
-    #   - keth*
+    tags:
+      - keth-operator-**.**.**
 jobs:
   release:
     runs-on: ubuntu-latest
