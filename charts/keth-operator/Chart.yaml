@@ -1,15 +1,16 @@
 ---
 apiVersion: v1
-name: keth
-version: 0.0.36
+name: keth-operator
+version: 0.0.13
 appVersion: 0.0.1
-description: Kubernetes implementation of the Ethereum protocol
+description: Operator for the Kubernetes implementation of the Ethereum protocol
 icon: https://kube-blockchain.github.io/keth/images/eth-diamond-rainbow.png
 keywords:
   - blockchain
   - eth
   - ethereum
   - keth
+  - operator
 home: https://github.com/kube-blockchain/keth
 sources:
   - https://github.com/kube-blockchain/keth
