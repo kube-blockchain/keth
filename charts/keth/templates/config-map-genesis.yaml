@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   labels: {{ include "keth.labels" . | nindent 4 }}
   name: {{ template "keth.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
 data:
-  # genesis.json: |-
-  #   {{}}
-  test: asdfg
+  genesis.json: |-
+    {{}}
