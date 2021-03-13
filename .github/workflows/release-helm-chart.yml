@@ -6,7 +6,7 @@ on:
     paths:
       - charts/**
     tags:
-      - v*
+      - keth-*
 jobs:
   release:
     runs-on: ubuntu-latest
