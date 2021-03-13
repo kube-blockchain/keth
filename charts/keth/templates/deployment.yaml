@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       labels:
-        test: 1
+        test: abc
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/name: {{ include "keth.name" . }}
       {{- if .Values.podLabels }}
