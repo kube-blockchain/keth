@@ -1,12 +1,12 @@
-name: Release Helm Chart
+name: Release Helm Operator Chart
 on:
   push:
     branches:
       - main
     paths:
-      - charts/**
+      - charts/keth-operator/**
     tags:
-      - keth-*
+      - keth-operator-*
 jobs:
   release:
     runs-on: ubuntu-latest

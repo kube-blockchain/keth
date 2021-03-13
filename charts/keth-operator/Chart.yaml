@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+name: keth-operator
+version: 0.0.1
+appVersion: 0.0.1
+description: Operator for the Kubernetes implementation of the Ethereum protocol
+icon: https://kube-blockchain.github.io/keth/images/eth-diamond-rainbow.png
+keywords:
+  - blockchain
+  - eth
+  - ethereum
+  - keth
+  - operator
+home: https://github.com/kube-blockchain/keth
+sources:
+  - https://github.com/kube-blockchain/keth
+maintainers:
+  - name: Scott Thomas
+    email: sthomas@idis.com

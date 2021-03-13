@@ -1,0 +1,43 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: ethereum.kube-blockchain.io
+spec:
+  conversion:
+    strategy: None
+  group: kube-blockchain.io
+  names:
+    categories:
+      - all
+      - blockchain
+      - eth
+      - ethereum
+    kind: Ethereum
+    plural: ethereum
+    singular: ethereum
+  scope: Namespaced
+  versions:
+    - additionalPrinterColumns:
+        - jsonPath: .metadata.creationTimestamp
+          name: Age
+          type: date
+      name: v1
+      schema:
+        openAPIV3Schema:
+          description: resource that represents an Ethereum network
+          properties:
+            spec:
+              type: object
+              x-kubernetes-preserve-unknown-fields: true
+            status:
+              description: |
+                Most recently observed status of the Ethereum network. This data may not be up to date.
+                Populated by the system. Read-only.
+              type: object
+              x-kubernetes-preserve-unknown-fields: true
+          required:
+            - spec
+          type: object
+      served: true
+      storage: true
