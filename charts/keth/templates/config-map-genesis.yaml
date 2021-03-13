@@ -2,7 +2,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: asd-xyz
-  namespace: keth
+  labels: {{ include "keth.labels" . | nindent 4 }}
+  name: {{ template "keth.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
 data:
-  genesisjson: vfr
+  genesis.json: {}
