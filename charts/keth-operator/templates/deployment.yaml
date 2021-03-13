@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels: {{ include "keth.labels" . | nindent 4 }}
-  name: {{ include "keth.fullname" . }}
+  name: {{ include "keth.fullname" . }}-controller
   namespace: {{ .Release.Namespace | quote }}
 spec:
   replicas: {{ .Values.replicaCount }}
