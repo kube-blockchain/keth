@@ -1,10 +1,12 @@
+''' Test the operator
+'''
+# pylint: disable=missing-function-docstring
 # import shlex
 # import subprocess
 import time
 from kopf.testing import KopfRunner
 
 
-# test the operator
 def test_operator():
     with KopfRunner(['run', '--verbose', 'handlers.py']) as runner:
         # do something while the operator is running.
