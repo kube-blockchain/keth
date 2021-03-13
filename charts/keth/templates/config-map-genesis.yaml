@@ -2,8 +2,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  labels: {{ include "keth.labels" . | nindent 4 }}
-  name: {{ template "keth.fullname" . }}
+  # labels: {{ include "keth.labels" . | nindent 4 }}
+  name: {{ template "keth.fullname" . }}-xyz
   namespace: {{ .Release.Namespace | quote }}
 data:
   genesis.json: ''
