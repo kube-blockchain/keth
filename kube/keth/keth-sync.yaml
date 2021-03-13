@@ -17,6 +17,7 @@ spec:
       retries: -1
   interval: 1m0s
   releaseName: dev
+  targetNamespace: keth
   upgrade:
     disableWait: true
     remediation:
