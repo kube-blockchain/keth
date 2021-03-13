@@ -28,5 +28,5 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
-          charts_dir: charts
+          charts_dir: charts/keth-operator
           version: v1.2.0
