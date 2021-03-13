@@ -5,5 +5,6 @@ metadata:
   labels: {{ include "keth.labels" . | nindent 4 }}
   name: {{ template "keth.fullname" . }}
 data:
-  genesis.json: |-
-    {{}}
+  # genesis.json: |-
+  #   {{}}
+  test: asdfg
