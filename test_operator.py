@@ -1,7 +1,8 @@
-import shlex
-import subprocess
+# import shlex
+# import subprocess
 import time
 from kopf.testing import KopfRunner
+
 
 def test_operator():
     with KopfRunner(['run', '--verbose', 'handlers.py']) as runner:
