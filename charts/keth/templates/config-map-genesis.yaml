@@ -6,4 +6,4 @@ metadata:
   name: {{ template "keth.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
 data:
-  genesis.json: {}
+  genesis.json: ''
