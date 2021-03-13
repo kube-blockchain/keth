@@ -24,9 +24,9 @@ jobs:
         with:
           version: v3.4.1
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.1.0
+        uses: helm/chart-releaser-action@v1.2.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
           charts_dir: charts
-          version: v1.1.1
+          version: v1.2.0
