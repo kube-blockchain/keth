@@ -1,4 +1,36 @@
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels: {{ include "keth.labels" . | nindent 4 }}
+    app: geth
+  name: {{ template "keth.fullname" . }}-geth
+  namespace: {{ .Release.Namespace | quote }}
+data:
+  genesis.json: ''
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels: {{ include "keth.labels" . | nindent 4 }}
+    app: geth
+    component: {{ template "keth.fullname" . }}-geth
+  name: {{ template "keth.fullname" . }}-geth
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  ports:
+    - name: rpc
+      port: 8545
+      protocol: TCP
+      targetPort: 8545
+    - name: ws
+      port: 8546
+      protocol: TCP
+      targetPort: 8546
+  selector:
+    component: {{ template "keth.fullname" . }}-geth
+  type: ClusterIP
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -47,11 +79,11 @@ spec:
             #     secretKeyRef:
             #       key: WS_SECRET
             #       name: {ethstatsSecret}
-            - name: POD_NAME
-              valueFrom:
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: metadata.name
+            # - name: POD_NAME
+            #   valueFrom:
+            #     fieldRef:
+            #       apiVersion: v1
+            #       fieldPath: metadata.name
             - name: POD_NAMESPACE
               valueFrom:
                 fieldRef:
@@ -117,25 +149,3 @@ spec:
           requests:
             storage: 10Gi
         # storageClassName: {storageClassName}
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels: {{ include "keth.labels" . | nindent 4 }}
-    app: geth
-    component: {{ template "keth.fullname" . }}-geth
-  name: {{ template "keth.fullname" . }}-geth
-  namespace: {{ .Release.Namespace | quote }}
-spec:
-  ports:
-    - name: rpc
-      port: 8545
-      protocol: TCP
-      targetPort: 8545
-    - name: ws
-      port: 8546
-      protocol: TCP
-      targetPort: 8546
-  selector:
-    component: {{ template "keth.fullname" . }}-geth
-  type: ClusterIP
