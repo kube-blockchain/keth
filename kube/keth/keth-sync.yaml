@@ -40,7 +40,7 @@ spec:
     remediation:
       retries: -1
   interval: 1m0s
-  releaseName: dev-operator
+  releaseName: operator
   targetNamespace: keth
   upgrade:
     disableWait: true
