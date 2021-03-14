@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels: {{ include "keth.labels" . | nindent 4 }}
-  name: {{ include "keth.fullname" . }}-controller
+  labels: {{ include "keth-operator.labels" . | nindent 4 }}
+  name: {{ include "keth-operator.fullname" . }}-controller
   namespace: {{ .Release.Namespace | quote }}
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -11,12 +11,12 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/instance: {{ .Release.Name }}
-      app.kubernetes.io/name: {{ include "keth.name" . }}
+      app.kubernetes.io/name: {{ include "keth-operator.name" . }}
   template:
     metadata:
       labels:
         app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/name: {{ include "keth.name" . }}
+        app.kubernetes.io/name: {{ include "keth-operator.name" . }}
       {{- if .Values.podLabels }}
           {{- toYaml .Values.podLabels | nindent 8 }}
       {{- end }}
@@ -25,7 +25,7 @@ spec:
         {{- toYaml .Values.podAnnotations | nindent 8 }}
       {{- end }}
     spec:
-      serviceAccountName: {{ template "keth.serviceAccountName" . }}
+      serviceAccountName: {{ template "keth-operator.serviceAccountName" . }}
       {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml .Values.imagePullSecrets | nindent 8 }}
