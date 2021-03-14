@@ -57,7 +57,6 @@ spec:
             - |
               geth \
                 --datadir=/root/.ethereum \
-                --ethstats="${{POD_NAME}}.${{POD_NAMESPACE}}:${{ETHSTATS_SECRET}}@${{ETHSTATS_SVC}}" \
                 --ropsten \
                 --rpc \
                 --rpcaddr=0.0.0.0 \
@@ -69,6 +68,7 @@ spec:
                 --ws \
                 --wsaddr=0.0.0.0 \
                 --wsapi=admin,debug,web3,eth,txpool,personal,clique,miner,net
+            # --ethstats="${{POD_NAME}}.${{POD_NAMESPACE}}:${{ETHSTATS_SECRET}}@${{ETHSTATS_SVC}}" \
           command:
             - /bin/sh
           env:
