@@ -57,7 +57,7 @@ spec:
             - |
               geth \
                 --datadir=/root/.ethereum \
-                --ethstats="${{POD_NAME}}.${{POD_NAMESPACE}}:${{ETHSTATS_SECRET}}@${{ETHSTATS_SVC}}" \
+                --ethstats="${POD_NAME}.${POD_NAMESPACE}:${ETHSTATS_SECRET}@${ETHSTATS_SVC}" \
                 --ropsten \
                 --rpc \
                 --rpcaddr=0.0.0.0 \
