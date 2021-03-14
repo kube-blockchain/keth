@@ -3,6 +3,27 @@ entries:
   keth:
   - apiVersion: v1
     appVersion: 0.0.1
+    created: "2021-03-14T00:52:15.849748659Z"
+    description: Kubernetes implementation of the Ethereum protocol
+    digest: da9c154ba786611f551059da447a6233fc6f7db719103f10110fc07c17c8f097
+    home: https://github.com/kube-blockchain/keth
+    icon: https://kube-blockchain.github.io/keth/images/eth-diamond-rainbow.png
+    keywords:
+    - blockchain
+    - eth
+    - ethereum
+    - keth
+    maintainers:
+    - email: sthomas@idis.com
+      name: Scott Thomas
+    name: keth
+    sources:
+    - https://github.com/kube-blockchain/keth
+    urls:
+    - https://github.com/kube-blockchain/keth/releases/download/keth-0.0.40/keth-0.0.40.tgz
+    version: 0.0.40
+  - apiVersion: v1
+    appVersion: 0.0.1
     created: "2021-03-14T00:38:09.356139221Z"
     description: Kubernetes implementation of the Ethereum protocol
     digest: a8dfd4045a8ef4df741e1d2823d565b0a042be5889ce65938f5a2146366793e0
@@ -130,6 +151,28 @@ entries:
   keth-operator:
   - apiVersion: v1
     appVersion: 0.0.1
+    created: "2021-03-14T00:52:15.960515752Z"
+    description: Operator for the Kubernetes implementation of the Ethereum protocol
+    digest: 3a72a28aaf15c9f20cde5b41b83599b43ca7542d195f5ea564636dae63367a6e
+    home: https://github.com/kube-blockchain/keth
+    icon: https://kube-blockchain.github.io/keth/images/eth-diamond-rainbow.png
+    keywords:
+    - blockchain
+    - eth
+    - ethereum
+    - keth
+    - operator
+    maintainers:
+    - email: sthomas@idis.com
+      name: Scott Thomas
+    name: keth-operator
+    sources:
+    - https://github.com/kube-blockchain/keth
+    urls:
+    - https://github.com/kube-blockchain/keth/releases/download/keth-operator-0.0.14/keth-operator-0.0.14.tgz
+    version: 0.0.14
+  - apiVersion: v1
+    appVersion: 0.0.1
     created: "2021-03-13T23:03:59.922206341Z"
     description: Operator for the Kubernetes implementation of the Ethereum protocol
     digest: 044c0fed7d6baa25849a56bff534f938e99c6a1aa616e29ecba5d8736325615a
@@ -194,4 +237,4 @@ entries:
     urls:
     - https://github.com/kube-blockchain/keth/releases/download/keth-operator-0.0.6/keth-operator-0.0.6.tgz
     version: 0.0.6
-generated: "2021-03-14T00:38:09.356165521Z"
+generated: "2021-03-14T00:52:15.960559052Z"
