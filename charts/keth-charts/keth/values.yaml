@@ -66,3 +66,9 @@ serviceMonitor:
   namespace:
 
 tolerations: []
+
+prometheus:
+  service:
+    enabled: false
+  serviceMonitor:
+    enabled: false
