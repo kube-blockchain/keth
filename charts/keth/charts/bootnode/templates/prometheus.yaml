@@ -1,5 +1,5 @@
----
 {{- if or .Values.prometheus.serviceMonitor.enabled .Values.prometheus.service.enabled }}
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -25,8 +25,9 @@ spec:
     {{- end }}
     protocol: TCP
 {{ end }}
----
+
 {{- if .Values.prometheus.serviceMonitor.enabled }}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:

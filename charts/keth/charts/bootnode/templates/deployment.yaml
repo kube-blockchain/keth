@@ -1,3 +1,4 @@
+{{- if .enabled }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -111,3 +112,4 @@ spec:
       volumes:
         - emptyDir: {}
           name: data
+{{ end }}

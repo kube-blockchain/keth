@@ -17,6 +17,7 @@ prometheus:
 
 bootnode:
   affinity: {}
+  enabled: true
   nodeSelector: {}
   overrides:
     fullName: ""
@@ -46,6 +47,7 @@ bootnode:
 
 ethstats:
   affinity: {}
+  enabled: true
   nodeSelector: {}
   overrides:
     fullName: ""
@@ -79,6 +81,7 @@ ethstats:
 
 geth:
   affinity: {}
+  enabled: true
   nodeSelector: {}
   overrides:
     fullName: ""

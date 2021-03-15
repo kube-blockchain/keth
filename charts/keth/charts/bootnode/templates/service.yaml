@@ -1,3 +1,4 @@
+{{- if .enabled }}
 ---
 apiVersion: v1
 kind: Service
@@ -20,3 +21,4 @@ spec:
     component: {{ template ".fullname" . }}
   sessionAffinity: None
   type: ClusterIP
+{{ end }}
