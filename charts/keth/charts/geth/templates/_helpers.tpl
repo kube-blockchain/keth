@@ -1,11 +1,11 @@
 {{/* vim: set filetype=mustache: */}}
 
 {{/* Helm required labels */}}
-{{- define "keth.labels" -}}
+{{- define "geth.labels" -}}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-app.kubernetes.io/name: {{ template "keth.name" . }}
-helm.sh/chart: {{ template "keth.chart" . }}
+app.kubernetes.io/name: {{ template "geth.name" . }}
+helm.sh/chart: {{ template "geth.chart" . }}
 {{- if .Values.podLabels }}
 {{ toYaml .Values.podLabels }}
 {{- end }}
@@ -14,7 +14,7 @@ helm.sh/chart: {{ template "keth.chart" . }}
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "keth.name" -}}
+{{- define "geth.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -22,7 +22,7 @@ Expand the name of the chart.
 Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
-{{- define "keth.fullname" -}}
+{{- define "geth.fullname" -}}
 {{- if .Values.overrides.fullName -}}
 {{- .Values.overrides.fullName | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -38,16 +38,16 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "keth.chart" -}}
+{{- define "geth.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "keth.serviceAccountName" -}}
+{{- define "geth.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create -}}
-    {{ default (include "keth.fullname" .) .Values.serviceAccount.name }}
+    {{ default (include "geth.fullname" .) .Values.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
@@ -56,6 +56,6 @@ Create the name of the service account to use
 {{/*
 Return true if a secret object should be created
 */}}
-{{- define "keth.createSecret" -}}
+{{- define "geth.createSecret" -}}
 {{- false -}}
 {{- end -}}
