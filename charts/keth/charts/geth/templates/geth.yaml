@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  labels: {{ include "geth.labels" . | nindent 4 }}
+  labels: {{ include ".labels" . | nindent 4 }}
     app: geth
-  name: {{ template "geth.fullname" . }}-geth
+  name: {{ template ".fullname" . }}-geth
   namespace: {{ .Release.Namespace | quote }}
 data:
   genesis.json: ''
@@ -12,10 +12,10 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  labels: {{ include "geth.labels" . | nindent 4 }}
+  labels: {{ include ".labels" . | nindent 4 }}
     app: geth
-    component: {{ template "geth.fullname" . }}-geth
-  name: {{ template "geth.fullname" . }}-geth
+    component: {{ template ".fullname" . }}-geth
+  name: {{ template ".fullname" . }}-geth
   namespace: {{ .Release.Namespace | quote }}
 spec:
   ports:
@@ -28,28 +28,28 @@ spec:
       protocol: TCP
       targetPort: 8546
   selector:
-    component: {{ template "geth.fullname" . }}-geth
+    component: {{ template ".fullname" . }}-geth
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  labels: {{ include "geth.labels" . | nindent 4 }}
+  labels: {{ include ".labels" . | nindent 4 }}
     app: geth
-    component: {{ template "geth.fullname" . }}-geth
-  name: {{ template "geth.fullname" . }}-geth
+    component: {{ template ".fullname" . }}-geth
+  name: {{ template ".fullname" . }}-geth
   namespace: {{ .Release.Namespace | quote }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: {{ template "geth.fullname" . }}-geth
-  serviceName: {{ template "geth.fullname" . }}-geth
+      component: {{ template ".fullname" . }}-geth
+  serviceName: {{ template ".fullname" . }}-geth
   template:
     metadata:
       labels:
         app: geth
-        component: {{ template "geth.fullname" . }}-geth
+        component: {{ template ".fullname" . }}-geth
     spec:
       containers:
         - args:
