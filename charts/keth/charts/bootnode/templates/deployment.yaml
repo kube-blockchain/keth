@@ -3,9 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels: {{ include ".labels" . | nindent 4 }}
-    app: bootnode
-    component: {{ template ".fullname" . }}-bootnode
-  name: {{ template ".fullname" . }}-bootnode
+    component: {{ template ".fullname" . }}
+  name: {{ template ".fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
 spec:
   progressDeadlineSeconds: 600
@@ -13,7 +12,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      component: {{ template ".fullname" . }}-bootnode
+      component: {{ template ".fullname" . }}
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -22,7 +21,7 @@ spec:
   template:
     metadata:
       labels:
-        component: {{ template ".fullname" . }}-bootnode
+        component: {{ template ".fullname" . }}
     spec:
       {{- with .Values.affinity }}
       affinity: {{ tpl (toYaml .) $ | nindent 8 }}

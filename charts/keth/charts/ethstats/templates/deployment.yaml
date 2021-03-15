@@ -3,9 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels: {{ include ".labels" . | nindent 4 }}
-    app: ethstats
-    component: {{ template ".fullname" . }}-ethstats
-  name: {{ template ".fullname" . }}-ethstats
+    component: {{ template ".fullname" . }}
+  name: {{ template ".fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
 spec:
   progressDeadlineSeconds: 600
@@ -13,7 +12,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      component: {{ template ".fullname" . }}-ethstats
+      component: {{ template ".fullname" . }}
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -22,9 +21,11 @@ spec:
   template:
     metadata:
       labels:
-        app: ethstats
-        component: {{ template ".fullname" . }}-ethstats
+        component: {{ template ".fullname" . }}
     spec:
+      {{- with .Values.affinity }}
+      affinity: {{ tpl (toYaml .) $ | nindent 8 }}
+      {{- end }}
       containers:
         - env:
             - name: WS_SECRET
@@ -42,8 +43,24 @@ spec:
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
+      dnsPolicy: ClusterFirst      {{- with .Values.nodeSelector }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector: {{ tpl (toYaml .) $ | nindent 8 }}
+      {{- end }}
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName | quote }}
+      {{- end }}
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: {}
+      {{- if .Values.podSecurityContext }}
+      securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- end }}
+      {{- if .Values.rbac.create }}
+      serviceAccountName: {{ template ".fullname" . }}
+      {{- else }}
+      serviceAccountName: {{ .Values.rbac.serviceAccountName | quote }}
+      {{- end }}
       terminationGracePeriodSeconds: 30
+      {{- with .Values.tolerations }}
+      tolerations: {{ tpl (toYaml .) $ | nindent 8 }}
+      {{- end }}

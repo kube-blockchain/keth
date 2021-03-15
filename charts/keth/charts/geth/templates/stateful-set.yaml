@@ -3,21 +3,19 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels: {{ include ".labels" . | nindent 4 }}
-    app: geth
-    component: {{ template ".fullname" . }}-geth
-  name: {{ template ".fullname" . }}-geth
+    component: {{ template ".fullname" . }}
+  name: {{ template ".fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: {{ template ".fullname" . }}-geth
-  serviceName: {{ template ".fullname" . }}-geth
+      component: {{ template ".fullname" . }}
+  serviceName: {{ template ".fullname" . }}
   template:
     metadata:
       labels:
-        app: geth
-        component: {{ template ".fullname" . }}-geth
+        component: {{ template ".fullname" . }}
     spec:
       containers:
         - args:
@@ -88,7 +86,7 @@ spec:
             - /bin/sh
           image: ethereum/client-go:v1.9.15
           imagePullPolicy: IfNotPresent
-          name: import-geth-account
+          name: import-account
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
