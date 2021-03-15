@@ -6,7 +6,7 @@ metadata:
   labels: {{ include ".labels" . | nindent 4 }}
     app: geth
   name: {{ template ".fullname" . }}
-  namespace: {{ .Release.Namespace | quote }}
+  namespace: {{ $.Release.Namespace }}
 data:
   genesis.json: ''
 {{- end -}}

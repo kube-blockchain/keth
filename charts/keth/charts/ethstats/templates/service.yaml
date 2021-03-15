@@ -6,7 +6,7 @@ metadata:
   labels: {{ include ".labels" . | nindent 4 }}
     component: {{ template ".fullname" . }}
   name: {{ template ".fullname" . }}
-  namespace: {{ .Release.Namespace | quote }}
+  namespace: {{ $.Release.Namespace }}
 spec:
   ports:
     - port: 80
