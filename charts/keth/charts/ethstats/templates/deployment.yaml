@@ -43,7 +43,7 @@ spec:
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst      {{- with .Values.nodeSelector }}
+      dnsPolicy: ClusterFirst
       {{- with .Values.nodeSelector }}
       nodeSelector: {{ tpl (toYaml .) $ | nindent 8 }}
       {{- end }}
