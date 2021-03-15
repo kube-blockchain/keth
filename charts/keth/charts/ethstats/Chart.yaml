@@ -1,7 +1,7 @@
 ---
 apiVersion: v1
 name: ethstats
-version: 0.0.60
+version: 0.0.61
 appVersion: master
 description: Kubernetes implementation of the Ethereum protocol
 icon: https://kube-blockchain.github.io/keth/images/eth-diamond-rainbow.png

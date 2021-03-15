@@ -24,7 +24,7 @@ spec:
       labels:
         component: {{ template "bootnode.fullname" . }}-bootnode
     spec:
-      {{- with .Values.bootnode.affinity }}
+      {{- with .Values.affinity }}
       affinity: {{ tpl (toYaml .) $ | nindent 8 }}
       {{- end }}
       containers:
@@ -89,24 +89,24 @@ spec:
           volumeMounts:
             - mountPath: /etc/bootnode
               name: data
-      {{- with .Values.bootnode.nodeSelector }}
+      {{- with .Values.nodeSelector }}
       nodeSelector: {{ tpl (toYaml .) $ | nindent 8 }}
       {{- end }}
-      {{- if .Values.bootnode.priorityClassName }}
-      priorityClassName: {{ .Values.bootnode.priorityClassName | quote }}
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName | quote }}
       {{- end }}
       restartPolicy: Always
       schedulerName: default-scheduler
-      {{- if .Values.bootnode.podSecurityContext }}
-      securityContext: {{ toYaml .Values.bootnode.podSecurityContext | nindent 8 }}
+      {{- if .Values.podSecurityContext }}
+      securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       {{- end }}
-      {{- if .Values.bootnode.rbac.create }}
+      {{- if .Values.rbac.create }}
       serviceAccountName: {{ template "bootnode.fullname" . }}
       {{- else }}
-      serviceAccountName: {{ .Values.bootnode.rbac.serviceAccountName | quote }}
+      serviceAccountName: {{ .Values.rbac.serviceAccountName | quote }}
       {{- end }}
       terminationGracePeriodSeconds: 30
-      {{- with .Values.bootnode.tolerations }}
+      {{- with .Values.tolerations }}
       tolerations: {{ tpl (toYaml .) $ | nindent 8 }}
       {{- end }}
       volumes:
