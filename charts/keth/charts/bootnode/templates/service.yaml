@@ -21,4 +21,4 @@ spec:
     component: {{ template ".fullname" . }}
   sessionAffinity: None
   type: ClusterIP
-{{ end }}
+{{- end -}}

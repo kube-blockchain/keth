@@ -1,4 +1,4 @@
-{{- if .enabled }}
+{{- if ".enabled" }}
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -116,4 +116,4 @@ spec:
           requests:
             storage: 10Gi
         # storageClassName: {storageClassName}
-{{ end }}
+{{- end -}}

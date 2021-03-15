@@ -15,4 +15,4 @@ spec:
   selector:
     component: {{ template ".fullname" . }}
   type: ClusterIP
-{{ end }}
+{{- end -}}

@@ -112,4 +112,4 @@ spec:
       volumes:
         - emptyDir: {}
           name: data
-{{ end }}
+{{- end -}}
