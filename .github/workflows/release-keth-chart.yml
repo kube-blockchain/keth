@@ -4,9 +4,9 @@ on:
     branches:
       - main
     paths:
-      - charts/keth-charts/**
+      - charts/keth/**
     tags:
-      - keth-**.**.**
+      - keth-**
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -28,5 +28,5 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
-          charts_dir: charts/keth-charts
+          charts_dir: charts
           version: v1.2.0

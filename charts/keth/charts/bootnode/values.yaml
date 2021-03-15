@@ -1,0 +1,27 @@
+affinity: {}
+nodeSelector: {}
+overrides:
+  fullName: ""
+  name: ""
+podAnnotations: {}
+podLabels: {}
+podSecurityContext:
+  runAsNonRoot: false
+priorityClassName: ""
+prometheus:
+  service:
+    enabled: false
+  serviceMonitor:
+    enabled: false
+    interval: "30s"
+    namespace:
+rbac:
+  create: true
+  serviceAccountName:
+replicaCount: 1
+resources: {}
+serviceAccount:
+  annotations: {}
+  create: true
+  name:
+tolerations: []
