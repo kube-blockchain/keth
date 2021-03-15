@@ -2,10 +2,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels: {{ include "ethstats.labels" . | nindent 4 }}
+  labels: {{ include ".labels" . | nindent 4 }}
     app: ethstats
-    component: {{ template "ethstats.fullname" . }}-ethstats
-  name: {{ template "ethstats.fullname" . }}-ethstats
+    component: {{ template ".fullname" . }}-ethstats
+  name: {{ template ".fullname" . }}-ethstats
   namespace: {{ .Release.Namespace | quote }}
 spec:
   progressDeadlineSeconds: 600
@@ -13,7 +13,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      component: {{ template "ethstats.fullname" . }}-ethstats
+      component: {{ template ".fullname" . }}-ethstats
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -23,7 +23,7 @@ spec:
     metadata:
       labels:
         app: ethstats
-        component: {{ template "ethstats.fullname" . }}-ethstats
+        component: {{ template ".fullname" . }}-ethstats
     spec:
       containers:
         - env:
@@ -51,10 +51,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  labels: {{ include "ethstats.labels" . | nindent 4 }}
+  labels: {{ include ".labels" . | nindent 4 }}
     app: ethstats
-    component: {{ template "ethstats.fullname" . }}-ethstats
-  name: {{ template "ethstats.fullname" . }}-ethstats
+    component: {{ template ".fullname" . }}-ethstats
+  name: {{ template ".fullname" . }}-ethstats
   namespace: {{ .Release.Namespace | quote }}
 spec:
   ports:
@@ -62,5 +62,5 @@ spec:
       protocol: TCP
       targetPort: http
   selector:
-    component: {{ template "ethstats.fullname" . }}-ethstats
+    component: {{ template ".fullname" . }}-ethstats
   type: ClusterIP
