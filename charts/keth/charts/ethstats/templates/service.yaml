@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels: {{ include ".labels" . | nindent 4 }}
+    app: ethstats
+    component: {{ template ".fullname" . }}-ethstats
+  name: {{ template ".fullname" . }}-ethstats
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: http
+  selector:
+    component: {{ template ".fullname" . }}-ethstats
+  type: ClusterIP
