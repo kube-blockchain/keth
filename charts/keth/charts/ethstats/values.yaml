@@ -18,8 +18,11 @@ prometheus:
     interval: "30s"
     namespace:
 rbac:
+  apiVersion: v1beta1
   create: true
-  serviceAccountName:
+  pspEnabled: false
+  serviceAccountAnnotations: {}
+  serviceAccountName: default
 replicaCount: 1
 resources: {}
 serviceAccount:
