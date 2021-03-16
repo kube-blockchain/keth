@@ -9,8 +9,11 @@ ethstats:
   secretName: ""
   webSocketSecret: ""
 geth:
+  syncmode: fast
+  verbosity: 5
   ws: true
   wsaddr: "0.0.0.0"
+  wsapi: "admin,debug,web3,eth,txpool,personal,clique,miner,net"
 nodeSelector: {}
 overrides:
   fullName: ""

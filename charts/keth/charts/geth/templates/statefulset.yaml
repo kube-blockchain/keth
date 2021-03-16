@@ -31,16 +31,21 @@ spec:
                 --rpcapi=admin,debug,web3,eth,txpool,personal,clique,miner,net \
                 --rpccorsdomain=* \
                 --rpcvhosts=* \
-                --syncmode=fast \
-                --verbosity=5 \
-                --ws \
+                {{- if .Values.geth.syncmode }}
+                --syncmode={{ .Values.geth.syncmode }} \
+                {{- end }}
+                {{- if .Values.geth.verbosity }}
+                --verbosity={{ .Values.geth.verbosity }} \
+                {{- end }}
                 {{- if .Values.geth.ws }}
                 --ws \
                 {{- end }}
                 {{- if .Values.geth.wsaddr }}
                 --wsaddr={{ .Values.geth.wsaddr }} \
                 {{- end }}
-                --wsapi=admin,debug,web3,eth,txpool,personal,clique,miner,net
+                {{- if .Values.geth.wsapi }}
+                --wsapi={{ .Values.geth.wsapi }} \
+                {{- end }}
           command:
             - /bin/sh
           env:
