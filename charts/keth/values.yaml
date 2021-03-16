@@ -50,6 +50,9 @@ bootnode:
 
 ethstats:
   affinity: {}
+  credentials:
+    # secretName:
+    webSocketSecret:
   enabled: true
   nodeSelector: {}
   overrides:
