@@ -102,6 +102,7 @@ geth:
   enabled: true
   ethstats:
     # secretName:
+    webSocketSecret: ""
   nodeSelector: {}
   overrides:
     fullName: ""
