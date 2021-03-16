@@ -23,14 +23,28 @@ spec:
             - -c
             - |
               geth \
-                --datadir=/root/.ethereum \
+                {{- if .Values.geth.datadir }}
+                --datadir={{ .Values.geth.datadir }} \
+                {{- end }}
                 --ethstats="${POD_NAME}.${POD_NAMESPACE}:${ETHSTATS_SECRET}@${ETHSTATS_SVC}" \
+                {{- if .Values.geth.ropsten }}
                 --ropsten \
+                {{- end }}
+                {{- if .Values.geth.rpc }}
                 --rpc \
-                --rpcaddr=0.0.0.0 \
-                --rpcapi=admin,debug,web3,eth,txpool,personal,clique,miner,net \
-                --rpccorsdomain=* \
-                --rpcvhosts=* \
+                {{- end }}
+                {{- if .Values.geth.rpcaddr }}
+                --rpcaddr={{ .Values.geth.rpcaddr }} \
+                {{- end }}
+                {{- if .Values.geth.rpcapi }}
+                --rpcapi={{ .Values.geth.rpcapi }} \
+                {{- end }}
+                {{- if .Values.geth.rpccorsdomain }}
+                --rpccorsdomain={{ .Values.geth.rpccorsdomain }} \
+                {{- end }}
+                {{- if .Values.geth.rpcvhosts }}
+                --rpcvhosts={{ .Values.geth.rpcvhosts }} \
+                {{- end }}
                 {{- if .Values.geth.syncmode }}
                 --syncmode={{ .Values.geth.syncmode }} \
                 {{- end }}

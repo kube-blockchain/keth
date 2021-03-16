@@ -9,6 +9,13 @@ ethstats:
   secretName: ""
   webSocketSecret: ""
 geth:
+  datadir: /root/.ethereum
+  ropsten: true
+  rpc: true
+  rpcaddr: "0.0.0.0"
+  rpcapi: "admin,debug,web3,eth,txpool,personal,clique,miner,net"
+  rpccorsdomain: "*"
+  rpcvhosts: "*"
   syncmode: fast
   verbosity: 5
   ws: true
