@@ -10,6 +10,7 @@ ethstats:
   webSocketSecret: ""
 geth:
   datadir: /root/.ethereum
+  ethstats: "${POD_NAME}.${POD_NAMESPACE}:${ETHSTATS_SECRET}@${ETHSTATS_SVC}"
   ropsten: true
   rpc: true
   rpcaddr: "0.0.0.0"
