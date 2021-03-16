@@ -111,7 +111,7 @@ spec:
             - geth account import --password /root/.ethereum/account/accountSecret /root/.ethereum/account/accountPrivateKey || true
           command:
             - /bin/sh
-          image: ethereum/client-go:v1.9.15
+          image: ethereum/client-go:v1.10.1
           imagePullPolicy: IfNotPresent
           name: import-account
           resources: {}
