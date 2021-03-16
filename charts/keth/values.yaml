@@ -103,7 +103,7 @@ geth:
     webSocketSecret: ""
   geth:
     ws: true
-    wsaddr: 0.0.0.0
+    wsaddr: "0.0.0.0"
   nodeSelector: {}
   overrides:
     fullName: ""
