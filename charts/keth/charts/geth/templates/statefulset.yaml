@@ -26,7 +26,7 @@ spec:
                 {{- if .Values.geth.datadir }}
                 --datadir={{ .Values.geth.datadir }} \
                 {{- end }}
-                --ethstats="${POD_NAME}.${{POD_NAMESPACE}}:${ETHSTATS_SECRET}@${ETHSTATS_SVC}" \
+                --ethstats="${POD_NAME}.${POD_NAMESPACE}:${ETHSTATS_SECRET}@${ETHSTATS_SVC}" \
                 {{- if .Values.geth.ropsten }}
                 --ropsten \
                 {{- end }}
@@ -64,7 +64,7 @@ spec:
             - /bin/sh
           env:
             - name: ETHSTATS_SVC
-              value: release-ethstats
+              value: {{ template "geth.ethstatsServiceName" . }}
             - name: ETHSTATS_SECRET
               valueFrom:
                 secretKeyRef:

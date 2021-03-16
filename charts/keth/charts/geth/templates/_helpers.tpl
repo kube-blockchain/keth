@@ -74,3 +74,10 @@ Return the name of the Secret used to store ethstats secrets
 {{- printf "%s-keth-ethstats" .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Return the name of the Service for ethstats
+*/}}
+{{- define "geth.ethstatsServiceName" -}}
+{{- printf "%s-keth-ethstats" .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
