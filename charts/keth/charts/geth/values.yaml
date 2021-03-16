@@ -8,6 +8,8 @@ enabled: true
 ethstats:
   secretName: ""
   webSocketSecret: ""
+geth:
+  wsaddr: 0.0.0.0
 nodeSelector: {}
 overrides:
   fullName: ""
