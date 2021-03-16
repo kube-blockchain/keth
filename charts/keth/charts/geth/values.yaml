@@ -16,7 +16,7 @@ persistence:
   accessMode: ReadWriteOnce
   annotations: {}
   size: 10Gi
-  # storageClass: "-"
+  storageClass: "-"
 podAnnotations: {}
 podLabels: {}
 podSecurityContext:
