@@ -56,4 +56,3 @@ spec:
       interval: {{ .Values.prometheus.serviceMonitor.interval }}
       path: /metrics
 {{- end -}}
-{{- end -}}
