@@ -34,8 +34,11 @@ spec:
                 --syncmode=fast \
                 --verbosity=5 \
                 --ws \
-                {{- if .Values.eth.wsaddr }}
-                --wsaddr={{ .Values.eth.wsaddr }} \
+                {{- if .Values.geth.ws }}
+                --ws \
+                {{- end }}
+                {{- if .Values.geth.wsaddr }}
+                --wsaddr={{ .Values.geth.wsaddr }} \
                 {{- end }}
                 --wsapi=admin,debug,web3,eth,txpool,personal,clique,miner,net
           command:
