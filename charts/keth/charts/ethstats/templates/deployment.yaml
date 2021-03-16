@@ -3,9 +3,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels: {{ include ".labels" . | nindent 4 }}
-    component: {{ template ".fullname" . }}
-  name: {{ template ".fullname" . }}
+  labels: {{ include "ethstats.labels" . | nindent 4 }}
+    component: {{ template "ethstats.fullname" . }}
+  name: {{ template "ethstats.fullname" . }}
   namespace: {{ $.Release.Namespace }}
 spec:
   progressDeadlineSeconds: 600
@@ -13,7 +13,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      component: {{ template ".fullname" . }}
+      component: {{ template "ethstats.fullname" . }}
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -22,7 +22,7 @@ spec:
   template:
     metadata:
       labels:
-        component: {{ template ".fullname" . }}
+        component: {{ template "ethstats.fullname" . }}
     spec:
       {{- with .Values.affinity }}
       affinity: {{ tpl (toYaml .) $ | nindent 8 }}
@@ -33,7 +33,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: WS_SECRET
-                  name: {{ template ".secretName" . }}
+                  name: {{ template "ethstats.secretName" . }}
           image: ethereumex/eth-stats-dashboard:latest
           imagePullPolicy: IfNotPresent
           name: ethstats
@@ -57,7 +57,7 @@ spec:
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       {{- end }}
       {{- if .Values.rbac.create }}
-      serviceAccountName: {{ template ".fullname" . }}
+      serviceAccountName: {{ template "ethstats.fullname" . }}
       {{- else }}
       serviceAccountName: {{ .Values.rbac.serviceAccountName | quote }}
       {{- end }}

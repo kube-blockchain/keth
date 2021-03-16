@@ -3,14 +3,14 @@
 apiVersion: rbac.authorization.k8s.io/{{ .Values.rbac.apiVersion }}
 kind: ClusterRoleBinding
 metadata:
-  name: {{ template ".fullname" . }}
-  labels: {{ include ".labels" . | nindent 4 }}
+  name: {{ template "ethstats.fullname" . }}
+  labels: {{ include "ethstats.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ template ".fullname" . }}
+  name: {{ template "ethstats.fullname" . }}
 subjects:
 - kind: ServiceAccount
-  name: {{ template ".fullname" . }}
+  name: {{ template "ethstats.fullname" . }}
   namespace: {{ .Release.Namespace }}
 {{- end }}

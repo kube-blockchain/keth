@@ -3,8 +3,8 @@
 apiVersion: {{ template "podSecurityPolicy.apiVersion" . }}
 kind: PodSecurityPolicy
 metadata:
-  name: {{ template ".fullname" . }}
-  labels: {{ include ".labels" . | nindent 4 }}
+  name: {{ template "ethstats.fullname" . }}
+  labels: {{ include "ethstats.labels" . | nindent 4 }}
 spec:
   privileged: false
   allowPrivilegeEscalation: false
