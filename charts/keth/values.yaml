@@ -35,7 +35,6 @@ bootnode:
       interval: "30s"
       namespace:
   rbac:
-    apiVersion: v1beta1
     create: true
     pspEnabled: false
     serviceAccountAnnotations: {}
@@ -76,7 +75,6 @@ ethstats:
       interval: "30s"
       namespace:
   rbac:
-    apiVersion: v1beta1
     create: true
     pspEnabled: false
     serviceAccountAnnotations: {}
@@ -120,7 +118,6 @@ geth:
       namespace:
   priorityClassName: ""
   rbac:
-    apiVersion: v1beta1
     create: true
     pspEnabled: false
     serviceAccountAnnotations: {}
