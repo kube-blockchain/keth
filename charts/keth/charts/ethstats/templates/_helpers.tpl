@@ -62,3 +62,14 @@ Return true if a secret object should be created
 {{- else -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Return the name of the Secret used to store credentials
+*/}}
+{{- define ".secretName" -}}
+{{- if .Values.credentials.secretName }}
+{{- .Values.credentials.secretName }}
+{{- else -}}
+{{- template ".fullname" . }}
+{{- end -}}
+{{- end -}}

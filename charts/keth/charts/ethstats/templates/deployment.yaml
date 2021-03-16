@@ -33,7 +33,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: WS_SECRET
-                  name: {{ template ".fullname" . }}
+                  name: {{ template ".secretName" . }}
           image: ethereumex/eth-stats-dashboard:latest
           imagePullPolicy: IfNotPresent
           name: ethstats
