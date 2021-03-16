@@ -54,16 +54,6 @@ Create the name of the service account to use
 {{- end -}}
 
 {{/*
-Return true if a secret object should be created
-*/}}
-{{- define ".createSecret" -}}
-{{- if and .Values.credentials .Values.credentials.webSocketSecret (not .Values.credentials.secretName) }}
-    {{- true -}}
-{{- else -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
 Return the name of the Secret used to store credentials
 */}}
 {{- define ".secretName" -}}
