@@ -1,12 +1,12 @@
 ---
 account:
-  # secretName:
+  secretName: ""
   privateKey: ""
   secret: ""
 affinity: {}
 enabled: true
 ethstats:
-  # secretName:
+  secretName: ""
   webSocketSecret: ""
 nodeSelector: {}
 overrides:

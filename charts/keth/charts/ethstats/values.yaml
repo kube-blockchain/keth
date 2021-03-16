@@ -1,7 +1,7 @@
 ---
 affinity: {}
 credentials:
-  # secretName:
+  secretName: ""
   webSocketSecret: ""
 enabled: true
 nodeSelector: {}

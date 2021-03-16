@@ -51,7 +51,7 @@ bootnode:
 ethstats:
   affinity: {}
   credentials:
-    # secretName:
+    secretName: ""
     webSocketSecret: ""
   enabled: true
   nodeSelector: {}
@@ -95,13 +95,13 @@ ethstats:
 
 geth:
   account:
-    # secretName:
+    secretName: ""
     privateKey: ""
     secret: ""
   affinity: {}
   enabled: true
   ethstats:
-    # secretName:
+    secretName: ""
     webSocketSecret: ""
   nodeSelector: {}
   overrides:
