@@ -1,7 +1,7 @@
 ---
 apiVersion: v1
 name: bootnode
-version: 0.0.77
+version: 0.0.78
 appVersion: master
 description: Kubernetes implementation of the Ethereum bootnode tool
 icon: https://kube-blockchain.github.io/keth/images/eth-diamond-rainbow.png

@@ -18,7 +18,7 @@ prometheus:
     interval: "30s"
     namespace:
 rbac:
-  apiVersion: v1beta1
+  apiVersion: v1
   create: true
   pspEnabled: false
   serviceAccountAnnotations: {}
