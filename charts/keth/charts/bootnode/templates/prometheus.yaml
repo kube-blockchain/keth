@@ -26,7 +26,7 @@ spec:
     protocol: TCP
 {{ end }}
 
-{{- if .Values.prometheus.serviceMonitor.enabled }}
+{{- if and .Values.enabled .Values.prometheus.serviceMonitor.enabled }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -55,4 +55,5 @@ spec:
     {{- end }}
       interval: {{ .Values.prometheus.serviceMonitor.interval }}
       path: /metrics
+{{- end -}}
 {{- end -}}
