@@ -1,11 +1,11 @@
 {{/* vim: set filetype=mustache: */}}
 
 {{/* Helm required labels */}}
-{{- define ".labels" -}}
+{{- define "bootnode.labels" -}}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-app.kubernetes.io/name: {{ template ".name" . }}
-helm.sh/chart: {{ template ".chart" . }}
+app.kubernetes.io/name: {{ template "bootnode.name" . }}
+helm.sh/chart: {{ template "bootnode.chart" . }}
 {{- if .Values.podLabels }}
 {{ toYaml .Values.podLabels }}
 {{- end }}
@@ -14,7 +14,7 @@ helm.sh/chart: {{ template ".chart" . }}
 {{/*
 Expand the name of the chart.
 */}}
-{{- define ".name" -}}
+{{- define "bootnode.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -22,7 +22,7 @@ Expand the name of the chart.
 Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
-{{- define ".fullname" -}}
+{{- define "bootnode.fullname" -}}
 {{- if .Values.overrides.fullName -}}
 {{- .Values.overrides.fullName | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -38,16 +38,16 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define ".chart" -}}
+{{- define "bootnode.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define ".serviceAccountName" -}}
+{{- define "bootnode.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create -}}
-    {{ default (include ".fullname" .) .Values.serviceAccount.name }}
+    {{ default (include "bootnode.fullname" .) .Values.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
@@ -56,6 +56,6 @@ Create the name of the service account to use
 {{/*
 Return true if a secret object should be created
 */}}
-{{- define ".createSecret" -}}
+{{- define "bootnode.createSecret" -}}
 {{- false -}}
 {{- end -}}

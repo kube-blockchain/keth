@@ -1,10 +1,10 @@
-{{- if .Values.rbac.pspEnabled }}
+{{- if and .Values.enabled .Values.rbac.pspEnabled }}
 ---
-apiVersion: {{ template "podSecurityPolicy.apiVersion" . }}
+apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: {{ template ".fullname" . }}
-  labels: {{ include ".labels" . | nindent 4 }}
+  name: {{ template "bootnode.fullname" . }}
+  labels: {{ include "bootnode.labels" . | nindent 4 }}
 spec:
   privileged: false
   allowPrivilegeEscalation: false

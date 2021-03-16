@@ -3,20 +3,20 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  labels: {{ include ".labels" . | nindent 4 }}
-    component: {{ template ".fullname" . }}
-  name: {{ template ".fullname" . }}
+  labels: {{ include "geth.labels" . | nindent 4 }}
+    component: {{ template "geth.fullname" . }}
+  name: {{ template "geth.fullname" . }}
   namespace: {{ $.Release.Namespace }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: {{ template ".fullname" . }}
-  serviceName: {{ template ".fullname" . }}
+      component: {{ template "geth.fullname" . }}
+  serviceName: {{ template "geth.fullname" . }}
   template:
     metadata:
       labels:
-        component: {{ template ".fullname" . }}
+        component: {{ template "geth.fullname" . }}
     spec:
       containers:
         - args:
@@ -45,7 +45,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: WS_SECRET
-                  name: {{ template ".ethstatsSecretName" . }}
+                  name: {{ template "geth.ethstatsSecretName" . }}
             - name: POD_NAME
               valueFrom:
                 fieldRef:
@@ -105,7 +105,7 @@ spec:
         - name: account
           secret:
             defaultMode: 420
-            secretName: {{ template ".secretName" . }}
+            secretName: {{ template "geth.secretName" . }}
   volumeClaimTemplates:
     - metadata:
         name: data

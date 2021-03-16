@@ -3,9 +3,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels: {{ include ".labels" . | nindent 4 }}
-    component: {{ template ".fullname" . }}
-  name: {{ template ".fullname" . }}
+  labels: {{ include "bootnode.labels" . | nindent 4 }}
+    component: {{ template "bootnode.fullname" . }}
+  name: {{ template "bootnode.fullname" . }}
   namespace: {{ $.Release.Namespace }}
 spec:
   progressDeadlineSeconds: 600
@@ -13,7 +13,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      component: {{ template ".fullname" . }}
+      component: {{ template "bootnode.fullname" . }}
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -22,7 +22,7 @@ spec:
   template:
     metadata:
       labels:
-        component: {{ template ".fullname" . }}
+        component: {{ template "bootnode.fullname" . }}
     spec:
       {{- with .Values.affinity }}
       affinity: {{ tpl (toYaml .) $ | nindent 8 }}
@@ -101,7 +101,7 @@ spec:
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       {{- end }}
       {{- if .Values.rbac.create }}
-      serviceAccountName: {{ template ".fullname" . }}
+      serviceAccountName: {{ template "bootnode.fullname" . }}
       {{- else }}
       serviceAccountName: {{ .Values.rbac.serviceAccountName | quote }}
       {{- end }}

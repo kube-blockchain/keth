@@ -1,16 +1,16 @@
-{{- if .Values.rbac.create }}
+{{- if and .Values.enabled .Values.rbac.create }}
 ---
 apiVersion: rbac.authorization.k8s.io/{{ .Values.rbac.apiVersion }}
 kind: ClusterRoleBinding
 metadata:
-  name: {{ template ".fullname" . }}
-  labels: {{ include ".labels" . | nindent 4 }}
+  name: {{ template "bootnode.fullname" . }}
+  labels: {{ include "bootnode.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ template ".fullname" . }}
+  name: {{ template "bootnode.fullname" . }}
 subjects:
 - kind: ServiceAccount
-  name: {{ template ".fullname" . }}
+  name: {{ template "bootnode.fullname" . }}
   namespace: {{ .Release.Namespace }}
 {{- end }}
