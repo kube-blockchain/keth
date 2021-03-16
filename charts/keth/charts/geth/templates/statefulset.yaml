@@ -45,7 +45,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: WS_SECRET
-                  name: ethstatsSecret
+                  name: {{ template ".ethstatsSecretName" . }}
             - name: POD_NAME
               valueFrom:
                 fieldRef:
@@ -101,19 +101,23 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 10
-      # volumes:
-      #   - name: account
-      #     secret:
-      #       defaultMode: 420
-      #       secretName: {accountSecret}
+      volumes:
+        - name: account
+          secret:
+            defaultMode: 420
+            secretName: {{ template ".secretName" . }}
   volumeClaimTemplates:
     - metadata:
         name: data
       spec:
         accessModes:
-          - ReadWriteOnce
+          - {{ .Values.persistence.accessMode }}
         resources:
           requests:
-            storage: 10Gi
-        # storageClassName: {storageClassName}
+            storage: {{ .Values.persistence.size }}
+        {{- if (eq "-" .Values.persistence.storageClass) }}
+        storageClassName: ""
+        {{- else }}
+        storageClassName: {{ .Values.persistence.storageClass }}
+        {{- end }}
 {{- end -}}

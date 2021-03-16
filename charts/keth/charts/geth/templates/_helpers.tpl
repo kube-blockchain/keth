@@ -54,8 +54,23 @@ Create the name of the service account to use
 {{- end -}}
 
 {{/*
-Return true if a secret object should be created
+Return the name of the Secret used to store credentials
 */}}
-{{- define ".createSecret" -}}
-{{- false -}}
+{{- define ".secretName" -}}
+{{- if .Values.account.secretName }}
+{{- .Values.account.secretName }}
+{{- else -}}
+{{- template ".fullname" . }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the name of the Secret used to store ethstats secrets
+*/}}
+{{- define ".ethstatsSecretName" -}}
+{{- if .Values.ethstats.secretName }}
+{{- .Values.ethstats.secretName }}
+{{- else -}}
+{{- printf "%s-keth-ethstats" .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
 {{- end -}}

@@ -58,6 +58,11 @@ ethstats:
   overrides:
     fullName: ""
     name: ""
+  persistence:
+    accessMode: ReadWriteOnce
+    annotations: {}
+    size: 10Gi
+    # storageClass: "-"
   podAnnotations: {}
   podLabels: {}
   podSecurityContext:
@@ -89,8 +94,14 @@ ethstats:
   tolerations: []
 
 geth:
+  account:
+    # secretName:
+    privateKey: ""
+    secret: ""
   affinity: {}
   enabled: true
+  ethstats:
+    # secretName:
   nodeSelector: {}
   overrides:
     fullName: ""

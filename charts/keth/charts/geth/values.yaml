@@ -1,10 +1,21 @@
 ---
+account:
+  # secretName:
+  privateKey: ""
+  secret: ""
 affinity: {}
 enabled: true
+ethstats:
+  # secretName:
 nodeSelector: {}
 overrides:
   fullName: ""
   name: ""
+persistence:
+  accessMode: ReadWriteOnce
+  annotations: {}
+  size: 10Gi
+  # storageClass: "-"
 podAnnotations: {}
 podLabels: {}
 podSecurityContext:
