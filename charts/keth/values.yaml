@@ -52,7 +52,7 @@ ethstats:
   affinity: {}
   credentials:
     # secretName:
-    webSocketSecret:
+    # webSocketSecret:
   enabled: true
   nodeSelector: {}
   overrides:
