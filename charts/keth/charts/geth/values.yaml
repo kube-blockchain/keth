@@ -4,11 +4,7 @@ account:
   privateKey: ""
   secret: ""
 affinity: {}
-enabled: true
-ethstats:
-  secretName: ""
-  webSocketSecret: ""
-geth:
+args:
   datadir: /root/.ethereum
   ethstats: "${POD_NAME}.${POD_NAMESPACE}:${ETHSTATS_SECRET}@${ETHSTATS_SVC}"
   rpc: true
@@ -21,6 +17,7 @@ geth:
   ws: true
   wsaddr: "0.0.0.0"
   wsapi: "admin,debug,web3,eth,txpool,personal,clique,miner,net"
+  allowinsecureunlock: false
   backtrace: ""
   bloomfilter_size: ""
   bootnodes: ""
@@ -109,6 +106,7 @@ geth:
   nodiscover: ""
   nousb: ""
   override_berlin: ""
+  password: ""
   pcscdpath: ""
   port: ""
   pprof: ""
@@ -124,6 +122,7 @@ geth:
   rpc_gascap: ""
   rpc_txfeecap: ""
   rpcport: ""
+  signer: ""
   snapshot: ""
   trace: ""
   txlookuplimit: ""
@@ -141,6 +140,7 @@ geth:
   ulc_fraction: ""
   ulc_onlyannounce: ""
   ulc_servers: ""
+  unlock: ""
   usb: ""
   v5disc: ""
   vm_evm: ""
@@ -154,6 +154,10 @@ geth:
   ws_port: ""
   ws_rpcprefix: ""
   yolov3: false
+enabled: true
+ethstats:
+  secretName: ""
+  webSocketSecret: ""
 nodeSelector: {}
 overrides:
   fullName: ""

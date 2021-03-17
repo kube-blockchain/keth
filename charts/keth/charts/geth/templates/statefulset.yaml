@@ -23,439 +23,451 @@ spec:
             - -c
             - |
               geth \
-                {{- if .Values.geth.backtrace }}
-                --backtrace={{ .Values.geth.backtrace }} \
+                {{- if .Values.args.allowinsecureunlock }}
+                --allow-insecure-unlock \
                 {{- end }}
-                {{- if .Values.geth.bloomfilter_size }}
-                --bloomfilter.size={{ .Values.geth.bloomfilter_size }} \
+                {{- if .Values.args.backtrace }}
+                --backtrace={{ .Values.args.backtrace }} \
                 {{- end }}
-                {{- if .Values.geth.bootnodes }}
-                --bootnodes={{ .Values.geth.bootnodes }} \
+                {{- if .Values.args.bloomfilter_size }}
+                --bloomfilter.size={{ .Values.args .bloomfilter_size }} \
                 {{- end }}
-                {{- if .Values.geth.cache }}
-                --cache={{ .Values.geth.cache }} \
+                {{- if .Values.args.bootnodes }}
+                --bootnodes={{ .Values.args.bootnodes }} \
                 {{- end }}
-                {{- if .Values.geth.cache_database }}
-                --cache.database={{ .Values.geth.cache_database }} \
+                {{- if .Values.args.cache }}
+                --cache={{ .Values.args.cache }} \
                 {{- end }}
-                {{- if .Values.geth.cache_gc }}
-                --cache.gc={{ .Values.geth.cache_gc }} \
+                {{- if .Values.args.cache_database }}
+                --cache.database={{ .Values.args .cache_database }} \
                 {{- end }}
-                {{- if .Values.geth.cache_noprefetch }}
+                {{- if .Values.args.cache_gc }}
+                --cache.gc={{ .Values.args .cache_gc }} \
+                {{- end }}
+                {{- if .Values.args.cache_noprefetch }}
                 --cache.noprefetch \
                 {{- end }}
-                {{- if .Values.geth.cache_preimages }}
+                {{- if .Values.args.cache_preimages }}
                 --cache.preimages \
                 {{- end }}
-                {{- if .Values.geth.cache_snapshot }}
-                --cache.snapshot={{ .Values.geth.cache_snapshot }} \
+                {{- if .Values.args.cache_snapshot }}
+                --cache.snapshot={{ .Values.args .cache_snapshot }} \
                 {{- end }}
-                {{- if .Values.geth.cache_trie }}
-                --cache.trie={{ .Values.geth.cache_trie }} \
+                {{- if .Values.args.cache_trie }}
+                --cache.trie={{ .Values.args .cache_trie }} \
                 {{- end }}
-                {{- if .Values.geth.cache_trie_journal }}
-                --cache.trie.journal={{ .Values.geth.cache_trie_journal }} \
+                {{- if .Values.args.cache_trie_journal }}
+                --cache.trie.journal={{ .Values.args .cache_trie_journal }} \
                 {{- end }}
-                {{- if .Values.geth.cache_trie_rejournal }}
-                --cache.trie.rejournal={{ .Values.geth.cache_trie_rejournal }} \
+                {{- if .Values.args.cache_trie_rejournal }}
+                --cache.trie.rejournal={{ .Values.args .cache_trie_rejournal }} \
                 {{- end }}
-                {{- if .Values.geth.config }}
-                --config={{ .Values.geth.config }} \
+                {{- if .Values.args.config }}
+                --config={{ .Values.args .config }} \
                 {{- end }}
-                {{- if .Values.geth.datadir }}
-                --datadir={{ .Values.geth.datadir }} \
+                {{- if .Values.args.datadir }}
+                --datadir={{ .Values.args.datadir }} \
                 {{- end }}
-                {{- if .Values.geth.datadir_ancient }}
-                --datadir.ancient={{ .Values.geth.datadir_ancient }} \
+                {{- if .Values.args.datadir_ancient }}
+                --datadir.ancient={{ .Values.args.datadir_ancient }} \
                 {{- end }}
-                {{- if .Values.geth.datadir_minfreedisk }}
-                --datadir.minfreedisk={{ .Values.geth.datadir_minfreedisk }} \
+                {{- if .Values.args.datadir_minfreedisk }}
+                --datadir.minfreedisk={{ .Values.args.datadir_minfreedisk }} \
                 {{- end }}
-                {{- if .Values.geth.dev }}
+                {{- if .Values.args.dev }}
                 --dev \
                 {{- end }}
-                {{- if .Values.geth.dev_period }}
-                --dev.period={{ .Values.geth.dev_period }} \
+                {{- if .Values.args.dev_period }}
+                --dev.period={{ .Values.args .dev_period }} \
                 {{- end }}
-                {{- if .Values.geth.discovery_dns }}
-                --discovery.dns={{ .Values.geth.discovery_dns }} \
+                {{- if .Values.args.discovery_dns }}
+                --discovery.dns={{ .Values.args.discovery_dns }} \
                 {{- end }}
-                {{- if .Values.geth.ethash_cachedir }}
-                --ethash.cachedir={{ .Values.geth.ethash_cachedir }} \
+                {{- if .Values.args.ethash_cachedir }}
+                --ethash.cachedir={{ .Values.args.ethash_cachedir }} \
                 {{- end }}
-                {{- if .Values.geth.ethash_cachesinmem }}
-                --ethash.cachesinmem={{ .Values.geth.ethash_cachesinmem }} \
+                {{- if .Values.args.ethash_cachesinmem }}
+                --ethash.cachesinmem={{ .Values.args .ethash_cachesinmem }} \
                 {{- end }}
-                {{- if .Values.geth.ethash_cacheslockmmap }}
+                {{- if .Values.args.ethash_cacheslockmmap }}
                 --ethash.cacheslockmmap \
                 {{- end }}
-                {{- if .Values.geth.ethash_cachesondisk }}
-                --ethash.cachesondisk={{ .Values.geth.ethash_cachesondisk }} \
+                {{- if .Values.args.ethash_cachesondisk }}
+                --ethash.cachesondisk={{ .Values.args.ethash_cachesondisk }} \
                 {{- end }}
-                {{- if .Values.geth.ethash_dagdir }}
-                --ethash.dagdir={{ .Values.geth.ethash_dagdir }} \
+                {{- if .Values.args.ethash_dagdir }}
+                --ethash.dagdir={{ .Values.args.ethash_dagdir }} \
                 {{- end }}
-                {{- if .Values.geth.ethash_dagsinmem }}
-                --ethash.dagsinmem={{ .Values.geth.ethash_dagsinmem }} \
+                {{- if .Values.args.ethash_dagsinmem }}
+                --ethash.dagsinmem={{ .Values.args .ethash_dagsinmem }} \
                 {{- end }}
-                {{- if .Values.geth.ethash_dagslockmmap }}
+                {{- if .Values.args.ethash_dagslockmmap }}
                 --ethash.dagslockmmap \
                 {{- end }}
-                {{- if .Values.geth.ethash_dagsondisk }}
-                --ethash.dagsondisk={{ .Values.geth.ethash_dagsondisk }} \
+                {{- if .Values.args.ethash_dagsondisk }}
+                --ethash.dagsondisk={{ .Values.args.ethash_dagsondisk }} \
                 {{- end }}
-                {{- if .Values.geth.ethstats }}
-                --ethstats={{ .Values.geth.ethstats }} \
+                {{- if .Values.args.ethstats }}
+                --ethstats={{ .Values.args .ethstats }} \
                 {{- end }}
-                {{- if .Values.geth.exec }}
-                --exec={{ .Values.geth.exec }} \
+                {{- if .Values.args.exec }}
+                --exec={{ .Values.args .exec }} \
                 {{- end }}
-                {{- if .Values.geth.exitwhensynced }}
+                {{- if .Values.args.exitwhensynced }}
                 --exitwhensynced \
                 {{- end }}
-                {{- if .Values.geth.fakepow }}
+                {{- if .Values.args.fakepow }}
                 --fakepow \
                 {{- end }}
-                {{- if .Values.geth.gcmode }}
-                --gcmode={{ .Values.geth.gcmode }} \
+                {{- if .Values.args.gcmode }}
+                --gcmode={{ .Values.args .gcmode }} \
                 {{- end }}
-                {{- if .Values.geth.goerli }}
+                {{- if .Values.args.goerli }}
                 --goerli \
                 {{- end }}
-                {{- if .Values.geth.gpo_blocks }}
-                --gpo.blocks={{ .Values.geth.gpo_blocks }} \
+                {{- if .Values.args.gpo_blocks }}
+                --gpo.blocks={{ .Values.args .gpo_blocks }} \
                 {{- end }}
-                {{- if .Values.geth.gpo_maxprice }}
-                --gpo.maxprice={{ .Values.geth.gpo_maxprice }} \
+                {{- if .Values.args.gpo_maxprice }}
+                --gpo.maxprice={{ .Values.args .gpo_maxprice }} \
                 {{- end }}
-                {{- if .Values.geth.gpo_percentile }}
-                --gpo.percentile={{ .Values.geth.gpo_percentile }} \
+                {{- if .Values.args.gpo_percentile }}
+                --gpo.percentile={{ .Values.args .gpo_percentile }} \
                 {{- end }}
-                {{- if .Values.geth.graphql }}
+                {{- if .Values.args.graphql }}
                 --graphql \
                 {{- end }}
-                {{- if .Values.geth.graphql_corsdomain }}
-                --graphql.corsdomain={{ .Values.geth.graphql_corsdomain }} \
+                {{- if .Values.args.graphql_corsdomain }}
+                --graphql.corsdomain={{ .Values.args .graphql_corsdomain }} \
                 {{- end }}
-                {{- if .Values.geth.graphql_vhosts }}
-                --graphql.vhosts={{ .Values.geth.graphql_vhosts }} \
+                {{- if .Values.args.graphql_vhosts }}
+                --graphql.vhosts={{ .Values.args .graphql_vhosts }} \
                 {{- end }}
-                {{- if .Values.geth.http }}
+                {{- if .Values.args.http }}
                 --http \
                 {{- end }}
-                {{- if .Values.geth.http_addr }}
-                --http.addr={{ .Values.geth.http_addr }} \
+                {{- if .Values.args.http_addr }}
+                --http.addr={{ .Values.args.http_addr }} \
                 {{- end }}
-                {{- if .Values.geth.http_api }}
-                --http.api={{ .Values.geth.http_api }} \
+                {{- if .Values.args.http_api }}
+                --http.api={{ .Values.args .http_api }} \
                 {{- end }}
-                {{- if .Values.geth.http_corsdomain }}
-                --http.corsdomain={{ .Values.geth.http_corsdomain }} \
+                {{- if .Values.args.http_corsdomain }}
+                --http.corsdomain={{ .Values.args.http_corsdomain }} \
                 {{- end }}
-                {{- if .Values.geth.http_port }}
-                --http.port={{ .Values.geth.http_port }} \
+                {{- if .Values.args.http_port }}
+                --http.port={{ .Values.args.http_port }} \
                 {{- end }}
-                {{- if .Values.geth.http_rpcprefix }}
-                --http.rpcprefix={{ .Values.geth.http_rpcprefix }} \
+                {{- if .Values.args.http_rpcprefix }}
+                --http.rpcprefix={{ .Values.args .http_rpcprefix }} \
                 {{- end }}
-                {{- if .Values.geth.http_vhosts }}
-                --http.vhosts={{ .Values.geth.http_vhosts }} \
+                {{- if .Values.args.http_vhosts }}
+                --http.vhosts={{ .Values.args.http_vhosts }} \
                 {{- end }}
-                {{- if .Values.geth.identity }}
-                --identity={{ .Values.geth.identity }} \
+                {{- if .Values.args.identity }}
+                --identity={{ .Values.args .identity }} \
                 {{- end }}
-                {{- if .Values.geth.ipcdisable }}
+                {{- if .Values.args.ipcdisable }}
                 --ipcdisable \
                 {{- end }}
-                {{- if .Values.geth.ipcpath }}
-                --ipcpath={{ .Values.geth.ipcpath }} \
+                {{- if .Values.args.ipcpath }}
+                --ipcpath={{ .Values.args.ipcpath }} \
                 {{- end }}
-                {{- if .Values.geth.jspath }}
-                --jspath={{ .Values.geth.jspath }} \
+                {{- if .Values.args.jspath }}
+                --jspath={{ .Values.args .jspath }} \
                 {{- end }}
-                {{- if .Values.geth.keystore }}
-                --keystore={{ .Values.geth.keystore }} \
+                {{- if .Values.args.keystore }}
+                --keystore={{ .Values.args .keystore }} \
                 {{- end }}
-                {{- if .Values.geth.light_egress }}
-                --light.egress={{ .Values.geth.light_egress }} \
+                {{- if .Values.args.light_egress }}
+                --light.egress={{ .Values.args .light_egress }} \
                 {{- end }}
-                {{- if .Values.geth.light_ingress }}
-                --light.ingress={{ .Values.geth.light_ingress }} \
+                {{- if .Values.args.light_ingress }}
+                --light.ingress={{ .Values.args.light_ingress }} \
                 {{- end }}
-                {{- if .Values.geth.light_maxpeers }}
-                --light.maxpeers={{ .Values.geth.light_maxpeers }} \
+                {{- if .Values.args.light_maxpeers }}
+                --light.maxpeers={{ .Values.args .light_maxpeers }} \
                 {{- end }}
-                {{- if .Values.geth.light_nopruning }}
+                {{- if .Values.args.light_nopruning }}
                 --light.nopruning \
                 {{- end }}
-                {{- if .Values.geth.light_nosyncserve }}
+                {{- if .Values.args.light_nosyncserve }}
                 --light.nosyncserve \
                 {{- end }}
-                {{- if .Values.geth.light_serve }}
-                --light.serve={{ .Values.geth.light_serve }} \
+                {{- if .Values.args.light_serve }}
+                --light.serve={{ .Values.args.light_serve }} \
                 {{- end }}
-                {{- if .Values.geth.lightkdf }}
+                {{- if .Values.args.lightkdf }}
                 --lightkdf \
                 {{- end }}
-                {{- if .Values.geth.log_json }}
+                {{- if .Values.args.log_json }}
                 --log.json \
                 {{- end }}
-                {{- if .Values.geth.maxpeers }}
-                --maxpeers={{ .Values.geth.maxpeers }} \
+                {{- if .Values.args.maxpeers }}
+                --maxpeers={{ .Values.args .maxpeers }} \
                 {{- end }}
-                {{- if .Values.geth.maxpendpeers }}
-                --maxpendpeers={{ .Values.geth.maxpendpeers }} \
+                {{- if .Values.args.maxpendpeers }}
+                --maxpendpeers={{ .Values.args .maxpendpeers }} \
                 {{- end }}
-                {{- if .Values.geth.metrics }}
+                {{- if .Values.args.metrics }}
                 --metrics \
                 {{- end }}
-                {{- if .Values.geth.metrics_addr }}
-                --metrics.addr={{ .Values.geth.metrics_addr }} \
+                {{- if .Values.args.metrics_addr }}
+                --metrics.addr={{ .Values.args .metrics_addr }} \
                 {{- end }}
-                {{- if .Values.geth.metrics_expensive }}
+                {{- if .Values.args.metrics_expensive }}
                 --metrics.expensive \
                 {{- end }}
-                {{- if .Values.geth.metrics_influxdb }}
+                {{- if .Values.args.metrics_influxdb }}
                 --metrics.influxdb \
                 {{- end }}
-                {{- if .Values.geth.metrics_influxdb_database }}
-                --metrics.influxdb.database={{ .Values.geth.metrics_influxdb_database }} \
+                {{- if .Values.args.metrics_influxdb_database }}
+                --metrics.influxdb.database={{ .Values.args.metrics_influxdb_database }} \
                 {{- end }}
-                {{- if .Values.geth.metrics_influxdb_endpoint }}
-                --metrics.influxdb.endpoint={{ .Values.geth.metrics_influxdb_endpoint }} \
+                {{- if .Values.args.metrics_influxdb_endpoint }}
+                --metrics.influxdb.endpoint={{ .Values.args.metrics_influxdb_endpoint }} \
                 {{- end }}
-                {{- if .Values.geth.metrics_influxdb_password }}
-                --metrics.influxdb.password={{ .Values.geth.metrics_influxdb_password }} \
+                {{- if .Values.args.metrics_influxdb_password }}
+                --metrics.influxdb.password={{ .Values.args.metrics_influxdb_password }} \
                 {{- end }}
-                {{- if .Values.geth.metrics_influxdb_tags }}
-                --metrics.influxdb.tags={{ .Values.geth.metrics_influxdb_tags }} \
+                {{- if .Values.args.metrics_influxdb_tags }}
+                --metrics.influxdb.tags={{ .Values.args.metrics_influxdb_tags }} \
                 {{- end }}
-                {{- if .Values.geth.metrics_influxdb_username }}
-                --metrics.influxdb.username={{ .Values.geth.metrics_influxdb_username }} \
+                {{- if .Values.args.metrics_influxdb_username }}
+                --metrics.influxdb.username={{ .Values.args.metrics_influxdb_username }} \
                 {{- end }}
-                {{- if .Values.geth.metrics_port }}
-                --metrics.port={{ .Values.geth.metrics_port }} \
+                {{- if .Values.args.metrics_port }}
+                --metrics.port={{ .Values.args .metrics_port }} \
                 {{- end }}
-                {{- if .Values.geth.mine }}
+                {{- if .Values.args.mine }}
                 --mine \
                 {{- end }}
-                {{- if .Values.geth.miner_etherbase }}
-                --miner.etherbase={{ .Values.geth.miner_etherbase }} \
+                {{- if .Values.args.miner_etherbase }}
+                --miner.etherbase={{ .Values.args.miner_etherbase }} \
                 {{- end }}
-                {{- if .Values.geth.miner_extradata }}
-                --miner.extradata={{ .Values.geth.miner_extradata }} \
+                {{- if .Values.args.miner_extradata }}
+                --miner.extradata={{ .Values.args.miner_extradata }} \
                 {{- end }}
-                {{- if .Values.geth.miner_gaslimit }}
-                --miner.gaslimit={{ .Values.geth.miner_gaslimit }} \
+                {{- if .Values.args.miner_gaslimit }}
+                --miner.gaslimit={{ .Values.args .miner_gaslimit }} \
                 {{- end }}
-                {{- if .Values.geth.miner_gasprice }}
-                --miner.gasprice={{ .Values.geth.miner_gasprice }} \
+                {{- if .Values.args.miner_gasprice }}
+                --miner.gasprice={{ .Values.args .miner_gasprice }} \
                 {{- end }}
-                {{- if .Values.geth.miner_gastarget }}
-                --miner.gastarget={{ .Values.geth.miner_gastarget }} \
+                {{- if .Values.args.miner_gastarget }}
+                --miner.gastarget={{ .Values.args.miner_gastarget }} \
                 {{- end }}
-                {{- if .Values.geth.miner_notify }}
-                --miner.notify={{ .Values.geth.miner_notify }} \
+                {{- if .Values.args.miner_notify }}
+                --miner.notify={{ .Values.args .miner_notify }} \
                 {{- end }}
-                {{- if .Values.geth.miner_noverify }}
+                {{- if .Values.args.miner_noverify }}
                 --miner.noverify \
                 {{- end }}
-                {{- if .Values.geth.miner_recommit }}
-                --miner.recommit={{ .Values.geth.miner_recommit }} \
+                {{- if .Values.args.miner_recommit }}
+                --miner.recommit={{ .Values.args .miner_recommit }} \
                 {{- end }}
-                {{- if .Values.geth.miner_threads }}
-                --miner.threads={{ .Values.geth.miner_threads }} \
+                {{- if .Values.args.miner_threads }}
+                --miner.threads={{ .Values.args.miner_threads }} \
                 {{- end }}
-                {{- if .Values.geth.nat }}
-                --nat={{ .Values.geth.nat }} \
+                {{- if .Values.args.nat }}
+                --nat={{ .Values.args.nat }} \
                 {{- end }}
-                {{- if .Values.geth.netrestrict }}
-                --netrestrict={{ .Values.geth.netrestrict }} \
+                {{- if .Values.args.netrestrict }}
+                --netrestrict={{ .Values.args.netrestrict }} \
                 {{- end }}
-                {{- if .Values.geth.networkid }}
-                --networkid={{ .Values.geth.networkid }} \
+                {{- if .Values.args.networkid }}
+                --networkid={{ .Values.args.networkid }} \
                 {{- end }}
-                {{- if .Values.geth.nocompaction }}
+                {{- if .Values.args.nocompaction }}
                 --nocompaction \
                 {{- end }}
-                {{- if .Values.geth.nodekey }}
-                --nodekey={{ .Values.geth.nodekey }} \
+                {{- if .Values.args.nodekey }}
+                --nodekey={{ .Values.args.nodekey }} \
                 {{- end }}
-                {{- if .Values.geth.nodekeyhex }}
-                --nodekeyhex={{ .Values.geth.nodekeyhex }} \
+                {{- if .Values.args.nodekeyhex }}
+                --nodekeyhex={{ .Values.args .nodekeyhex }} \
                 {{- end }}
-                {{- if .Values.geth.nodiscover }}
+                {{- if .Values.args.nodiscover }}
                 --nodiscover \
                 {{- end }}
-                {{- if .Values.geth.nousb }}
+                {{- if .Values.args.nousb }}
                 --nousb \
                 {{- end }}
-                {{- if .Values.geth.override_berlin }}
-                --override.berlin={{ .Values.geth.override_berlin }} \
+                {{- if .Values.args.override_berlin }}
+                --override.berlin={{ .Values.args.override_berlin }} \
                 {{- end }}
-                {{- if .Values.geth.pcscdpath }}
-                --pcscdpath={{ .Values.geth.pcscdpath }} \
+                {{- if .Values.args.password }}
+                --password={{ .Values.args .password }} \
                 {{- end }}
-                {{- if .Values.geth.port }}
-                --port={{ .Values.geth.port }} \
+                {{- if .Values.args.pcscdpath }}
+                --pcscdpath={{ .Values.args.pcscdpath }} \
                 {{- end }}
-                {{- if .Values.geth.pprof }}
+                {{- if .Values.args.port }}
+                --port={{ .Values.args .port }} \
+                {{- end }}
+                {{- if .Values.args.pprof }}
                 --pprof \
                 {{- end }}
-                {{- if .Values.geth.pprof_addr }}
-                --pprof.addr={{ .Values.geth.pprof_addr }} \
+                {{- if .Values.args.pprof_addr }}
+                --pprof.addr={{ .Values.args .pprof_addr }} \
                 {{- end }}
-                {{- if .Values.geth.pprof_blockprofilerate }}
-                --pprof.blockprofilerate={{ .Values.geth.pprof_blockprofilerate }} \
+                {{- if .Values.args.pprof_blockprofilerate }}
+                --pprof.blockprofilerate={{ .Values.args .pprof_blockprofilerate }} \
                 {{- end }}
-                {{- if .Values.geth.pprof_cpuprofile }}
-                --pprof.cpuprofile={{ .Values.geth.pprof_cpuprofile }} \
+                {{- if .Values.args.pprof_cpuprofile }}
+                --pprof.cpuprofile={{ .Values.args .pprof_cpuprofile }} \
                 {{- end }}
-                {{- if .Values.geth.pprof_memprofilerate }}
-                --pprof.memprofilerate={{ .Values.geth.pprof_memprofilerate }} \
+                {{- if .Values.args.pprof_memprofilerate }}
+                --pprof.memprofilerate={{ .Values.args .pprof_memprofilerate }} \
                 {{- end }}
-                {{- if .Values.geth.pprof_port }}
-                --pprof.port={{ .Values.geth.pprof_port }} \
+                {{- if .Values.args.pprof_port }}
+                --pprof.port={{ .Values.args .pprof_port }} \
                 {{- end }}
-                {{- if .Values.geth.preload }}
-                --preload={{ .Values.geth.preload }} \
+                {{- if .Values.args.preload }}
+                --preload={{ .Values.args.preload }} \
                 {{- end }}
-                {{- if .Values.geth.rinkeby }}
+                {{- if .Values.args.rinkeby }}
                 --rinkeby \
                 {{- end }}
-                {{- if .Values.geth.ropsten }}
+                {{- if .Values.args.ropsten }}
                 --ropsten \
                 {{- end }}
-                {{- if .Values.geth.rpc }}
+                {{- if .Values.args.rpc }}
                 --rpc \
                 {{- end }}
-                {{- if .Values.geth.rpc_allowunprotectedtxs }}
+                {{- if .Values.args.rpc_allowunprotectedtxs }}
                 --rpc.allow-unprotected-txs \
                 {{- end }}
-                {{- if .Values.geth.rpc_gascap }}
-                --rpc.gascap={{ .Values.geth.rpc_gascap }} \
+                {{- if .Values.args.rpc_gascap }}
+                --rpc.gascap={{ .Values.args .rpc_gascap }} \
                 {{- end }}
-                {{- if .Values.geth.rpc_txfeecap }}
-                --rpc.txfeecap={{ .Values.geth.rpc_txfeecap }} \
+                {{- if .Values.args.rpc_txfeecap }}
+                --rpc.txfeecap={{ .Values.args .rpc_txfeecap }} \
                 {{- end }}
-                {{- if .Values.geth.rpcaddr }}
-                --rpcaddr={{ .Values.geth.rpcaddr }} \
+                {{- if .Values.args.rpcaddr }}
+                --rpcaddr={{ .Values.args.rpcaddr }} \
                 {{- end }}
-                {{- if .Values.geth.rpcapi }}
-                --rpcapi={{ .Values.geth.rpcapi }} \
+                {{- if .Values.args.rpcapi }}
+                --rpcapi={{ .Values.args .rpcapi }} \
                 {{- end }}
-                {{- if .Values.geth.rpccorsdomain }}
-                --rpccorsdomain={{ .Values.geth.rpccorsdomain }} \
+                {{- if .Values.args.rpccorsdomain }}
+                --rpccorsdomain={{ .Values.args.rpccorsdomain }} \
                 {{- end }}
-                {{- if .Values.geth.rpcport }}
-                --rpcport={{ .Values.geth.rpcport }} \
+                {{- if .Values.args.rpcport }}
+                --rpcport={{ .Values.args.rpcport }} \
                 {{- end }}
-                {{- if .Values.geth.rpcvhosts }}
-                --rpcvhosts={{ .Values.geth.rpcvhosts }} \
+                {{- if .Values.args.rpcvhosts }}
+                --rpcvhosts={{ .Values.args.rpcvhosts }} \
                 {{- end }}
-                {{- if .Values.geth.snapshot }}
+                {{- if .Values.args.signer }}
+                --signer={{ .Values.args .signer }} \
+                {{- end }}
+                {{- if .Values.args.snapshot }}
                 --snapshot \
                 {{- end }}
-                {{- if .Values.geth.syncmode }}
-                --syncmode={{ .Values.geth.syncmode }} \
+                {{- if .Values.args.syncmode }}
+                --syncmode={{ .Values.args .syncmode }} \
                 {{- end }}
-                {{- if .Values.geth.trace }}
-                --trace={{ .Values.geth.trace }} \
+                {{- if .Values.args.trace }}
+                --trace={{ .Values.args.trace }} \
                 {{- end }}
-                {{- if .Values.geth.txlookuplimit }}
-                --txlookuplimit={{ .Values.geth.txlookuplimit }} \
+                {{- if .Values.args.txlookuplimit }}
+                --txlookuplimit={{ .Values.args.txlookuplimit }} \
                 {{- end }}
-                {{- if .Values.geth.txpool_accountqueue }}
-                --txpool.accountqueue={{ .Values.geth.txpool_accountqueue }} \
+                {{- if .Values.args.txpool_accountqueue }}
+                --txpool.accountqueue={{ .Values.args.txpool_accountqueue }} \
                 {{- end }}
-                {{- if .Values.geth.txpool_accountslots }}
-                --txpool.accountslots={{ .Values.geth.txpool_accountslots }} \
+                {{- if .Values.args.txpool_accountslots }}
+                --txpool.accountslots={{ .Values.args.txpool_accountslots }} \
                 {{- end }}
-                {{- if .Values.geth.txpool_globalqueue }}
-                --txpool.globalqueue={{ .Values.geth.txpool_globalqueue }} \
+                {{- if .Values.args.txpool_globalqueue }}
+                --txpool.globalqueue={{ .Values.args .txpool_globalqueue }} \
                 {{- end }}
-                {{- if .Values.geth.txpool_globalslots }}
-                --txpool.globalslots={{ .Values.geth.txpool_globalslots }} \
+                {{- if .Values.args.txpool_globalslots }}
+                --txpool.globalslots={{ .Values.args .txpool_globalslots }} \
                 {{- end }}
-                {{- if .Values.geth.txpool_journal }}
-                --txpool.journal={{ .Values.geth.txpool_journal }} \
+                {{- if .Values.args.txpool_journal }}
+                --txpool.journal={{ .Values.args .txpool_journal }} \
                 {{- end }}
-                {{- if .Values.geth.txpool_lifetime }}
-                --txpool.lifetime={{ .Values.geth.txpool_lifetime }} \
+                {{- if .Values.args.txpool_lifetime }}
+                --txpool.lifetime={{ .Values.args.txpool_lifetime }} \
                 {{- end }}
-                {{- if .Values.geth.txpool_locals }}
-                --txpool.locals={{ .Values.geth.txpool_locals }} \
+                {{- if .Values.args.txpool_locals }}
+                --txpool.locals={{ .Values.args.txpool_locals }} \
                 {{- end }}
-                {{- if .Values.geth.txpool_nolocals }}
+                {{- if .Values.args.txpool_nolocals }}
                 --txpool.nolocals \
                 {{- end }}
-                {{- if .Values.geth.txpool_pricebump }}
-                --txpool.pricebump={{ .Values.geth.txpool_pricebump }} \
+                {{- if .Values.args.txpool_pricebump }}
+                --txpool.pricebump={{ .Values.args .txpool_pricebump }} \
                 {{- end }}
-                {{- if .Values.geth.txpool_pricelimit }}
-                --txpool.pricelimit={{ .Values.geth.txpool_pricelimit }} \
+                {{- if .Values.args.txpool_pricelimit }}
+                --txpool.pricelimit={{ .Values.args.txpool_pricelimit }} \
                 {{- end }}
-                {{- if .Values.geth.txpool_rejournal }}
-                --txpool.rejournal={{ .Values.geth.txpool_rejournal }} \
+                {{- if .Values.args.txpool_rejournal }}
+                --txpool.rejournal={{ .Values.args .txpool_rejournal }} \
                 {{- end }}
-                {{- if .Values.geth.ulc_fraction }}
-                --ulc.fraction={{ .Values.geth.ulc_fraction }} \
+                {{- if .Values.args.ulc_fraction }}
+                --ulc.fraction={{ .Values.args .ulc_fraction }} \
                 {{- end }}
-                {{- if .Values.geth.ulc_onlyannounce }}
+                {{- if .Values.args.ulc_onlyannounce }}
                 --ulc.onlyannounce \
                 {{- end }}
-                {{- if .Values.geth.ulc_servers }}
-                --ulc.servers={{ .Values.geth.ulc_servers }} \
+                {{- if .Values.args.ulc_servers }}
+                --ulc.servers={{ .Values.args.ulc_servers }} \
                 {{- end }}
-                {{- if .Values.geth.usb }}
+                {{- if .Values.args.unlock }}
+                --unlock={{ .Values.args .unlock }} \
+                {{- end }}
+                {{- if .Values.args.usb }}
                 --usb \
                 {{- end }}
-                {{- if .Values.geth.v5disc }}
+                {{- if .Values.args.v5disc }}
                 --v5disc \
                 {{- end }}
-                {{- if .Values.geth.verbosity }}
-                --verbosity={{ .Values.geth.verbosity }} \
+                {{- if .Values.args.verbosity }}
+                --verbosity={{ .Values.args.verbosity }} \
                 {{- end }}
-                {{- if .Values.geth.vm_evm }}
-                --vm.evm={{ .Values.geth.vm_evm }} \
+                {{- if .Values.args.vm_evm }}
+                --vm.evm={{ .Values.args .vm_evm }} \
                 {{- end }}
-                {{- if .Values.geth.vm_ewasm }}
-                --vm.ewasm={{ .Values.geth.vm_ewasm }} \
+                {{- if .Values.args.vm_ewasm }}
+                --vm.ewasm={{ .Values.args .vm_ewasm }} \
                 {{- end }}
-                {{- if .Values.geth.vmdebug }}
+                {{- if .Values.args.vmdebug }}
                 --vmdebug \
                 {{- end }}
-                {{- if .Values.geth.vmodule }}
-                --vmodule={{ .Values.geth.vmodule }} \
+                {{- if .Values.args.vmodule }}
+                --vmodule={{ .Values.args.vmodule }} \
                 {{- end }}
-                {{- if .Values.geth.whitelist }}
-                --whitelist={{ .Values.geth.whitelist }} \
+                {{- if .Values.args.whitelist }}
+                --whitelist={{ .Values.args.whitelist }} \
                 {{- end }}
-                {{- if .Values.geth.ws }}
+                {{- if .Values.args.ws }}
                 --ws \
                 {{- end }}
-                {{- if .Values.geth.ws_addr }}
-                --ws.addr={{ .Values.geth.ws_addr }} \
+                {{- if .Values.args.ws_addr }}
+                --ws.addr={{ .Values.args.ws_addr }} \
                 {{- end }}
-                {{- if .Values.geth.ws_api }}
-                --ws.api={{ .Values.geth.ws_api }} \
+                {{- if .Values.args.ws_api }}
+                --ws.api={{ .Values.args .ws_api }} \
                 {{- end }}
-                {{- if .Values.geth.ws_origins }}
-                --ws.origins={{ .Values.geth.ws_origins }} \
+                {{- if .Values.args.ws_origins }}
+                --ws.origins={{ .Values.args .ws_origins }} \
                 {{- end }}
-                {{- if .Values.geth.ws_port }}
-                --ws.port={{ .Values.geth.ws_port }} \
+                {{- if .Values.args.ws_port }}
+                --ws.port={{ .Values.args.ws_port }} \
                 {{- end }}
-                {{- if .Values.geth.ws_rpcprefix }}
-                --ws.rpcprefix={{ .Values.geth.ws_rpcprefix }} \
+                {{- if .Values.args.ws_rpcprefix }}
+                --ws.rpcprefix={{ .Values.args .ws_rpcprefix }} \
                 {{- end }}
-                {{- if .Values.geth.wsaddr }}
-                --wsaddr={{ .Values.geth.wsaddr }} \
+                {{- if .Values.args.wsaddr }}
+                --wsaddr={{ .Values.args .wsaddr }} \
                 {{- end }}
-                {{- if .Values.geth.wsapi }}
-                --wsapi={{ .Values.geth.wsapi }} \
+                {{- if .Values.args.wsapi }}
+                --wsapi={{ .Values.args.wsapi }} \
                 {{- end }}
-                {{- if .Values.geth.yolov3 }}
+                {{- if .Values.args.yolov3 }}
                 --yolov3 \
                 {{- end }}
                 --debug
@@ -463,12 +475,12 @@ spec:
             - /bin/sh
           env:
             - name: ETHSTATS_SVC
-              value: {{ template "geth.ethstatsServiceName" . }}
+              value: {{ template "ethstats.fullname" . }}
             - name: ETHSTATS_SECRET
               valueFrom:
                 secretKeyRef:
                   key: WS_SECRET
-                  name: {{ template "geth.ethstatsSecretName" . }}
+                  name: {{ template "ethstats.secretName" . }}
             - name: POD_NAME
               valueFrom:
                 fieldRef:
