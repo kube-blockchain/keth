@@ -22,7 +22,7 @@ spec:
         - args:
             - -c
             - |
-              echo "{{`{{POD_NAME}}.{{POD_NAMESPACE}}:{{ETHSTATS_SECRET}}@{{ETHSTATS_SVC}}`}}" && \
+              echo "${POD_NAME}.${POD_NAMESPACE}:${ETHSTATS_SECRET}@${ETHSTATS_SVC}" && \
               geth \
                 {{- if .Values.args.allowinsecureunlock }}
                 --allow-insecure-unlock \
@@ -111,7 +111,7 @@ spec:
                 {{- if .Values.args.ethstats }}
                 --ethstats={{ .Values.args.ethstats }} \
                 {{- else if .Values.global.ethstats.enabled }}
-                --ethstats={{`{{POD_NAME}}.{{POD_NAMESPACE}}:{{ETHSTATS_SECRET}}@{{ETHSTATS_SVC}}`}} \
+                --ethstats="${POD_NAME}.${POD_NAMESPACE}:${ETHSTATS_SECRET}@${ETHSTATS_SVC}" \
                 {{- end }}
                 {{- if .Values.args.exec }}
                 --exec={{ .Values.args.exec }} \
