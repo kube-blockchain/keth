@@ -78,7 +78,6 @@ geth:
   light_serve: ""
   lightkdf: ""
   log_json: ""
-  mainnet: false
   maxpeers: ""
   maxpendpeers: ""
   metrics: ""

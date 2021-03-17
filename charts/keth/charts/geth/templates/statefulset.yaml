@@ -200,9 +200,6 @@ spec:
                 {{- if .Values.geth.log_json }}
                 --log.json \
                 {{- end }}
-                {{- if .Values.geth.mainnet }}
-                --mainnet \
-                {{- end }}
                 {{- if .Values.geth.maxpeers }}
                 --maxpeers={{ .Values.geth.maxpeers }} \
                 {{- end }}
