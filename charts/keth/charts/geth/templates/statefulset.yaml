@@ -127,7 +127,7 @@ spec:
                 {{ if .Values.geth.rinkeby }} --rinkeby \ {{ end }}
                 {{ if .Values.geth.ropsten }} --ropsten \ {{ end }}
                 {{ if .Values.geth.rpc }} --rpc \ {{ end }}
-                {{ if .Values.geth.rpc.allow-unprotected-txs }} --rpc.allow-unprotected-txs \ {{ end }}
+                {{ if .Values.geth.rpc.allowunprotectedtxs }} --rpc.allow-unprotected-txs \ {{ end }}
                 {{ if .Values.geth.rpc.gascap }} --rpc.gascap={{ .Values.geth.rpc.gascap }} \ {{ end }}
                 {{ if .Values.geth.rpc.txfeecap }} --rpc.txfeecap={{ .Values.geth.rpc.txfeecap }} \ {{ end }}
                 {{ if .Values.geth.rpcaddr }} --rpcaddr={{ .Values.geth.rpcaddr }} \ {{ end }}
