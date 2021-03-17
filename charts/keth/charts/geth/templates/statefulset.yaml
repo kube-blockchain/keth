@@ -23,45 +23,154 @@ spec:
             - -c
             - |
               geth \
-                {{- if .Values.geth.datadir }}
-                --datadir={{ .Values.geth.datadir }} \
-                {{- end }}
-                {{- if .Values.geth.ethstats }}
-                --ethstats={{ .Values.geth.ethstats }} \
-                {{- end }}
-                {{- if .Values.geth.ropsten }}
-                --ropsten \
-                {{- end }}
-                {{- if .Values.geth.rpc }}
-                --rpc \
-                {{- end }}
-                {{- if .Values.geth.rpcaddr }}
-                --rpcaddr={{ .Values.geth.rpcaddr }} \
-                {{- end }}
-                {{- if .Values.geth.rpcapi }}
-                --rpcapi={{ .Values.geth.rpcapi }} \
-                {{- end }}
-                {{- if .Values.geth.rpccorsdomain }}
-                --rpccorsdomain={{ .Values.geth.rpccorsdomain }} \
-                {{- end }}
-                {{- if .Values.geth.rpcvhosts }}
-                --rpcvhosts={{ .Values.geth.rpcvhosts }} \
-                {{- end }}
-                {{- if .Values.geth.syncmode }}
-                --syncmode={{ .Values.geth.syncmode }} \
-                {{- end }}
-                {{- if .Values.geth.verbosity }}
-                --verbosity={{ .Values.geth.verbosity }} \
-                {{- end }}
-                {{- if .Values.geth.ws }}
-                --ws \
-                {{- end }}
-                {{- if .Values.geth.wsaddr }}
-                --wsaddr={{ .Values.geth.wsaddr }} \
-                {{- end }}
-                {{- if .Values.geth.wsapi }}
-                --wsapi={{ .Values.geth.wsapi }} \
-                {{- end }}
+                {{ if .Values.geth.backtrace }} --backtrace={{ .Values.geth.backtrace }} \ {{ end }}
+                {{ if .Values.geth.bloomfilter.size }} --bloomfilter.size={{ .Values.geth.bloomfilter.size }} \ {{ end }}
+                {{ if .Values.geth.bootnodes }} --bootnodes={{ .Values.geth.bootnodes }} \ {{ end }}
+                {{ if .Values.geth.cache }} --cache={{ .Values.geth.cache }} \ {{ end }}
+                {{ if .Values.geth.cache.database }} --cache.database={{ .Values.geth.cache.database }} \ {{ end }}
+                {{ if .Values.geth.cache.gc }} --cache.gc={{ .Values.geth.cache.gc }} \ {{ end }}
+                {{ if .Values.geth.cache.noprefetch }} --cache.noprefetch \ {{ end }}
+                {{ if .Values.geth.cache.preimages }} --cache.preimages \ {{ end }}
+                {{ if .Values.geth.cache.snapshot }} --cache.snapshot={{ .Values.geth.cache.snapshot }} \ {{ end }}
+                {{ if .Values.geth.cache.trie }} --cache.trie={{ .Values.geth.cache.trie }} \ {{ end }}
+                {{ if .Values.geth.cache.trie.journal }} --cache.trie.journal={{ .Values.geth.cache.trie.journal }} \ {{ end }}
+                {{ if .Values.geth.cache.trie.rejournal }} --cache.trie.rejournal={{ .Values.geth.cache.trie.rejournal }} \ {{ end }}
+                {{ if .Values.geth.config }} --config={{ .Values.geth.config }} \ {{ end }}
+                {{ if .Values.geth.datadir }} --datadir={{ .Values.geth.datadir }} \ {{ end }}
+                {{ if .Values.geth.datadir.ancient }} --datadir.ancient={{ .Values.geth.datadir.ancient }} \ {{ end }}
+                {{ if .Values.geth.datadir.minfreedisk }} --datadir.minfreedisk={{ .Values.geth.datadir.minfreedisk }} \ {{ end }}
+                {{ if .Values.geth.debug }} --debug \ {{ end }}
+                {{ if .Values.geth.dev }} --dev \ {{ end }}
+                {{ if .Values.geth.dev.period }} --dev.period={{ .Values.geth.dev.period }} \ {{ end }}
+                {{ if .Values.geth.discovery.dns }} --discovery.dns={{ .Values.geth.discovery.dns }} \ {{ end }}
+                {{ if .Values.geth.ethash.cachedir }} --ethash.cachedir={{ .Values.geth.ethash.cachedir }} \ {{ end }}
+                {{ if .Values.geth.ethash.cachesinmem }} --ethash.cachesinmem={{ .Values.geth.ethash.cachesinmem }} \ {{ end }}
+                {{ if .Values.geth.ethash.cacheslockmmap }} --ethash.cacheslockmmap \ {{ end }}
+                {{ if .Values.geth.ethash.cachesondisk }} --ethash.cachesondisk={{ .Values.geth.ethash.cachesondisk }} \ {{ end }}
+                {{ if .Values.geth.ethash.dagdir }} --ethash.dagdir={{ .Values.geth.ethash.dagdir }} \ {{ end }}
+                {{ if .Values.geth.ethash.dagsinmem }} --ethash.dagsinmem={{ .Values.geth.ethash.dagsinmem }} \ {{ end }}
+                {{ if .Values.geth.ethash.dagslockmmap }} --ethash.dagslockmmap \ {{ end }}
+                {{ if .Values.geth.ethash.dagsondisk }} --ethash.dagsondisk={{ .Values.geth.ethash.dagsondisk }} \ {{ end }}
+                {{ if .Values.geth.ethstats }} --ethstats={{ .Values.geth.ethstats }} \ {{ end }}
+                {{ if .Values.geth.exec }} --exec={{ .Values.geth.exec }} \ {{ end }}
+                {{ if .Values.geth.exitwhensynced }} --exitwhensynced \ {{ end }}
+                {{ if .Values.geth.fakepow }} --fakepow \ {{ end }}
+                {{ if .Values.geth.gcmode }} --gcmode={{ .Values.geth.gcmode }} \ {{ end }}
+                {{ if .Values.geth.goerli }} --goerli \ {{ end }}
+                {{ if .Values.geth.gpo.blocks }} --gpo.blocks={{ .Values.geth.gpo.blocks }} \ {{ end }}
+                {{ if .Values.geth.gpo.maxprice }} --gpo.maxprice={{ .Values.geth.gpo.maxprice }} \ {{ end }}
+                {{ if .Values.geth.gpo.percentile }} --gpo.percentile={{ .Values.geth.gpo.percentile }} \ {{ end }}
+                {{ if .Values.geth.graphql }} --graphql \ {{ end }}
+                {{ if .Values.geth.graphql.corsdomain }} --graphql.corsdomain={{ .Values.geth.graphql.corsdomain }} \ {{ end }}
+                {{ if .Values.geth.graphql.vhosts }} --graphql.vhosts={{ .Values.geth.graphql.vhosts }} \ {{ end }}
+                {{ if .Values.geth.http }} --http \ {{ end }}
+                {{ if .Values.geth.http.addr }} --http.addr={{ .Values.geth.http.addr }} \ {{ end }}
+                {{ if .Values.geth.http.api }} --http.api={{ .Values.geth.http.api }} \ {{ end }}
+                {{ if .Values.geth.http.corsdomain }} --http.corsdomain={{ .Values.geth.http.corsdomain }} \ {{ end }}
+                {{ if .Values.geth.http.port }} --http.port={{ .Values.geth.http.port }} \ {{ end }}
+                {{ if .Values.geth.http.rpcprefix }} --http.rpcprefix={{ .Values.geth.http.rpcprefix }} \ {{ end }}
+                {{ if .Values.geth.http.vhosts }} --http.vhosts={{ .Values.geth.http.vhosts }} \ {{ end }}
+                {{ if .Values.geth.identity }} --identity={{ .Values.geth.identity }} \ {{ end }}
+                {{ if .Values.geth.ipcdisable }} --ipcdisable \ {{ end }}
+                {{ if .Values.geth.ipcpath }} --ipcpath={{ .Values.geth.ipcpath }} \ {{ end }}
+                {{ if .Values.geth.jspath }} --jspath={{ .Values.geth.jspath }} \ {{ end }}
+                {{ if .Values.geth.keystore }} --keystore={{ .Values.geth.keystore }} \ {{ end }}
+                {{ if .Values.geth.light.egress }} --light.egress={{ .Values.geth.light.egress }} \ {{ end }}
+                {{ if .Values.geth.light.ingress }} --light.ingress={{ .Values.geth.light.ingress }} \ {{ end }}
+                {{ if .Values.geth.light.maxpeers }} --light.maxpeers={{ .Values.geth.light.maxpeers }} \ {{ end }}
+                {{ if .Values.geth.light.nopruning }} --light.nopruning \ {{ end }}
+                {{ if .Values.geth.light.nosyncserve }} --light.nosyncserve \ {{ end }}
+                {{ if .Values.geth.light.serve }} --light.serve={{ .Values.geth.light.serve }} \ {{ end }}
+                {{ if .Values.geth.lightkdf }} --lightkdf \ {{ end }}
+                {{ if .Values.geth.log.json }} --log.json \ {{ end }}
+                {{ if .Values.geth.mainnet }} --mainnet \ {{ end }}
+                {{ if .Values.geth.maxpeers }} --maxpeers={{ .Values.geth.maxpeers }} \ {{ end }}
+                {{ if .Values.geth.maxpendpeers }} --maxpendpeers={{ .Values.geth.maxpendpeers }} \ {{ end }}
+                {{ if .Values.geth.metrics }} --metrics \ {{ end }}
+                {{ if .Values.geth.metrics.addr }} --metrics.addr={{ .Values.geth.metrics.addr }} \ {{ end }}
+                {{ if .Values.geth.metrics.expensive }} --metrics.expensive \ {{ end }}
+                {{ if .Values.geth.metrics.influxdb }} --metrics.influxdb \ {{ end }}
+                {{ if .Values.geth.metrics.influxdb.database }} --metrics.influxdb.database={{ .Values.geth.metrics.influxdb.database }} \ {{ end }}
+                {{ if .Values.geth.metrics.influxdb.endpoint }} --metrics.influxdb.endpoint={{ .Values.geth.metrics.influxdb.endpoint }} \ {{ end }}
+                {{ if .Values.geth.metrics.influxdb.password }} --metrics.influxdb.password={{ .Values.geth.metrics.influxdb.password }} \ {{ end }}
+                {{ if .Values.geth.metrics.influxdb.tags }} --metrics.influxdb.tags={{ .Values.geth.metrics.influxdb.tags }} \ {{ end }}
+                {{ if .Values.geth.metrics.influxdb.username }} --metrics.influxdb.username={{ .Values.geth.metrics.influxdb.username }} \ {{ end }}
+                {{ if .Values.geth.metrics.port }} --metrics.port={{ .Values.geth.metrics.port }} \ {{ end }}
+                {{ if .Values.geth.mine }} --mine \ {{ end }}
+                {{ if .Values.geth.miner.etherbase }} --miner.etherbase={{ .Values.geth.miner.etherbase }} \ {{ end }}
+                {{ if .Values.geth.miner.extradata }} --miner.extradata={{ .Values.geth.miner.extradata }} \ {{ end }}
+                {{ if .Values.geth.miner.gaslimit }} --miner.gaslimit={{ .Values.geth.miner.gaslimit }} \ {{ end }}
+                {{ if .Values.geth.miner.gasprice }} --miner.gasprice={{ .Values.geth.miner.gasprice }} \ {{ end }}
+                {{ if .Values.geth.miner.gastarget }} --miner.gastarget={{ .Values.geth.miner.gastarget }} \ {{ end }}
+                {{ if .Values.geth.miner.notify }} --miner.notify={{ .Values.geth.miner.notify }} \ {{ end }}
+                {{ if .Values.geth.miner.noverify }} --miner.noverify \ {{ end }}
+                {{ if .Values.geth.miner.recommit }} --miner.recommit={{ .Values.geth.miner.recommit }} \ {{ end }}
+                {{ if .Values.geth.miner.threads }} --miner.threads={{ .Values.geth.miner.threads }} \ {{ end }}
+                {{ if .Values.geth.nat }} --nat={{ .Values.geth.nat }} \ {{ end }}
+                {{ if .Values.geth.netrestrict }} --netrestrict={{ .Values.geth.netrestrict }} \ {{ end }}
+                {{ if .Values.geth.networkid }} --networkid={{ .Values.geth.networkid }} \ {{ end }}
+                {{ if .Values.geth.nocompaction }} --nocompaction \ {{ end }}
+                {{ if .Values.geth.nodekey }} --nodekey={{ .Values.geth.nodekey }} \ {{ end }}
+                {{ if .Values.geth.nodekeyhex }} --nodekeyhex={{ .Values.geth.nodekeyhex }} \ {{ end }}
+                {{ if .Values.geth.nodiscover }} --nodiscover \ {{ end }}
+                {{ if .Values.geth.nousb }} --nousb \ {{ end }}
+                {{ if .Values.geth.override.berlin }} --override.berlin={{ .Values.geth.override.berlin }} \ {{ end }}
+                {{ if .Values.geth.pcscdpath }} --pcscdpath={{ .Values.geth.pcscdpath }} \ {{ end }}
+                {{ if .Values.geth.port }} --port={{ .Values.geth.port }} \ {{ end }}
+                {{ if .Values.geth.pprof }} --pprof \ {{ end }}
+                {{ if .Values.geth.pprof.addr }} --pprof.addr={{ .Values.geth.pprof.addr }} \ {{ end }}
+                {{ if .Values.geth.pprof.blockprofilerate }} --pprof.blockprofilerate={{ .Values.geth.pprof.blockprofilerate }} \ {{ end }}
+                {{ if .Values.geth.pprof.cpuprofile }} --pprof.cpuprofile={{ .Values.geth.pprof.cpuprofile }} \ {{ end }}
+                {{ if .Values.geth.pprof.memprofilerate }} --pprof.memprofilerate={{ .Values.geth.pprof.memprofilerate }} \ {{ end }}
+                {{ if .Values.geth.pprof.port }} --pprof.port={{ .Values.geth.pprof.port }} \ {{ end }}
+                {{ if .Values.geth.preload }} --preload={{ .Values.geth.preload }} \ {{ end }}
+                {{ if .Values.geth.rinkeby }} --rinkeby \ {{ end }}
+                {{ if .Values.geth.ropsten }} --ropsten \ {{ end }}
+                {{ if .Values.geth.rpc }} --rpc \ {{ end }}
+                {{ if .Values.geth.rpc.allow-unprotected-txs }} --rpc.allow-unprotected-txs \ {{ end }}
+                {{ if .Values.geth.rpc.gascap }} --rpc.gascap={{ .Values.geth.rpc.gascap }} \ {{ end }}
+                {{ if .Values.geth.rpc.txfeecap }} --rpc.txfeecap={{ .Values.geth.rpc.txfeecap }} \ {{ end }}
+                {{ if .Values.geth.rpcaddr }} --rpcaddr={{ .Values.geth.rpcaddr }} \ {{ end }}
+                {{ if .Values.geth.rpcapi }} --rpcapi={{ .Values.geth.rpcapi }} \ {{ end }}
+                {{ if .Values.geth.rpccorsdomain }} --rpccorsdomain={{ .Values.geth.rpccorsdomain }} \ {{ end }}
+                {{ if .Values.geth.rpcport }} --rpcport={{ .Values.geth.rpcport }} \ {{ end }}
+                {{ if .Values.geth.rpcvhosts }} --rpcvhosts={{ .Values.geth.rpcvhosts }} \ {{ end }}
+                {{ if .Values.geth.snapshot }} --snapshot \ {{ end }}
+                {{ if .Values.geth.syncmode }} --syncmode={{ .Values.geth.syncmode }} \ {{ end }}
+                {{ if .Values.geth.trace }} --trace={{ .Values.geth.trace }} \ {{ end }}
+                {{ if .Values.geth.txlookuplimit }} --txlookuplimit={{ .Values.geth.txlookuplimit }} \ {{ end }}
+                {{ if .Values.geth.txpool.accountqueue }} --txpool.accountqueue={{ .Values.geth.txpool.accountqueue }} \ {{ end }}
+                {{ if .Values.geth.txpool.accountslots }} --txpool.accountslots={{ .Values.geth.txpool.accountslots }} \ {{ end }}
+                {{ if .Values.geth.txpool.globalqueue }} --txpool.globalqueue={{ .Values.geth.txpool.globalqueue }} \ {{ end }}
+                {{ if .Values.geth.txpool.globalslots }} --txpool.globalslots={{ .Values.geth.txpool.globalslots }} \ {{ end }}
+                {{ if .Values.geth.txpool.journal }} --txpool.journal={{ .Values.geth.txpool.journal }} \ {{ end }}
+                {{ if .Values.geth.txpool.lifetime }} --txpool.lifetime={{ .Values.geth.txpool.lifetime }} \ {{ end }}
+                {{ if .Values.geth.txpool.locals }} --txpool.locals={{ .Values.geth.txpool.locals }} \ {{ end }}
+                {{ if .Values.geth.txpool.nolocals }} --txpool.nolocals \ {{ end }}
+                {{ if .Values.geth.txpool.pricebump }} --txpool.pricebump={{ .Values.geth.txpool.pricebump }} \ {{ end }}
+                {{ if .Values.geth.txpool.pricelimit }} --txpool.pricelimit={{ .Values.geth.txpool.pricelimit }} \ {{ end }}
+                {{ if .Values.geth.txpool.rejournal }} --txpool.rejournal={{ .Values.geth.txpool.rejournal }} \ {{ end }}
+                {{ if .Values.geth.ulc.fraction }} --ulc.fraction={{ .Values.geth.ulc.fraction }} \ {{ end }}
+                {{ if .Values.geth.ulc.onlyannounce }} --ulc.onlyannounce \ {{ end }}
+                {{ if .Values.geth.ulc.servers }} --ulc.servers={{ .Values.geth.ulc.servers }} \ {{ end }}
+                {{ if .Values.geth.usb }} --usb \ {{ end }}
+                {{ if .Values.geth.v5disc }} --v5disc \ {{ end }}
+                {{ if .Values.geth.verbosity }} --verbosity={{ .Values.geth.verbosity }} \ {{ end }}
+                {{ if .Values.geth.vm.evm }} --vm.evm={{ .Values.geth.vm.evm }} \ {{ end }}
+                {{ if .Values.geth.vm.ewasm }} --vm.ewasm={{ .Values.geth.vm.ewasm }} \ {{ end }}
+                {{ if .Values.geth.vmdebug }} --vmdebug \ {{ end }}
+                {{ if .Values.geth.vmodule }} --vmodule={{ .Values.geth.vmodule }} \ {{ end }}
+                {{ if .Values.geth.whitelist }} --whitelist={{ .Values.geth.whitelist }} \ {{ end }}
+                {{ if .Values.geth.ws }} --ws \ {{ end }}
+                {{ if .Values.geth.ws.addr }} --ws.addr={{ .Values.geth.ws.addr }} \ {{ end }}
+                {{ if .Values.geth.ws.api }} --ws.api={{ .Values.geth.ws.api }} \ {{ end }}
+                {{ if .Values.geth.ws.origins }} --ws.origins={{ .Values.geth.ws.origins }} \ {{ end }}
+                {{ if .Values.geth.ws.port }} --ws.port={{ .Values.geth.ws.port }} \ {{ end }}
+                {{ if .Values.geth.ws.rpcprefix }} --ws.rpcprefix={{ .Values.geth.ws.rpcprefix }} \ {{ end }}
+                {{ if .Values.geth.wsaddr }} --wsaddr={{ .Values.geth.wsaddr }} \ {{ end }}
+                {{ if .Values.geth.wsapi }} --wsapi={{ .Values.geth.wsapi }} \ {{ end }}
+                {{ if .Values.geth.yolov3 }} --yolov3 \ {{ end }}
+
           command:
             - /bin/sh
           env:
