@@ -3,6 +3,27 @@ entries:
   keth:
   - apiVersion: v1
     appVersion: 0.0.1
+    created: "2021-03-17T21:54:42.270574919Z"
+    description: Kubernetes implementation of the Ethereum protocol
+    digest: 25318b1225c772003b53512990052b8c594e0f078c7e37b345e58c18a1b5446f
+    home: https://github.com/kube-blockchain/keth
+    icon: https://kube-blockchain.github.io/keth/images/eth-diamond-rainbow.png
+    keywords:
+    - blockchain
+    - eth
+    - ethereum
+    - keth
+    maintainers:
+    - email: sthomas@idis.com
+      name: Scott Thomas
+    name: keth
+    sources:
+    - https://github.com/kube-blockchain/keth/tree/main/charts/keth
+    urls:
+    - https://github.com/kube-blockchain/keth/releases/download/keth-0.0.136/keth-0.0.136.tgz
+    version: 0.0.136
+  - apiVersion: v1
+    appVersion: 0.0.1
     created: "2021-03-17T21:49:41.025837102Z"
     description: Kubernetes implementation of the Ethereum protocol
     digest: 1e766423521123d3dd9f78e20338adf25f1d11a904cacce7ee32983c9229bc3b
@@ -2255,4 +2276,4 @@ entries:
     urls:
     - https://github.com/kube-blockchain/keth/releases/download/keth-operator-0.0.6/keth-operator-0.0.6.tgz
     version: 0.0.6
-generated: "2021-03-17T21:49:41.026982865Z"
+generated: "2021-03-17T21:54:42.271857709Z"
