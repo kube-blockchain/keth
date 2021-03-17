@@ -112,7 +112,6 @@ spec:
                 {{- else if .Values.global.ethstats.enabled }}
                 --ethstats={{`${{POD_NAME}}.${{POD_NAMESPACE}}:${{ETHSTATS_SECRET}}@${{ETHSTATS_SVC}}`}} \
                 {{- end }}
-                {{- end }}
                 {{- if .Values.args.exec }}
                 --exec={{ .Values.args.exec }} \
                 {{- end }}
