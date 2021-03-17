@@ -154,7 +154,6 @@ args:
   ws_port: ""
   ws_rpcprefix: ""
   yolov3: false
-enabled: true
 ethstats:
   secretName: ""
   webSocketSecret: ""

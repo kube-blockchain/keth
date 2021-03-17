@@ -1,6 +1,5 @@
 ---
 affinity: {}
-enabled: true
 nodeSelector: {}
 overrides:
   fullName: ""

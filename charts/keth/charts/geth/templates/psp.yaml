@@ -1,4 +1,4 @@
-{{- if and .Values.enabled .Values.rbac.pspEnabled }}
+{{- if and .Values.global.geth.enabled .Values.rbac.pspEnabled }}
 ---
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy

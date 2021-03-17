@@ -3,7 +3,6 @@ affinity: {}
 credentials:
   secretName: ""
   webSocketSecret: ""
-enabled: true
 nodeSelector: {}
 overrides:
   fullName: ""

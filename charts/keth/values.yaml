@@ -17,7 +17,6 @@ prometheus:
 
 bootnode:
   affinity: {}
-  enabled: true
   nodeSelector: {}
   overrides:
     fullName: ""
@@ -52,12 +51,11 @@ ethstats:
   credentials:
     secretName: ""
     webSocketSecret: ""
-  enabled: true
   nodeSelector: {}
   overrides:
     fullName: ""
     name: ""
-  persistence:
+  persistence: 
     accessMode: ReadWriteOnce
     annotations: {}
     size: 10Gi
@@ -97,7 +95,6 @@ geth:
     privateKey: ""
     secret: ""
   affinity: {}
-  enabled: true
   ethstats:
     secretName: ""
     webSocketSecret: ""
@@ -133,3 +130,11 @@ geth:
     interval: "30s"
     namespace:
   tolerations: []
+
+global:
+  bootnode:
+    enabled: true
+  ethstats:
+    enabled: true
+  geth:
+    enabled: true

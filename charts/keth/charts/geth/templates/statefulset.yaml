@@ -1,4 +1,4 @@
-{{ if .Values.enabled -}}
+{{ if .Values.global.geth.enabled -}}
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -475,12 +475,12 @@ spec:
             - /bin/sh
           env:
             - name: ETHSTATS_SVC
-              value: {{ template "ethstats.fullname" . }}
+              value: {{ template "geth.ethstatsServiceName" . }}
             - name: ETHSTATS_SECRET
               valueFrom:
                 secretKeyRef:
                   key: WS_SECRET
-                  name: {{ template "ethstats.secretName" . }}
+                  name: {{ template "geth.ethstatsSecretName" . }}
             - name: POD_NAME
               valueFrom:
                 fieldRef:

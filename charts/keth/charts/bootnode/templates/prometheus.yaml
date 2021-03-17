@@ -1,4 +1,4 @@
-{{- if and .Values.enabled ( or .Values.prometheus.serviceMonitor.enabled .Values.prometheus.service.enabled ) }}
+{{- if and .Values.global.bootnode.enabled ( or .Values.prometheus.serviceMonitor.enabled .Values.prometheus.service.enabled ) }}
 ---
 apiVersion: v1
 kind: Service
@@ -26,7 +26,7 @@ spec:
     protocol: TCP
 {{ end }}
 
-{{- if and .Values.enabled .Values.prometheus.serviceMonitor.enabled }}
+{{- if and .Values.global.bootnode.enabled .Values.prometheus.serviceMonitor.enabled }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
