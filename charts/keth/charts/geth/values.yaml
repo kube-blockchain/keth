@@ -11,7 +11,6 @@ ethstats:
 geth:
   datadir: /root/.ethereum
   ethstats: "${POD_NAME}.${POD_NAMESPACE}:${ETHSTATS_SECRET}@${ETHSTATS_SVC}"
-  ropsten: true
   rpc: true
   rpcaddr: "0.0.0.0"
   rpcapi: "admin,debug,web3,eth,txpool,personal,clique,miner,net"
@@ -37,7 +36,7 @@ geth:
   config: ""
   datadir_ancient: ""
   datadir_minfreedisk: ""
-  debug: ""
+  debug: false
   dev: ""
   dev_period: ""
   discovery_dns: ""
@@ -80,7 +79,7 @@ geth:
   light_serve: ""
   lightkdf: ""
   log_json: ""
-  mainnet: ""
+  mainnet: false
   maxpeers: ""
   maxpendpeers: ""
   metrics: ""
@@ -121,7 +120,8 @@ geth:
   pprof_memprofilerate: ""
   pprof_port: ""
   preload: ""
-  rinkeby: ""
+  rinkeby: false
+  ropsten: false
   rpc_allowunprotectedtxs: ""
   rpc_gascap: ""
   rpc_txfeecap: ""
@@ -155,7 +155,7 @@ geth:
   ws_origins: ""
   ws_port: ""
   ws_rpcprefix: ""
-  yolov3: ""
+  yolov3: false
 nodeSelector: {}
 overrides:
   fullName: ""
