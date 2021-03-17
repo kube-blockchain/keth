@@ -109,6 +109,9 @@ spec:
                 {{- end }}
                 {{- if .Values.args.ethstats }}
                 --ethstats={{ .Values.args.ethstats }} \
+                {{- else if .Values.global.ethstats.enabled }}
+                --ethstats=`${{POD_NAME}}.${{POD_NAMESPACE}}:${{ETHSTATS_SECRET}}@${{ETHSTATS_SVC}}` \
+                {{- end }}
                 {{- end }}
                 {{- if .Values.args.exec }}
                 --exec={{ .Values.args.exec }} \
@@ -474,6 +477,7 @@ spec:
           command:
             - /bin/sh
           env:
+            {{- if .Values.global.ethstats.enabled }}
             - name: ETHSTATS_SVC
               value: {{ template "geth.ethstatsServiceName" . }}
             - name: ETHSTATS_SECRET
@@ -491,6 +495,7 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: metadata.namespace
+            {{- end }}
           image: ethereum/client-go:v1.9.15
           imagePullPolicy: IfNotPresent
           name: geth-api
