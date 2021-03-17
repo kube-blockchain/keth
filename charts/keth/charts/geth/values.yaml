@@ -6,7 +6,6 @@ account:
 affinity: {}
 args:
   datadir: /root/.ethereum
-  ethstats: "${POD_NAME}.${POD_NAMESPACE}:${ETHSTATS_SECRET}@${ETHSTATS_SVC}"
   rpc: true
   rpcaddr: "0.0.0.0"
   rpcapi: "admin,debug,web3,eth,txpool,personal,clique,miner,net"
@@ -44,6 +43,7 @@ args:
   ethash_dagsinmem: ""
   ethash_dagslockmmap: ""
   ethash_dagsondisk: ""
+  ethstats: ""
   exec: ""
   exitwhensynced: ""
   fakepow: ""
