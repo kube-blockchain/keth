@@ -22,6 +22,7 @@ args:
   datadir: /root/.ethereum
   datadir_ancient: ""
   datadir_minfreedisk: ""
+  debug: false
   dev: ""
   dev_period: ""
   discovery_dns: ""

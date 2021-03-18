@@ -75,6 +75,9 @@ spec:
                 {{- if .Values.args.datadir_minfreedisk }}
                 --datadir.minfreedisk={{ .Values.args.datadir_minfreedisk }} \
                 {{- end }}
+                {{- if .Values.args.debug }}
+                --debug \
+                {{- end }}
                 {{- if .Values.args.dev }}
                 --dev \
                 {{- end }}
@@ -473,7 +476,7 @@ spec:
                 {{- if .Values.args.yolov3 }}
                 --yolov3 \
                 {{- end }}
-                --debug
+                || true
           command:
             - /bin/sh
           env:
