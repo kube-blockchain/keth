@@ -9,7 +9,8 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 data:
   {{- if .Values.genesis }}
-  genesis.json: {{ toPrettyJson .Values.genesis | nindent 4 }}
+  genesis.json: |-
+    {{ toPrettyJson .Values.genesis | nindent 4 }}
   {{- end }}
   {{- if .Values.networkId }}
   networkId: {{ .Values.networkId }}
