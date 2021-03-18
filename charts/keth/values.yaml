@@ -51,6 +51,7 @@ ethstats:
   credentials:
     secretName: ""
     webSocketSecret: ""
+  genesis: {}
   nodeSelector: {}
   overrides:
     fullName: ""
