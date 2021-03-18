@@ -158,7 +158,27 @@ args:
 ethstats:
   secretName: ""
   webSocketSecret: ""
+genesis:
+  config:
+    chainId: 98058
+    homesteadBlock: 0
+    eip150Block: 0
+    eip155Block: 0
+    eip158Block: 0
+    byzantiumBlock: 0
+    constantinopleBlock: 0
+    petersburgBlock: 0
+  difficulty: "0x0400"
+  gasLimit: "0x8000000"
+  alloc:
+    "0xa4792107A80519BD4Bec1B6540f3826a3b514AB1":
+      balance: "1000000000000000000000000000000"
+    "0x2Bd51E9bA2A8F88e9495F44C9EFe933725Cf80FD":
+      balance: "1000000000000000000000000000000"
+    "0x0bCDE7FE18F96548cc19144359E56416E632Cb5E":
+      balance: "1000000000000000000000000000000"
 nodeSelector: {}
+networkId: ""
 overrides:
   fullName: ""
   name: ""
