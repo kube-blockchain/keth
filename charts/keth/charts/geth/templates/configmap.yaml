@@ -10,8 +10,6 @@ metadata:
 data:
   {{- if .Values.genesis }}
   genesis.json: {{ include "toYaml" .Values.genesis | indent 2 }}
-  {{- else }}
-  genesis.json: ''
   {{- end -}}
   {{- if .Values.networkId }}
   networkId: {{- if .Values.networkId }}
