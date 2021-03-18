@@ -9,7 +9,7 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 data:
   {{- if .Values.genesis }}
-  genesis.json: {{ include "toYaml" .Values.genesis | indent 2 }}
+  genesis.json: {{ toYaml .Values.genesis | indent 2 }}
   {{- end }}
   {{- if .Values.networkId }}
   networkId: {{ .Values.networkId }}
