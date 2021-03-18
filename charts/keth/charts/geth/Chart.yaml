@@ -1,7 +1,7 @@
 ---
 apiVersion: v1
 name: geth
-version: 0.0.152
+version: 0.0.153
 appVersion: master
 description: Kubernetes implementation of the Ethereum protocol
 icon: https://kube-blockchain.github.io/keth/images/eth-diamond-rainbow.png
