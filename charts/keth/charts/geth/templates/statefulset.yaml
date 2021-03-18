@@ -476,7 +476,7 @@ spec:
                 {{- if .Values.args.yolov3 }}
                 --yolov3 \
                 {{- end }}
-                || true
+                && true
           command:
             - /bin/sh
           env:
@@ -545,6 +545,10 @@ spec:
       securityContext: {}
       terminationGracePeriodSeconds: 10
       volumes:
+        - configMap:
+            defaultMode: 420
+            name: {{ template "geth.fullname" . }}
+          name: config
         - name: account
           secret:
             defaultMode: 420
