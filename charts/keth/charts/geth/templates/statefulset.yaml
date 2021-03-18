@@ -8,7 +8,7 @@ metadata:
   name: {{ template "geth.fullname" . }}
   namespace: {{ $.Release.Namespace }}
 spec:
-  replicas: {{ template "geth.replicaCount" . }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       component: {{ template "geth.fullname" . }}

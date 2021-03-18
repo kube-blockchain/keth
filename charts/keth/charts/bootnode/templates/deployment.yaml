@@ -9,7 +9,7 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   progressDeadlineSeconds: 600
-  replicas: {{ template "ethstats.replicaCount" . }}
+  replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: 10
   selector:
     matchLabels:
