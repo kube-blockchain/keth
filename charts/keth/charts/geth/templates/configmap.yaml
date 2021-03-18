@@ -10,7 +10,7 @@ metadata:
 data:
   {{- if .Values.genesis }}
   genesis.json: |-
-    {{ toPrettyJson .Values.genesis | nindent 4 }}
+    {{- toPrettyJson .Values.genesis | nindent 4 }}
   {{- end }}
   {{- if .Values.networkId }}
   networkId: {{ .Values.networkId }}
