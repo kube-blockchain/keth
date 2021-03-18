@@ -5,17 +5,6 @@ account:
   secret: ""
 affinity: {}
 args:
-  datadir: /root/.ethereum
-  rpc: true
-  rpcaddr: "0.0.0.0"
-  rpcapi: "admin,debug,web3,eth,txpool,personal,clique,miner,net"
-  rpccorsdomain: "*"
-  rpcvhosts: "*"
-  syncmode: fast
-  verbosity: 5
-  ws: true
-  wsaddr: "0.0.0.0"
-  wsapi: "admin,debug,web3,eth,txpool,personal,clique,miner,net"
   allowinsecureunlock: false
   backtrace: ""
   bloomfilter_size: ""
@@ -23,13 +12,14 @@ args:
   cache: ""
   cache_database: ""
   cache_gc: ""
-  cache_noprefetch: ""
-  cache_preimages: ""
+  cache_noprefetch: false
+  cache_preimages: false
   cache_snapshot: ""
   cache_trie: ""
   cache_trie_journal: ""
   cache_trie_rejournal: ""
   config: ""
+  datadir: /root/.ethereum
   datadir_ancient: ""
   datadir_minfreedisk: ""
   dev: ""
@@ -37,57 +27,57 @@ args:
   discovery_dns: ""
   ethash_cachedir: ""
   ethash_cachesinmem: ""
-  ethash_cacheslockmmap: ""
+  ethash_cacheslockmmap: false
   ethash_cachesondisk: ""
   ethash_dagdir: ""
   ethash_dagsinmem: ""
-  ethash_dagslockmmap: ""
+  ethash_dagslockmmap: false
   ethash_dagsondisk: ""
   ethstats: ""
   exec: ""
-  exitwhensynced: ""
-  fakepow: ""
+  exitwhensynced: false
+  fakepow: false
   gcmode: ""
-  goerli: ""
+  goerli: false
   gpo_blocks: ""
   gpo_maxprice: ""
   gpo_percentile: ""
-  graphql: ""
+  graphql: false
   graphql_corsdomain: ""
   graphql_vhosts: ""
-  http: ""
-  http_addr: ""
-  http_api: ""
-  http_corsdomain: ""
+  http: true
+  http_addr: "0.0.0.0"
+  http_api: "admin,debug,web3,eth,txpool,personal,clique,miner,net"
+  http_corsdomain: "*"
   http_port: ""
   http_rpcprefix: ""
-  http_vhosts: ""
+  http_vhosts: "*"
   identity: ""
-  ipcdisable: ""
+  ipcdisable: false
   ipcpath: ""
   jspath: ""
   keystore: ""
   light_egress: ""
   light_ingress: ""
   light_maxpeers: ""
-  light_nopruning: ""
-  light_nosyncserve: ""
+  light_nopruning: false
+  light_nosyncserve: false
   light_serve: ""
-  lightkdf: ""
-  log_json: ""
+  lightkdf: false
+  log_json: false
   maxpeers: ""
   maxpendpeers: ""
-  metrics: ""
+  metrics: false
   metrics_addr: ""
-  metrics_expensive: ""
-  metrics_influxdb: ""
+  metrics_expensive: false
+  metrics_influxdb: false
   metrics_influxdb_database: ""
   metrics_influxdb_endpoint: ""
   metrics_influxdb_password: ""
   metrics_influxdb_tags: ""
   metrics_influxdb_username: ""
   metrics_port: ""
-  mine: ""
+  mine: false
   miner_etherbase: ""
   miner_extradata: ""
   miner_gaslimit: ""
@@ -100,16 +90,16 @@ args:
   nat: ""
   netrestrict: ""
   networkid: ""
-  nocompaction: ""
+  nocompaction: false
   nodekey: ""
   nodekeyhex: ""
-  nodiscover: ""
-  nousb: ""
+  nodiscover: false
+  nousb: false
   override_berlin: ""
   password: ""
   pcscdpath: ""
   port: ""
-  pprof: ""
+  pprof: false
   pprof_addr: ""
   pprof_blockprofilerate: ""
   pprof_cpuprofile: ""
@@ -118,12 +108,18 @@ args:
   preload: ""
   rinkeby: false
   ropsten: false
-  rpc_allowunprotectedtxs: ""
+  rpc: false
+  rpc_allowunprotectedtxs: false
   rpc_gascap: ""
   rpc_txfeecap: ""
+  rpcaddr: ""
+  rpcapi: ""
+  rpccorsdomain: ""
   rpcport: ""
+  rpcvhosts: ""
   signer: ""
-  snapshot: ""
+  snapshot: false
+  syncmode: fast
   trace: ""
   txlookuplimit: ""
   txpool_accountqueue: ""
@@ -133,26 +129,30 @@ args:
   txpool_journal: ""
   txpool_lifetime: ""
   txpool_locals: ""
-  txpool_nolocals: ""
+  txpool_nolocals: false
   txpool_pricebump: ""
   txpool_pricelimit: ""
   txpool_rejournal: ""
   ulc_fraction: ""
-  ulc_onlyannounce: ""
+  ulc_onlyannounce: false
   ulc_servers: ""
   unlock: ""
-  usb: ""
-  v5disc: ""
+  usb: false
+  v5disc: false
+  verbosity: 5
   vm_evm: ""
   vm_ewasm: ""
-  vmdebug: ""
+  vmdebug: false
   vmodule: ""
   whitelist: ""
-  ws_addr: ""
-  ws_api: ""
+  ws: true
+  ws_addr: "0.0.0.0"
+  ws_api: "admin,debug,web3,eth,txpool,personal,clique,miner,net"
   ws_origins: ""
   ws_port: ""
   ws_rpcprefix: ""
+  wsaddr: ""
+  wsapi: ""
   yolov3: false
 ethstats:
   secretName: ""
