@@ -13,6 +13,6 @@ data:
     {{- toPrettyJson .Values.genesis | nindent 4 }}
   {{- end }}
   {{- if .Values.networkId }}
-  networkId: {{ .Values.networkId }}
+  networkId: {{ .Values.networkId | quote }}
   {{- end }}
 {{- end -}}

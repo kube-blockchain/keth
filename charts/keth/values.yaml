@@ -111,6 +111,7 @@ geth:
   ethstats:
     secretName: ""
     webSocketSecret: ""
+  networkId: ""
   nodeSelector: {}
   overrides:
     fullName: ""

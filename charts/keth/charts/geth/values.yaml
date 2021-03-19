@@ -159,8 +159,8 @@ ethstats:
   secretName: ""
   webSocketSecret: ""
 genesis: {}
+networkId: "" 
 nodeSelector: {}
-networkId: ""
 overrides:
   fullName: ""
   name: ""
