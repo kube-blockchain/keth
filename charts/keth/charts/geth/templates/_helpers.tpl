@@ -76,6 +76,13 @@ Return the name of the Secret used to store ethstats secrets
 {{- end -}}
 
 {{/*
+Return the name of the Service for bootnode
+*/}}
+{{- define "geth.bootnodeServiceName" -}}
+{{- printf "%s-keth-bootnode" .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
 Return the name of the Service for ethstats
 */}}
 {{- define "geth.ethstatsServiceName" -}}
