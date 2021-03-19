@@ -19,6 +19,34 @@ spec:
         component: {{ template "geth.fullname" . }}
     spec:
       containers:
+        {{ if .Values.global.bootnode.enabled -}}
+        - args:
+            - -c
+            - |
+              apk add --no-cache curl
+              echo "retrieving bootnodes from $(BOOTNODE_SVC)"
+              while true; do
+                curl -m 5 -s $(BOOTNODE_SVC) | xargs echo -n > /geth/bootnodes
+                if [ -s /geth/bootnodes ]; then
+                  cat /geth/bootnodes
+                fi
+                sleep 15 || break
+              done
+          command:
+            - /bin/sh
+          env:
+            - name: BOOTNODE_SVC
+              value: {{ template "geth.bootnodeServiceName" . }}
+          image: ethereum/client-go:v1.10.1
+          imagePullPolicy: IfNotPresent
+          name: get-bootnodes
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /geth
+              name: data
+        {{- end }}
         - args:
             - -c
             - |
