@@ -98,7 +98,7 @@ geth:
   args:
     http: true
     http_addr: "0.0.0.0"
-    http_api: "admin,debug,web3,eth,txpool,personal,clique,miner,net"
+    http_api: "admin,debug,web3,eth,txpool,personal,ethash,miner,net"
     http_corsdomain: "*"
     http_vhosts: "*"
     nousb: true
@@ -106,7 +106,7 @@ geth:
     verbosity: 3
     ws: true
     ws_addr: "0.0.0.0"
-    ws_api: "admin,debug,web3,eth,txpool,personal,clique,miner,net"
+    ws_api: "admin,debug,web3,eth,txpool,personal,ethash,miner,net"
   affinity: {}
   ethstats:
     secretName: ""
