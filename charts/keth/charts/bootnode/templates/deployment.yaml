@@ -63,8 +63,8 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: status.podIP
-          image: ethereum/client-go:alltools-v1.10.1
-          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           name: bootnode-server
           ports:
             - containerPort: 80
@@ -80,8 +80,8 @@ spec:
         - args:
             - bootnode
             - --genkey=/etc/bootnode/node.key
-          image: ethereum/client-go:alltools-v1.9.15
-          imagePullPolicy: "{{ .Values.imagePullPolicy }}"
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           name: genkey
           resources: {}
           securityContext: {{ toYaml .Values.securityContext | indent 10 }}

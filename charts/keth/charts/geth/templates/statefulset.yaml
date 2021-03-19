@@ -4,19 +4,19 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels: {{ include "geth.labels" . | nindent 4 }}
-    component: {{ template "geth.fullname" . }}
-  name: {{ template "geth.fullname" . }}
+    component: {{ template "keth.fullname" . }}
+  name: {{ template "keth.fullname" . }}
   namespace: {{ $.Release.Namespace }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      component: {{ template "geth.fullname" . }}
-  serviceName: {{ template "geth.fullname" . }}
+      component: {{ template "keth.fullname" . }}
+  serviceName: {{ template "keth.fullname" . }}
   template:
     metadata:
       labels:
-        component: {{ template "geth.fullname" . }}
+        component: {{ template "keth.fullname" . }}
     spec:
       containers:
         {{ if .Values.global.bootnode.enabled -}}
@@ -35,8 +35,8 @@ spec:
           env:
             - name: BOOTNODE_SVC
               value: {{ template "geth.bootnodeServiceName" . }}
-          image: ethereum/client-go:v1.10.1
-          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           name: get-bootnodes
           resources: {}
           terminationMessagePath: /dev/termination-log
@@ -525,8 +525,8 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.namespace
             {{- end }}
-          image: ethereum/client-go:v1.9.15
-          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           name: geth-api
           ports:
             - containerPort: 8545
@@ -552,8 +552,8 @@ spec:
         - args:
             - init
             - /root/.ethereum/genesis/genesis.json
-          image: ethereum/client-go:v1.10.1
-          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           name: init-genesis
           resources: {}
           terminationMessagePath: /dev/termination-log
@@ -568,8 +568,8 @@ spec:
             - geth account import --password /root/.ethereum/account/accountSecret /root/.ethereum/account/accountPrivateKey || true
           command:
             - /bin/sh
-          image: ethereum/client-go:v1.10.1
-          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           name: init-account
           resources: {}
           terminationMessagePath: /dev/termination-log
@@ -580,14 +580,21 @@ spec:
             - mountPath: /root/.ethereum/account
               name: account
               readOnly: true
+        {{- if eq "string" (printf "%T" .Values.extraInitContainers) }}
+        {{ .Values.extraInitContainers . | indent 6 }}
+        {{- else }}
+        {{ toYaml .Values.extraInitContainers | indent 6 }}
+        {{- end }}
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: {}
+      {{- if .Values.podSecurityContext }}
+      securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- end }}
       terminationGracePeriodSeconds: 10
       volumes:
         - configMap:
             defaultMode: 420
-            name: {{ template "geth.fullname" . }}
+            name: {{ template "keth.fullname" . }}
           name: config
         - name: account
           secret:

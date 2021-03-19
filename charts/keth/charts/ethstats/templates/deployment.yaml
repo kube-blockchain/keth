@@ -34,8 +34,8 @@ spec:
                 secretKeyRef:
                   key: WS_SECRET
                   name: {{ template "ethstats.secretName" . }}
-          image: ethereumex/eth-stats-dashboard:latest
-          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           name: ethstats
           ports:
             - containerPort: 3000
@@ -45,6 +45,14 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
+      {{- if .Values.extraInitContainers }}
+      initContainers:
+        {{- if eq "string" (printf "%T" .Values.extraInitContainers) }}
+        {{ .Values.extraInitContainers . | indent 6 }}
+        {{- else }}
+        {{ toYaml .Values.extraInitContainers | indent 6 }}
+        {{- end }}
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector: {{ tpl (toYaml .) $ | nindent 8 }}
       {{- end }}

@@ -6,7 +6,7 @@ image:
   pullSecrets: []
   registry: docker.io
   repository: ethereum/client-go
-  tag: alltools-v1.9.15
+  tag: alltools-v1.10.1
 ingress:
   enabled: false
   annotations: {}

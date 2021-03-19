@@ -3,14 +3,14 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{ template "geth.fullname" . }}-psp
+  name: {{ template "keth.fullname" . }}-psp
   labels: {{ include "geth.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ template "geth.fullname" . }}-psp
+  name: {{ template "keth.fullname" . }}-psp
 subjects:
   - kind: ServiceAccount
-    name: {{ template "geth.fullname" . }}
+    name: {{ template "keth.fullname" . }}
     namespace: {{ .Release.Namespace }}
 {{- end }}

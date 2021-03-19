@@ -158,7 +158,22 @@ args:
 ethstats:
   secretName: ""
   webSocketSecret: ""
+extraInitContainers: ""
 genesis: {}
+image:
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+  registry: docker.io
+  repository: ethereum/client-go
+  tag: v1.10.1
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: example.local
+      paths:
+        - path: /
+  tls: []
 networkId: "" 
 nodeSelector: {}
 overrides:
@@ -172,7 +187,7 @@ persistence:
 podAnnotations: {}
 podLabels: {}
 podSecurityContext:
-  runAsNonRoot: false
+  fsGroup: 1000
 priorityClassName: ""
 prometheus:
   service:
@@ -188,6 +203,12 @@ rbac:
   serviceAccountName: default
 replicaCount: 1
 resources: {}
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  runAsNonRoot: true
+  runAsUser: 1000
 serviceAccount:
   annotations: {}
   create: true

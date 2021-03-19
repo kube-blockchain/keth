@@ -3,6 +3,21 @@ affinity: {}
 credentials:
   secretName: ""
   webSocketSecret: ""
+extraInitContainers: ""
+image:
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+  registry: docker.io
+  repository: ethereumex/eth-stats-dashboard
+  tag: latest
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: example.local
+      paths:
+        - path: /
+  tls: []
 nodeSelector: {}
 overrides:
   fullName: ""
@@ -10,7 +25,7 @@ overrides:
 podAnnotations: {}
 podLabels: {}
 podSecurityContext:
-  runAsNonRoot: false
+  fsGroup: 1000
 priorityClassName: ""
 prometheus:
   service:
@@ -26,6 +41,12 @@ rbac:
   serviceAccountName: default
 replicaCount: 1
 resources: {}
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  runAsNonRoot: true
+  runAsUser: 1000
 serviceAccount:
   annotations: {}
   create: true

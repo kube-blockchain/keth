@@ -19,7 +19,7 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- if contains $name .Release.Name -}}
 {{- .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-keth-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
@@ -36,8 +36,8 @@ Create the name of the service account to use
 */}}
 {{- define "keth.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create -}}
-    {{ default (include "keth.fullname" .) .Values.serviceAccount.name }}
+{{ default (include "keth.fullname" .) .Values.serviceAccount.name }}
 {{- else -}}
-    {{ default "default" .Values.serviceAccount.name }}
+{{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
 {{- end -}}

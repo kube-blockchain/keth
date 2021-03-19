@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   labels: {{ include "geth.labels" . | nindent 4 }}
     app: geth
-  name: {{ template "geth.fullname" . }}
+  name: {{ template "keth.fullname" . }}
   namespace: {{ $.Release.Namespace }}
 data:
   {{- if .Values.genesis }}
