@@ -30,7 +30,8 @@ spec:
                 if [ -s /geth/bootnodes ]; then
                   cat /geth/bootnodes
                 fi
-                sleep 15 || break
+                echo "---"
+                sleep 2
               done
           command:
             - /bin/sh
