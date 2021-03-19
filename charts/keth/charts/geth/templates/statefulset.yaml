@@ -26,11 +26,11 @@ spec:
               apk add --no-cache curl
               echo "retrieving bootnodes from $(BOOTNODE_SVC)"
               while true; do
-                curl -m 5 -s $(BOOTNODE_SVC) | xargs echo -n > /geth/bootnodes
-                if [ -s /geth/bootnodes ]; then
-                  cat /geth/bootnodes
-                fi
-                echo "---"
+                BOOTNODE="$(curl -m 5 -s $(BOOTNODE_SVC) | xargs echo -n)"
+                BOOTNODE_FILE="/geth/bootnodes"
+                grep -qxF "${BOOTNODE}" "${BOOTNODE_FILE}" || echo "${BOOTNODE}" >> "${BOOTNODE_FILE}"
+                echo "${BOOTNODE_FILE} contents:"
+                cat "${BOOTNODE_FILE}" && echo
                 sleep 2
               done
           command:
