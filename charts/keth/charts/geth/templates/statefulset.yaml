@@ -591,9 +591,11 @@ spec:
               CNT=0
               echo "retrieving bootnodes from $(BOOTNODE_SVC)"
               while [ $CNT -le 90 ]; do
-                curl -m 5 -s $(BOOTNODE_SVC) | xargs echo -n > /geth/bootnodes
-                if [ -s /geth/bootnodes ]; then
-                  cat /geth/bootnodes
+                BOOTNODE="$(curl -m 5 -s "${BOOTNODE_SVC}" | xargs echo -n)"
+                BOOTNODE_FILE="/geth/bootnodes"
+                grep -qxF "${BOOTNODE}" "${BOOTNODE_FILE}" || echo "${BOOTNODE}" >> "${BOOTNODE_FILE}"
+                if [ -s "${BOOTNODE_FILE}" ]; then
+                  cat "${BOOTNODE_FILE}"
                   exit 0
                 fi
                 echo "no bootnodes found. retrying $CNT..."
