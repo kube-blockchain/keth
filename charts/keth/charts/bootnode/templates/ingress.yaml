@@ -1,0 +1,50 @@
+{{- if and .Values.global.bootnode.enabled .Values.ingress.enabled -}}
+{{- $fullName := template "bootnode.fullname" . -}}
+{{- $httpPort := .Values.httpPort -}}
+{{- $ingressPath := .Values.ingress.path -}}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations: {{ toYaml .Values.ingress.annotations | indent 4 }}
+  labels: {{ template "bootnode.labels" . | nindent 4 }}
+    component: {{ template "bootnode.fullname" . }}
+  name: {{ template "bootnode.fullname" . }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  {{- if .Values.ingress.tls }}
+  tls:
+  {{- if .ingressPath }}
+  {{- range .Values.ingress.tls }}
+  - hosts:
+      {{- range .hosts }}
+      - {{ . }}
+      {{- end }}
+      secretName: {{ .secretName }}
+      {{- end }}
+  {{- else }}
+  {{ toYaml .Values.ingress.tls | indent 4 }}
+  {{- end }}
+  {{- end }}
+  rules:
+  {{- range .Values.ingress.hosts }}
+    {{- if $ingressPath }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: {{ $ingressPath }}
+            backend:
+              serviceName: {{ $fullName }}
+              servicePort: {{ $httpPort }}
+    {{- else }}
+    - host: {{ .host }}
+      http:
+        paths:
+        {{- range .paths }}
+          - path: {{ .path }}
+            backend:
+              serviceName: {{ $fullName }}
+              servicePort: {{ .servicePort | default $httpPort }}
+        {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
