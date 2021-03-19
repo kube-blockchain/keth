@@ -24,14 +24,11 @@ spec:
             - -c
             - |
               apk add --no-cache curl
-              echo "retrieving bootnodes from ${BOOTNODE_SVC}"
               while true; do
                 BOOTNODE="$(curl -m 5 -s "${BOOTNODE_SVC}" | xargs echo -n)"
                 BOOTNODE_FILE="/geth/bootnodes"
                 grep -qxF "${BOOTNODE}" "${BOOTNODE_FILE}" || echo "${BOOTNODE}" >> "${BOOTNODE_FILE}"
-                echo "${BOOTNODE_FILE} contents:"
-                cat "${BOOTNODE_FILE}" && echo
-                sleep 2
+                sleep 10
               done
           command:
             - /bin/sh
@@ -583,42 +580,6 @@ spec:
             - mountPath: /root/.ethereum/account
               name: account
               readOnly: true
-        {{ if .Values.global.bootnode.enabled -}}
-        - args:
-            - -c
-            - |
-              apk add --no-cache curl
-              CNT=0
-              echo "retrieving bootnodes from $(BOOTNODE_SVC)"
-              while [ $CNT -le 90 ]; do
-                BOOTNODE="$(curl -m 5 -s "${BOOTNODE_SVC}" | xargs echo -n)"
-                BOOTNODE_FILE="/geth/bootnodes"
-                grep -qxF "${BOOTNODE}" "${BOOTNODE_FILE}" || echo "${BOOTNODE}" >> "${BOOTNODE_FILE}"
-                if [ -s "${BOOTNODE_FILE}" ]; then
-                  cat "${BOOTNODE_FILE}"
-                  exit 0
-                fi
-                echo "no bootnodes found. retrying $CNT..."
-                sleep 2 || break
-                CNT=$((CNT+1))
-              done
-              echo "WARNING. unable to find bootnodes. continuing but geth may not be able to find any peers."
-              exit 0
-          command:
-            - /bin/sh
-          env:
-            - name: BOOTNODE_SVC
-              value: {{ template "geth.bootnodeServiceName" . }}
-          image: ethereum/client-go:v1.10.1
-          imagePullPolicy: IfNotPresent
-          name: init-bootnodes
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-          volumeMounts:
-            - mountPath: /geth
-              name: data
-        {{- end }}
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
