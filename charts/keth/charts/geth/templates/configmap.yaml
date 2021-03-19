@@ -11,6 +11,8 @@ data:
   {{- if .Values.genesis }}
   genesis.json: |-
     {{- toPrettyJson .Values.genesis | nindent 4 }}
+  {{- else }}
+  genesis.json: ''
   {{- end }}
   {{- if .Values.networkId }}
   networkId: {{ .Values.networkId | quote }}
