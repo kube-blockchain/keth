@@ -27,11 +27,11 @@ jobs:
         uses: helm/kind-action@v1.0.0-alpha.3
         with:
           install_local_path_provisioner: true
-      - name: Install Helm
+      - name: Install the Helm chart with the default values
         uses: azure/setup-helm@v1
         with:
           version: v3.5.3
-          command: helm version
+          command: helm install test charts/keth --create-namespace --debug --namespace keth
   release:
     needs: lint-test
     runs-on: ubuntu-latest
