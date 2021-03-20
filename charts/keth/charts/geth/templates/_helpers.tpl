@@ -1,5 +1,22 @@
 {{/* vim: set filetype=mustache: */}}
 
+{{/*
+Create a default fully qualified app name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "geth.fullname" -}}
+{{- if .Values.overrides.fullName -}}
+{{- .Values.overrides.fullName | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.overrides.name -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-geth-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
 {{/* Helm required labels */}}
 {{- define "geth.labels" -}}
 app.kubernetes.io/instance: {{ .Release.Name }}
@@ -7,7 +24,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 app.kubernetes.io/name: {{ template "geth.name" . }}
 helm.sh/chart: {{ template "geth.chart" . }}
 {{- if .Values.podLabels }}
-{{ toYaml .Values.podLabels }}
+{{ .Values.podLabels | toYaml }}
 {{- end }}
 {{- end -}}
 
@@ -31,7 +48,7 @@ Create the name of the service account to use
 */}}
 {{- define "geth.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create -}}
-{{ default (include "keth.fullname" .) .Values.serviceAccount.name }}
+{{ default (include "geth.fullname" .) .Values.serviceAccount.name }}
 {{- else -}}
 {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
@@ -44,7 +61,7 @@ Return the name of the Secret used to store credentials
 {{- if .Values.account.secretName }}
 {{- .Values.account.secretName }}
 {{- else -}}
-{{- template "keth.fullname" . }}
+{{- template "geth.fullname" . }}
 {{- end -}}
 {{- end -}}
 
@@ -55,7 +72,7 @@ Return the name of the Secret used to store ethstats secrets
 {{- if .Values.ethstats.secretName }}
 {{- .Values.ethstats.secretName }}
 {{- else -}}
-{{- printf "%s-keth-ethstats" .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-geth-ethstats" .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
 
@@ -63,12 +80,12 @@ Return the name of the Secret used to store ethstats secrets
 Return the name of the Service for bootnode
 */}}
 {{- define "geth.bootnodeServiceName" -}}
-{{- printf "%s-keth-bootnode" .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-geth-bootnode" .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Return the name of the Service for ethstats
 */}}
 {{- define "geth.ethstatsServiceName" -}}
-{{- printf "%s-keth-ethstats" .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-geth-ethstats" .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}

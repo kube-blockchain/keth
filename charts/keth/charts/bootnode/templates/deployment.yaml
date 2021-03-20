@@ -3,7 +3,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels: {{ include "bootnode.labels" . | nindent 4 }}
+  labels:
+    {{ include "bootnode.labels" . | indent 4 | trim }}
     component: {{ template "bootnode.fullname" . }}
   name: {{ template "bootnode.fullname" . }}
   namespace: {{ $.Release.Namespace }}
@@ -13,7 +14,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      component: {{ template "ethstats.fullname" . }}
+      component: {{ template "bootnode.fullname" . }}
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -24,9 +25,8 @@ spec:
       labels:
         component: {{ template "bootnode.fullname" . }}
     spec:
-      {{- with .Values.affinity }}
-      affinity: {{ tpl (toYaml .) $ | nindent 8 }}
-      {{- end }}
+      affinity:
+        {{ .Values.affinity | toYaml | indent 8 | trim }}
       containers:
         - args:
             - -c
@@ -84,27 +84,23 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           name: genkey
           resources: {}
-          securityContext: {{ toYaml .Values.securityContext | indent 10 }}
+          securityContext:
+            {{ .Values.securityContext | toYaml | indent 10 | trim}}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
             - mountPath: /etc/bootnode
               name: data
         {{- if .Values.extraInitContainers }}
-        # Currently some extra blocks accept strings
-        # to continue with backwards compatibility this is being kept
-        # whilst also allowing for yaml to be specified too.
-        {{- if eq "string" (printf "%T" .Values.extraInitContainers) }}
-        {{ .Values.extraInitContainers . | indent 6 }}
-        {{- else }}
-        {{ toYaml .Values.extraInitContainers | indent 6 }}
-        {{- end }}
+        {{ .Values.extraInitContainers | toYaml | indent 6 | trim }}
         {{- end }}
       {{- if .Values.imagePullSecrets }}
-      imagePullSecrets: {{ toYaml .Values.imagePullSecrets | indent 8 }}
+      imagePullSecrets:
+        {{ .Values.imagePullSecrets | toYaml | indent 8 | trim }}
       {{- end }}
       {{- if .Values.nodeSelector }}
-      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      nodeSelector:
+        {{ .Values.nodeSelector | toYaml | indent 8 | trim }}
       {{- end }}
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName | quote }}
@@ -112,7 +108,8 @@ spec:
       restartPolicy: Always
       schedulerName: default-scheduler
       {{- if .Values.podSecurityContext }}
-      securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
+      securityContext:
+        {{ .Values.podSecurityContext | toYaml | indent 8 | trim }}
       {{- end }}
       {{- if .Values.rbac.create }}
       serviceAccount: {{ template "bootnode.fullname" . }}
@@ -120,9 +117,8 @@ spec:
       serviceAccount: {{ .Values.rbac.serviceAccountName | quote }}
       {{- end }}
       terminationGracePeriodSeconds: 30
-      {{- with .Values.tolerations }}
-      tolerations: {{ tpl (toYaml .) $ | nindent 8 }}
-      {{- end }}
+      tolerations:
+        {{ .Values.tolerations | toYaml | indent 8 | trim }}
       volumes:
         - emptyDir: {}
           name: data

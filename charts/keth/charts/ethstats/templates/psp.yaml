@@ -4,7 +4,8 @@ apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
   name: {{ template "ethstats.fullname" . }}
-  labels: {{ include "ethstats.labels" . | nindent 4 }}
+  labels:
+    {{ include "ethstats.labels" . | indent 4  | trim}}
 spec:
   privileged: false
   allowPrivilegeEscalation: false

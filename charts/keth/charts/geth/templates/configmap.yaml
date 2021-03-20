@@ -3,16 +3,17 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  labels: {{ include "geth.labels" . | nindent 4 }}
+  labels:
+    {{ include "geth.labels" . | indent 4  | trim}}
     app: geth
-  name: {{ template "keth.fullname" . }}
+  name: {{ template "geth.fullname" . }}
   namespace: {{ $.Release.Namespace }}
 data:
   {{- if .Values.genesis }}
   genesis.json: |-
-    {{- toPrettyJson .Values.genesis | nindent 4 }}
+    {{ .Values.genesis | toPrettyJson | indent 4 | trim }}
   {{- else }}
-  genesis.json: ''
+  genesis.json: ""
   {{- end }}
   {{- if .Values.networkId }}
   networkId: {{ .Values.networkId | quote }}

@@ -3,8 +3,9 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: {{ template "keth.fullname" . }}
-  labels: {{ include "geth.labels" . | nindent 4 }}
+  name: {{ template "geth.fullname" . }}
+  labels:
+    {{ include "geth.labels" . | indent 4  | trim}}
 spec:
   privileged: false
   allowPrivilegeEscalation: false

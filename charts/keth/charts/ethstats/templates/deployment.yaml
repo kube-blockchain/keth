@@ -3,7 +3,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels: {{ include "ethstats.labels" . | nindent 4 }}
+  labels:
+    {{ include "ethstats.labels" . | indent 4 | trim }}
     component: {{ template "ethstats.fullname" . }}
   name: {{ template "ethstats.fullname" . }}
   namespace: {{ $.Release.Namespace }}
@@ -24,9 +25,8 @@ spec:
       labels:
         component: {{ template "ethstats.fullname" . }}
     spec:
-      {{- with .Values.affinity }}
-      affinity: {{ tpl (toYaml .) $ | nindent 8 }}
-      {{- end }}
+      affinity:
+        {{ .Values.affinity | toYaml | indent 8 | trim }}
       containers:
         - env:
             - name: WS_SECRET
@@ -46,18 +46,11 @@ spec:
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       {{- if .Values.extraInitContainers }}
-      # Currently some extra blocks accept strings
-      # to continue with backwards compatibility this is being kept
-      # whilst also allowing for yaml to be specified too.
       initContainers:
-        {{- if eq "string" (printf "%T" .Values.extraInitContainers) }}
-        {{ .Values.extraInitContainers . | indent 6 }}
-        {{- else }}
-        {{ toYaml .Values.extraInitContainers | indent 6 }}
-        {{- end }}
+        {{ .Values.extraInitContainers | toYaml | indent 6 | trim }}
       {{- end }}
       {{- with .Values.nodeSelector }}
-      nodeSelector: {{ tpl (toYaml .) $ | nindent 8 }}
+      nodeSelector: {{ tpl (toYaml .) $ | indent 8 }}
       {{- end }}
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName | quote }}
@@ -65,7 +58,8 @@ spec:
       restartPolicy: Always
       schedulerName: default-scheduler
       {{- if .Values.podSecurityContext }}
-      securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
+      securityContext:
+        {{ .Values.podSecurityContext | toYaml | indent 8 | trim }}
       {{- end }}
       {{- if .Values.rbac.create }}
       serviceAccountName: {{ template "ethstats.fullname" . }}
@@ -73,7 +67,6 @@ spec:
       serviceAccountName: {{ .Values.rbac.serviceAccountName | quote }}
       {{- end }}
       terminationGracePeriodSeconds: 30
-      {{- with .Values.tolerations }}
-      tolerations: {{ tpl (toYaml .) $ | nindent 8 }}
-      {{- end }}
+      tolerations:
+        {{ .Values.tolerations | toYaml | indent 8 | trim }}
 {{- end -}}

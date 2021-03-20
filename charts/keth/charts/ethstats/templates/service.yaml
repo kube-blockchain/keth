@@ -3,7 +3,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels: {{ include "ethstats.labels" . | nindent 4 }}
+  labels:
+    {{ include "ethstats.labels" . | indent 4  | trim}}
     component: {{ template "ethstats.fullname" . }}
   name: {{ template "ethstats.fullname" . }}
   namespace: {{ $.Release.Namespace }}

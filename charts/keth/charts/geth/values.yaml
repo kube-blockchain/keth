@@ -206,7 +206,7 @@ resources: {}
 securityContext:
   capabilities:
     drop:
-    - ALL
+      - ALL
   runAsNonRoot: true
   runAsUser: 1000
 serviceAccount:
@@ -214,3 +214,11 @@ serviceAccount:
   create: true
   name:
 tolerations: []
+
+global:
+  bootnode:
+    enabled: true
+  ethstats:
+    enabled: true
+  geth:
+    enabled: true

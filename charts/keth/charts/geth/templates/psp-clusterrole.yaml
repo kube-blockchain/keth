@@ -3,12 +3,13 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ template "keth.fullname" . }}-psp
-  labels: {{ include "geth.labels" . | nindent 4 }}
+  name: {{ template "geth.fullname" . }}-psp
+  labels:
+    {{ include "geth.labels" . | indent 4  | trim}}
 rules:
 - apiGroups: ['extensions']
   resources: ['podsecuritypolicies']
   verbs:     ['use']
   resourceNames:
-  - {{ template "keth.fullname" . }}
+  - {{ template "geth.fullname" . }}
 {{- end }}

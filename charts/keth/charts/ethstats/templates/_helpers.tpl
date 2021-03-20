@@ -7,7 +7,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 app.kubernetes.io/name: {{ template "ethstats.name" . }}
 helm.sh/chart: {{ template "ethstats.chart" . }}
 {{- if .Values.podLabels }}
-{{ toYaml .Values.podLabels }}
+{{ .Values.podLabels | toYaml }}
 {{- end }}
 {{- end -}}
 

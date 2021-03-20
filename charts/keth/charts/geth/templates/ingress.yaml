@@ -5,10 +5,11 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  annotations: {{ toYaml .Values.ingress.annotations | indent 4 }}
-  labels: {{ template "geth.labels" . | nindent 4 }}
-    component: {{ template "keth.fullname" . }}
-  name: {{ template "keth.fullname" . }}
+  annotations: {{ .Values.ingress.annotations | toYaml | indent 4 }}
+  labels:
+    {{ include "geth.labels" . | indent 4  | trim}}
+    component: {{ template "geth.fullname" . }}
+  name: {{ template "geth.fullname" . }}
   namespace: {{ $.Release.Namespace }}
 spec:
   {{- if .Values.ingress.tls }}
@@ -22,7 +23,7 @@ spec:
       secretName: {{ .secretName }}
       {{- end }}
   {{- else }}
-  {{ toYaml .Values.ingress.tls | indent 4 }}
+  {{ .Values.ingress.tls | toYaml | indent 4 }}
   {{- end }}
   {{- end }}
   rules:
