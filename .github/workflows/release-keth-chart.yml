@@ -27,12 +27,23 @@ jobs:
         uses: helm/kind-action@v1.0.0-alpha.3
         with:
           install_local_path_provisioner: true
-      - name: Install the Helm chart with the default values
+      - name: Lint the Helm chart
         run: |
-          helm install test charts/keth \
+          helm lint charts/keth \
+            --debug \
+            --with-subcharts
+      - name: Install the Helm chart with default values
+        run: |
+          helm install test-release charts/keth \
             --create-namespace \
             --debug \
             --namespace keth
+      - name: Test the Helm chart release
+        run: |
+          helm test test-release \
+            --debug \
+            --namespace keth \
+            --with-subcharts
   release:
     needs: lint-test
     runs-on: ubuntu-latest
