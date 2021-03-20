@@ -42,8 +42,6 @@ bootnode:
     annotations: {}
     create: true
     name:
-  tests:
-    enabled: false
   tolerations: []
 
 ethstats:
@@ -88,8 +86,6 @@ ethstats:
     enabled: false
     interval: "30s"
     namespace:
-  tests:
-    enabled: false
   tolerations: []
 
 geth:
@@ -145,8 +141,6 @@ geth:
     enabled: false
     interval: "30s"
     namespace:
-  tests:
-    enabled: false
   tolerations: []
 
 global:

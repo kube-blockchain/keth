@@ -219,8 +219,6 @@ serviceAccount:
   annotations: {}
   create: true
   name:
-tests:
-  enabled: false
 tolerations: []
 
 global:
