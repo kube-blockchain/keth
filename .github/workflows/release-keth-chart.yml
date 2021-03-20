@@ -12,21 +12,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
-      # - name: Run chart-testing (lint)
-      #   id: lint
-      #   uses: HexF/chart-testing-action@v3.0.0
-      #   with:
-      #     command: lint
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.5.3
       - name: Create kind cluster
         uses: helm/kind-action@v1.0.0-alpha.3
         with:
           install_local_path_provisioner: true
         if: steps.lint.outputs.changed == 'true'
-      - name: Run chart-testing (install)
-        uses: HexF/chart-testing-action@v3.0.0
-        with:
-          command: install
+      # - name: Run chart-testing (install)
+      #   uses: HexF/chart-testing-action@v3.0.0
+      #   with:
+      #     command: install
   release:
     needs: lint-test
     runs-on: ubuntu-latest
