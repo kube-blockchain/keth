@@ -1,7 +1,7 @@
 dependencies:
   - name: bootnode
-    version: 0.0.180
+    version:  0.0.181
   - name: ethstats
-    version: 0.0.180
+    version:  0.0.181
   - name: geth
-    version: 0.0.180
+    version:  0.0.181

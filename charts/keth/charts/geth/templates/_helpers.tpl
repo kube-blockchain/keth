@@ -12,7 +12,7 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- if contains $name .Release.Name -}}
 {{- .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- printf "%s-geth-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-keth-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
@@ -72,7 +72,7 @@ Return the name of the Secret used to store ethstats secrets
 {{- if .Values.ethstats.secretName }}
 {{- .Values.ethstats.secretName }}
 {{- else -}}
-{{- printf "%s-geth-ethstats" .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-keth-ethstats" .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
 
@@ -80,12 +80,12 @@ Return the name of the Secret used to store ethstats secrets
 Return the name of the Service for bootnode
 */}}
 {{- define "geth.bootnodeServiceName" -}}
-{{- printf "%s-geth-bootnode" .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-keth-bootnode" .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Return the name of the Service for ethstats
 */}}
 {{- define "geth.ethstatsServiceName" -}}
-{{- printf "%s-geth-ethstats" .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-keth-ethstats" .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}

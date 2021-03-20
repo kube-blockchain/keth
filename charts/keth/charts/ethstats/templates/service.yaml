@@ -3,17 +3,29 @@
 apiVersion: v1
 kind: Service
 metadata:
+  {{- if .Values.service.labels }}
+  annotations:
+    {{ .Values.service.annotations | toYaml | indent 4 | trim }}
+  {{- end }}
   labels:
-    {{ include "ethstats.labels" . | indent 4  | trim}}
+    {{ include "ethstats.labels" . | indent 4 | trim }}
+    {{- if .Values.service.labels }}
+    {{ .Values.service.labels | toYaml | indent 4 | trim }}
+    {{- end }}
     component: {{ template "ethstats.fullname" . }}
   name: {{ template "ethstats.fullname" . }}
   namespace: {{ $.Release.Namespace }}
 spec:
+  {{- if .Values.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
+  {{- end }}
+  loadBalancerSourceRanges:
+    {{ .Values.service.loadBalancerSourceRanges | toYaml | indent 4 | trim }}
   ports:
     - port: 80
       protocol: TCP
       targetPort: http
   selector:
     component: {{ template "ethstats.fullname" . }}
-  type: ClusterIP
+  type: {{ .Values.service.type }}
 {{- end -}}

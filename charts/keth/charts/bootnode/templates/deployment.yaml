@@ -84,8 +84,6 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           name: genkey
           resources: {}
-          securityContext:
-            {{ .Values.securityContext | toYaml | indent 10 | trim}}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:

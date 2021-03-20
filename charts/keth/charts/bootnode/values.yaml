@@ -44,10 +44,18 @@ securityContext:
       - ALL
   runAsNonRoot: true
   runAsUser: 1000
+service:
+  annotations: {}
+  labels: {}
+  loadBalancerIP: ""
+  loadBalancerSourceRanges: []
+  type: ClusterIP
 serviceAccount:
   annotations: {}
   create: true
   name:
+tests:
+  enabled: false
 tolerations: []
 
 global:

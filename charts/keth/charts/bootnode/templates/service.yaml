@@ -3,12 +3,24 @@
 apiVersion: v1
 kind: Service
 metadata:
+  {{- if .Values.service.labels }}
+  annotations:
+    {{ .Values.service.annotations | toYaml | indent 4 | trim }}
+  {{- end }}
   labels:
     {{ include "bootnode.labels" . | indent 4 | trim }}
+    {{- if .Values.service.labels }}
+    {{ .Values.service.labels | toYaml | indent 4 | trim }}
+    {{- end }}
     component: {{ template "bootnode.fullname" . }}
   name: {{ template "bootnode.fullname" . }}
   namespace: {{ $.Release.Namespace }}
 spec:
+  {{- if .Values.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
+  {{- end }}
+  loadBalancerSourceRanges:
+    {{ .Values.service.loadBalancerSourceRanges | toYaml | indent 4 | trim }}
   ports:
     - name: discovery
       port: 30301
@@ -20,6 +32,5 @@ spec:
       targetPort: 80
   selector:
     component: {{ template "bootnode.fullname" . }}
-  sessionAffinity: None
-  type: ClusterIP
+  type: {{ .Values.service.type }}
 {{- end -}}
