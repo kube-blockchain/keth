@@ -28,9 +28,6 @@ jobs:
         with:
           install_local_path_provisioner: true
       - name: Install the Helm chart with the default values
-        uses: azure/setup-helm@v1
-        with:
-          version: v3.5.3
         run: |
           helm install test charts/keth \
             --create-namespace \
