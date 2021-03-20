@@ -4,11 +4,11 @@ on:
     branches:
       - main
     paths:
-      - images/keth-bootnode-test/**
+      - images/keth-helm-test-ethstats/**
     tags:
       - v*
 env:
-  IMAGE_NAME: keth-bootnode-test
+  IMAGE_NAME: keth-helm-test-ethstats
 jobs:
   push:
     runs-on: ubuntu-latest
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Test and build image
         run: |
-          docker build images/keth-bootnode-test/. --tag "${IMAGE_NAME}"
+          docker build images/keth-helm-test-ethstats/. --tag "${IMAGE_NAME}"
       - name: Log into the container registry
         run: |
           echo "${{ secrets.CR_PAT }}" |\
@@ -31,4 +31,3 @@ jobs:
           [ "$VERSION" == "main" ] && VERSION=latest
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:lastest
