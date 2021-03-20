@@ -5,13 +5,13 @@ metadata:
   annotations:
     "helm.sh/hook": test
   labels:
-    {{ include "bootnode.labels" . | indent 4  | trim}}
-  name: {{ template "bootnode.fullname" . }}-test-noop
+    {{ include "keth.labels" . | indent 4  | trim}}
+  name: {{ template "keth.fullname" . }}-test-noop
   namespace: {{ $.Release.Namespace }}
 spec:
   containers:
     - 
-      image: alpine:latest
+      image: ghcr.io/kube-blockchain/keth-helm-test:latest
       imagePullPolicy: IfNotPresent
       name: test
       securityContext:
