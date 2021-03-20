@@ -31,7 +31,11 @@ jobs:
         uses: azure/setup-helm@v1
         with:
           version: v3.5.3
-          command: helm install test charts/keth --create-namespace --debug --namespace keth
+        run: |
+          helm install test charts/keth \
+            --create-namespace \
+            --debug \
+            --namespace keth
   release:
     needs: lint-test
     runs-on: ubuntu-latest
