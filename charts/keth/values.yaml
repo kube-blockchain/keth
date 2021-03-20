@@ -10,6 +10,8 @@ prometheus:
 overrides:
   fullName: ""
   name: ""
+tests:
+  enabled: false
 
 bootnode:
   affinity: {}
