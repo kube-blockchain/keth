@@ -25,7 +25,7 @@ jobs:
           python-version: 3.7
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2.0.1
-        
+
       # - name: Run chart-testing (list-changed)
       #   id: list-changed
       #   run: |
@@ -41,6 +41,7 @@ jobs:
       # - name: Run chart-testing (install)
       #   run: ct install
   release:
+    needs: lint-test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
