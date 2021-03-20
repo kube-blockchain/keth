@@ -44,7 +44,7 @@ resources: {}
 securityContext:
   capabilities:
     drop:
-      - ALL
+    - ALL
   runAsNonRoot: true
   runAsUser: 1000
 serviceAccount:
