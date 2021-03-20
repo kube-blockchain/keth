@@ -42,8 +42,7 @@ jobs:
         run: |
           helm test test-release \
             --debug \
-            --namespace keth \
-            --with-subcharts
+            --namespace keth
   release:
     needs: lint-test
     runs-on: ubuntu-latest
