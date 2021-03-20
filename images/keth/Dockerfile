@@ -1,2 +1,1 @@
-FROM alpine:latest
-
+FROM ethereum/client-go:v1.10.1
