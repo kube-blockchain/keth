@@ -90,10 +90,15 @@ spec:
           volumeMounts:
             - mountPath: /etc/bootnode
               name: data
+        {{- if .Values.extraInitContainers }}
+        # Currently some extra blocks accept strings
+        # to continue with backwards compatibility this is being kept
+        # whilst also allowing for yaml to be specified too.
         {{- if eq "string" (printf "%T" .Values.extraInitContainers) }}
         {{ .Values.extraInitContainers . | indent 6 }}
         {{- else }}
         {{ toYaml .Values.extraInitContainers | indent 6 }}
+        {{- end }}
         {{- end }}
       {{- if .Values.imagePullSecrets }}
       imagePullSecrets: {{ toYaml .Values.imagePullSecrets | indent 8 }}
