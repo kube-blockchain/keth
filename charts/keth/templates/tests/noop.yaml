@@ -10,16 +10,14 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   containers:
-    - 
+    - command:
+        - /bin/sh
+        - -ec
+        - test-release
       image: ghcr.io/kube-blockchain/keth-helm-test:latest
       imagePullPolicy: IfNotPresent
       name: test
       securityContext:
         runAsUser: 1000
-      command:
-        - /bin/sh
-        - -ec
-        - |
-          exit 0
   restartPolicy: Never
 {{- end }}
