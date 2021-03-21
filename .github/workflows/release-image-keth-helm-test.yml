@@ -27,7 +27,15 @@ jobs:
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-          [ "$VERSION" == "main" ] && VERSION=latest
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+
+          if [[ "${{ github.ref }}" == "refs/tags/"* ]]; then
+            VERSION=$(echo $VERSION | sed -e 's/^v//')
+          fi
+
+          if [[ "$VERSION" != "main" ]]; then
+            docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+            docker push $IMAGE_ID:$VERSION
+          fi
+
+          docker tag $IMAGE_NAME $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
