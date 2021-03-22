@@ -13,7 +13,7 @@ spec:
     - command:
         - /bin/sh
         - -ec
-        - /root/scripts/test-release
+        - test-release
       image: ghcr.io/kube-blockchain/keth-helm-test:latest
       imagePullPolicy: IfNotPresent
       name: test

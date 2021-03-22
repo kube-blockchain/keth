@@ -19,8 +19,10 @@ spec:
   {{- if .Values.service.loadBalancerIP }}
   loadBalancerIP: {{ .Values.service.loadBalancerIP }}
   {{- end }}
+  {{- if .Values.service.loadBalancerSourceRanges }}
   loadBalancerSourceRanges:
     {{ .Values.service.loadBalancerSourceRanges | toYaml | indent 4 | trim }}
+  {{- end }}
   ports:
     - name: discovery
       port: 30301

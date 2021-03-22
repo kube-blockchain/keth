@@ -18,6 +18,8 @@ ingress:
       paths:
         - path: /
   tls: []
+init:
+  resources: {}
 nodeSelector: {}
 overrides:
   fullName: ""
@@ -41,6 +43,7 @@ rbac:
   serviceAccountName: default
 replicaCount: 1
 resources: {}
+schedulerName: default-scheduler
 securityContext:
   capabilities:
     drop:

@@ -10,9 +10,8 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - services
+  - namespaces
   - pods
-  - nodes
   verbs:
   - get
   - list
@@ -22,14 +21,6 @@ rules:
   - networking.k8s.io
   resources:
   - ingresses
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - networking.istio.io
-  resources:
-  - gateways
   verbs:
   - get
   - list

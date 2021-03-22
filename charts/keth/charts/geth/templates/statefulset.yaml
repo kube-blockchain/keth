@@ -39,7 +39,10 @@ spec:
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           name: get-bootnodes
-          resources: {}
+          {{- if .Values.resources }}
+          resources:
+            {{ .Values.resources | toYaml | indent 12 | trim }}
+          {{- end }}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
@@ -542,7 +545,10 @@ spec:
             - containerPort: 30303
               name: discovery-tcp
               protocol: TCP
-          resources: {}
+          {{- if .Values.resources }}
+          resources:
+            {{ .Values.resources | toYaml | indent 12 | trim }}
+          {{- end }}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
@@ -556,7 +562,10 @@ spec:
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           name: init-genesis
-          resources: {}
+          {{- if .Values.init.resources }}
+          resources:
+            {{ .Values.init.resources | toYaml | indent 12 | trim }}
+          {{- end }}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
@@ -572,7 +581,10 @@ spec:
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           name: init-account
-          resources: {}
+          {{- if .Values.init.resources }}
+          resources:
+            {{ .Values.init.resources | toYaml | indent 12 | trim }}
+          {{- end }}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
@@ -585,10 +597,16 @@ spec:
         {{ .Values.extraInitContainers | toYaml | indent 6 | trim }}
         {{- end }}
       restartPolicy: Always
-      schedulerName: default-scheduler
+      {{- if .Values.schedulerName }}
+      schedulerName: "{{ .Values.schedulerName }}"
+      {{- end }}
       securityContext:
         {{ .Values.podSecurityContext | toYaml | indent 8 | trim }}
       terminationGracePeriodSeconds: 10
+      {{- if .Values.tolerations }}
+      tolerations:
+        {{ .Values.tolerations | toYaml | indent 8 | trim }}
+      {{- end }}
       volumes:
         - configMap:
             defaultMode: 420
@@ -607,7 +625,7 @@ spec:
         resources:
           requests:
             storage: {{ .Values.persistence.size }}
-        {{ if (eq "-" (default "" $.Values.persistence.storageClass)) -}}
+        {{- if (eq "-" (default "" $.Values.persistence.storageClass)) }}
         storageClassName: ""
         {{- else }}
         storageClassName: {{ .Values.persistence.storageClass }}

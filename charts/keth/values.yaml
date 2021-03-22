@@ -38,6 +38,7 @@ bootnode:
     serviceAccountName: default
   replicaCount: 1
   resources: {}
+  schedulerName: default-scheduler
   serviceAccount:
     annotations: {}
     create: true
@@ -78,6 +79,7 @@ ethstats:
     serviceAccountName: default
   replicaCount: 1
   resources: {}
+  schedulerName: default-scheduler
   serviceAccount:
     annotations: {}
     create: true
@@ -133,6 +135,7 @@ geth:
     serviceAccountName: default
   replicaCount: 1
   resources: {}
+  schedulerName: default-scheduler
   serviceAccount:
     annotations: {}
     create: true

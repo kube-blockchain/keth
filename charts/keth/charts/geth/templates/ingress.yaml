@@ -5,8 +5,10 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
+  {{- if .Values.ingress.annotations }}
   annotations:
-    {{ .Values.ingress.annotations | toYaml | indent 4 }}
+    {{ .Values.ingress.annotations | toYaml | indent 4 | trim }}
+  {{- end }}
   labels:
     {{ include "geth.labels" . | indent 4  | trim}}
     component: {{ template "geth.fullname" . }}
