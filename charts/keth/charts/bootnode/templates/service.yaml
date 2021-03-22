@@ -35,4 +35,4 @@ spec:
   selector:
     component: {{ template "bootnode.fullname" . }}
   type: {{ .Values.service.type }}
-{{- end -}}
+{{- end }}

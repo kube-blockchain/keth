@@ -78,4 +78,4 @@ spec:
       tolerations:
         {{ .Values.tolerations | toYaml | indent 8 | trim }}
       {{- end }}
-{{- end -}}
+{{- end }}

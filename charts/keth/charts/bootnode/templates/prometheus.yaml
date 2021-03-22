@@ -26,35 +26,3 @@ spec:
     {{- end }}
     protocol: TCP
 {{ end }}
-
-{{- if and .Values.global.bootnode.enabled .Values.prometheus.serviceMonitor.enabled }}
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: {{ template "bootnode.fullname" . }}
-  {{- if .Values.prometheus.serviceMonitor.namespace }}
-  namespace: {{ .Values.prometheus.serviceMonitor.namespace }}
-  {{- end }}
-  labels:
-    {{ include "bootnode.labels" . | indent 4 | trim }}
-    {{- if .Values.prometheus.serviceMonitor.labels }}
-    {{- toYaml .Values.prometheus.serviceMonitor.labels | indent 4 | trim }}
-    {{- end }}
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: {{ template "bootnode.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
-  namespaceSelector:
-    matchNames:
-      - {{ .Release.Namespace }}
-  endpoints:
-    {{- if .Values.prometheus.metricsPort }}
-    - port: metrics
-    {{- else }}
-    - port: http
-    {{- end }}
-      interval: {{ .Values.prometheus.serviceMonitor.interval }}
-      path: /metrics
-{{- end -}}

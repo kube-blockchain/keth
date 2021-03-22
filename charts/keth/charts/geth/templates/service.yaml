@@ -35,4 +35,4 @@ spec:
   selector:
     component: {{ template "geth.fullname" . }}
   type: {{ .Values.service.type }}
-{{- end -}}
+{{- end }}

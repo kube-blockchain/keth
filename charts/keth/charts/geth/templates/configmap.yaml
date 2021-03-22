@@ -18,4 +18,4 @@ data:
   {{- if .Values.networkId }}
   networkId: {{ .Values.networkId | quote }}
   {{- end }}
-{{- end -}}
+{{- end }}

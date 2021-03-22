@@ -30,4 +30,4 @@ spec:
   selector:
     component: {{ template "ethstats.fullname" . }}
   type: {{ .Values.service.type }}
-{{- end -}}
+{{- end }}
