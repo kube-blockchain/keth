@@ -18,16 +18,16 @@ spec:
   {{- if .Values.ingress.tls }}
   tls:
   {{- if .ingressPath }}
-  {{- range .Values.ingress.tls }}
-  - hosts:
-      {{- range .hosts }}
-      - {{ . }}
-      {{- end }}
-      secretName: {{ .secretName }}
-      {{- end }}
-  {{- else }}
-  {{ .Values.ingress.tls | toYaml | indent 4 }}
-  {{- end }}
+    {{- range .Values.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . }}
+        {{- end }}
+        secretName: {{ .secretName }}
+        {{- end }}
+    {{- else }}
+    {{ .Values.ingress.tls | toYaml | indent 4 }}
+    {{- end }}
   {{- end }}
   rules:
   {{- range .Values.ingress.hosts }}

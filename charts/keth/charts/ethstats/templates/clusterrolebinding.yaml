@@ -11,7 +11,7 @@ roleRef:
   kind: ClusterRole
   name: {{ template "ethstats.fullname" . }}
 subjects:
-- kind: ServiceAccount
-  name: {{ template "ethstats.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  - kind: ServiceAccount
+    name: {{ template "ethstats.fullname" . }}
+    namespace: {{ .Release.Namespace }}
 {{- end }}
