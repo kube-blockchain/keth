@@ -3,6 +3,37 @@ entries:
   keth:
   - apiVersion: v1
     appVersion: 0.0.1
+    created: "2021-03-23T01:04:16.479961975Z"
+    dependencies:
+    - name: keth-bootnode
+      repository: ""
+      version: 0.0.202
+    - name: keth-ethstats
+      repository: ""
+      version: 0.0.202
+    - name: keth-geth
+      repository: ""
+      version: 0.0.202
+    description: Kubernetes implementation of the Ethereum protocol
+    digest: 54cf51f5f5224f97a61dd321e3c369cb2550aa59721a050ddb26eaf14fd39e00
+    home: https://github.com/kube-blockchain/keth
+    icon: https://kube-blockchain.github.io/keth/images/eth-diamond-rainbow.png
+    keywords:
+    - blockchain
+    - eth
+    - ethereum
+    - keth
+    maintainers:
+    - email: sthomas@idis.com
+      name: Scott Thomas
+    name: keth
+    sources:
+    - https://github.com/kube-blockchain/keth/tree/main/charts/keth
+    urls:
+    - https://github.com/kube-blockchain/keth/releases/download/keth-0.0.202/keth-0.0.202.tgz
+    version: 0.0.202
+  - apiVersion: v1
+    appVersion: 0.0.1
     created: "2021-03-22T15:35:27.944481275Z"
     dependencies:
     - name: bootnode
@@ -3644,4 +3675,4 @@ entries:
     urls:
     - https://github.com/kube-blockchain/keth/releases/download/keth-operator-0.0.6/keth-operator-0.0.6.tgz
     version: 0.0.6
-generated: "2021-03-22T15:35:27.946216831Z"
+generated: "2021-03-23T01:04:16.48218654Z"
