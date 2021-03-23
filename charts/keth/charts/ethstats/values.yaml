@@ -11,15 +11,22 @@ image:
   repository: ethereumex/eth-stats-dashboard
   tag: latest
 ingress:
-  enabled: false
   annotations: {}
-  hosts:
-    - host: example.local
-      paths:
-        - path: /
+  className: ""
+  enabled: false
+  extraLabels: {}
+  extraPaths: []
+  hosts: []
   tls: []
 init:
   resources: {}
+metrics:
+  metricsPort: false
+  serviceMonitor:
+    enabled: false
+    interval: "30s"
+    labels: {}
+    namespace:
 nodeSelector: {}
 overrides:
   fullName: ""
@@ -41,7 +48,13 @@ rbac:
   serviceAccountAnnotations: {}
   serviceAccountName: default
 replicaCount: 1
-resources: {}
+resources:
+  requests:
+    memory: "64Mi"
+    cpu: "250m"
+  limits:
+    memory: "128Mi"
+    cpu: "500m"
 schedulerName: default-scheduler
 securityContext:
   capabilities:
@@ -54,6 +67,7 @@ service:
   labels: {}
   loadBalancerIP: ""
   loadBalancerSourceRanges: []
+  port: 80
   type: ClusterIP
 serviceAccount:
   annotations: {}

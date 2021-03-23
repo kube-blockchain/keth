@@ -8,15 +8,22 @@ image:
   repository: ethereum/client-go
   tag: alltools-v1.10.1
 ingress:
-  enabled: false
   annotations: {}
-  hosts:
-    - host: example.local
-      paths:
-        - path: /
+  className: ""
+  enabled: false
+  extraLabels: {}
+  extraPaths: []
+  hosts: []
   tls: []
 init:
   resources: {}
+metrics:
+  metricsPort: false
+  serviceMonitor:
+    enabled: false
+    interval: "30s"
+    labels: {}
+    namespace:
 nodeSelector: {}
 overrides:
   fullName: ""
@@ -26,19 +33,18 @@ podLabels: {}
 podSecurityContext:
   fsGroup: 1000
 priorityClassName: ""
-prometheus:
-  service:
-    enabled: false
-  serviceMonitor:
-    enabled: false
-    interval: "30s"
-    namespace:
 rbac:
   create: true
   serviceAccountAnnotations: {}
   serviceAccountName: default
 replicaCount: 1
-resources: {}
+resources:
+  requests:
+    memory: "64Mi"
+    cpu: "250m"
+  limits:
+    memory: "128Mi"
+    cpu: "500m"
 schedulerName: default-scheduler
 securityContext:
   capabilities:
@@ -51,6 +57,7 @@ service:
   labels: {}
   loadBalancerIP: ""
   loadBalancerSourceRanges: []
+  port: 80
   type: ClusterIP
 serviceAccount:
   annotations: {}

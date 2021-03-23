@@ -1,31 +1,32 @@
-{{- if and .Values.global.bootnode.enabled .Values.prometheus.serviceMonitor.enabled }}
+{{- if and .Values.global.bootnode.enabled .Values.metrics.serviceMonitor.enabled }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ template "bootnode.fullname" . }}
-  {{- if .Values.prometheus.serviceMonitor.namespace }}
-  namespace: {{ .Values.prometheus.serviceMonitor.namespace }}
-  {{- end }}
   labels:
     {{ include "bootnode.labels" . | indent 4 | trim }}
-    {{- if .Values.prometheus.serviceMonitor.labels }}
-    {{- toYaml .Values.prometheus.serviceMonitor.labels | indent 4 | trim }}
+    {{- if .Values.metrics.serviceMonitor.labels }}
+    {{- toYaml .Values.metrics.serviceMonitor.labels | indent 4 | trim }}
     {{- end }}
+  name: {{ template "bootnode.fullname" . }}
+  {{- if .Values.metrics.serviceMonitor.namespace }}
+  namespace: {{ .Values.metrics.serviceMonitor.namespace }}
+  {{- end }}
 spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: {{ template "bootnode.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
-  namespaceSelector:
-    matchNames:
-      - {{ .Release.Namespace }}
   endpoints:
-    {{- if .Values.prometheus.metricsPort }}
+    {{- if .Values.metrics.metricsPort }}
     - port: metrics
     {{- else }}
     - port: http
     {{- end }}
-      interval: {{ .Values.prometheus.serviceMonitor.interval }}
+      interval: {{ .Values.metrics.serviceMonitor.interval }}
       path: /metrics
+      scrapeTimeout: {{ .Values.metrics.serviceMonitor.scrapeTimeout }}
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/name: {{ template "bootnode.name" . }}
 {{- end }}

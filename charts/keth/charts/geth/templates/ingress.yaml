@@ -1,8 +1,5 @@
-{{- if and .Values.global.geth.enabled .Values.ingress.enabled -}}
-{{- $fullName := include "keth.fullname" . -}}
-{{- $httpPort := .Values.httpPort -}}
-{{- $ingressPath := .Values.ingress.path -}}
-apiVersion: networking.k8s.io/v1beta1
+{{- if and .Values.global.geth.enabled .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   {{- if .Values.ingress.annotations }}
@@ -10,45 +7,35 @@ metadata:
     {{ .Values.ingress.annotations | toYaml | indent 4 | trim }}
   {{- end }}
   labels:
-    {{ include "geth.labels" . | indent 4  | trim}}
-    component: {{ template "geth.fullname" . }}
+    {{ include "geth.labels" . | indent 4  | trim }}
+    {{- range $key, $value := .Values.ingress.extraLabels }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
   name: {{ template "geth.fullname" . }}
   namespace: {{ $.Release.Namespace }}
 spec:
-  {{- if .Values.ingress.tls }}
-  tls:
-  {{- if .ingressPath }}
-    {{- range .Values.ingress.tls }}
-    - hosts:
-        {{- range .hosts }}
-        - {{ . }}
-        {{- end }}
-        secretName: {{ .secretName }}
-        {{- end }}
-    {{- else }}
-    {{ .Values.ingress.tls | toYaml | indent 4 }}
-    {{- end }}
+  {{- if .Values.ingress.className }}
+  ingressClassName: {{ .Values.ingress.className }}
   {{- end }}
   rules:
+  {{- $extraPaths := .Values.ingress.extraPaths }}
+  {{- $fullName := include "geth.fullname" . }}
+  {{- $servicePort := .Values.service.port }}
   {{- range .Values.ingress.hosts }}
-    {{- if $ingressPath }}
-    - host: {{ . }}
+    {{- $url := splitList "/" . }}
+    - host: {{ first $url }}
       http:
         paths:
-          - path: {{ $ingressPath }}
+          {{- if $extraPaths }}
+          {{ toYaml $extraPaths | indent 10 | trim }}
+          {{- end }}
+          - path: /{{ rest $url | join "/" }}
             backend:
               serviceName: {{ $fullName }}
-              servicePort: {{ $httpPort }}
-    {{- else }}
-    - host: {{ .host }}
-      http:
-        paths:
-        {{- range .paths }}
-          - path: {{ .path }}
-            backend:
-              serviceName: {{ $fullName }}
-              servicePort: {{ .servicePort | default $httpPort }}
-        {{- end }}
-    {{- end }}
+              servicePort: {{ $servicePort }}
+  {{- end }}
+  {{- if .Values.ingress.tls }}
+  tls:
+    {{ toYaml .Values.ingress.tls | indent 4 | trim }}
   {{- end }}
 {{- end }}

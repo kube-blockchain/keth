@@ -17,5 +17,12 @@ spec:
       image: ghcr.io/kube-blockchain/keth-helm-test:latest
       imagePullPolicy: IfNotPresent
       name: test
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
   restartPolicy: Never
 {{- end }}
