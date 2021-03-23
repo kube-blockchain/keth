@@ -33,7 +33,6 @@ bootnode:
       namespace:
   rbac:
     create: true
-    pspEnabled: false
     serviceAccountAnnotations: {}
     serviceAccountName: default
   replicaCount: 1
@@ -74,7 +73,6 @@ ethstats:
       namespace:
   rbac:
     create: true
-    pspEnabled: false
     serviceAccountAnnotations: {}
     serviceAccountName: default
   replicaCount: 1
@@ -130,7 +128,6 @@ geth:
   priorityClassName: ""
   rbac:
     create: true
-    pspEnabled: false
     serviceAccountAnnotations: {}
     serviceAccountName: default
   replicaCount: 1

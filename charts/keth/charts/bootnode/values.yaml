@@ -35,7 +35,6 @@ prometheus:
     namespace:
 rbac:
   create: true
-  pspEnabled: false
   serviceAccountAnnotations: {}
   serviceAccountName: default
 replicaCount: 1
