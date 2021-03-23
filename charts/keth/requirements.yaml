@@ -1,7 +1,7 @@
 dependencies:
   - name: keth-bootnode
-    version:  0.0.201
+    version:  0.0.202
   - name: keth-ethstats
-    version:  0.0.201
+    version:  0.0.202
   - name: keth-geth
-    version:  0.0.201
+    version:  0.0.202
