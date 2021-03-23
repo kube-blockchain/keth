@@ -1,19 +1,19 @@
 ---
 apiVersion: v1
-name: ethstats
-version:  0.0.200
+name: geth
+version:  0.0.201
 appVersion: master
-description: Kubernetes implementation of Ethereum network statistics dashboards
+description: Kubernetes implementation of the Ethereum protocol
 icon: https://kube-blockchain.github.io/keth/images/eth-diamond-rainbow.png
 keywords:
   - blockchain
   - eth
   - ethereum
-  - ethstats
+  - geth
   - keth
 home: https://github.com/kube-blockchain/keth
 sources:
-  - https://github.com/kube-blockchain/keth/tree/main/charts/keth/charts/ethstats
+  - https://github.com/kube-blockchain/keth/tree/main/charts/keth/charts/geth
 maintainers:
   - name: Scott Thomas
     email: sthomas@idis.com
