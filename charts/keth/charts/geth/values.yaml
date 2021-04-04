@@ -176,6 +176,23 @@ ingress:
   tls: []
 init:
   resources: {}
+
+
+## Liveness Probe. The block is directly forwarded into the deployment, so you can use whatever livenessProbe configuration you want.
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
+##
+livenessProbe:
+  httpGet:
+    path: /health/livez
+    port: 8080
+    scheme: HTTPS
+  initialDelaySeconds: 10
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 2
+  successThreshold: 1
+
+
 metrics:
   metricsPort: false
   serviceMonitor:
@@ -194,6 +211,27 @@ persistence:
   size: 10Gi
   # storageClass: "-"
 podAnnotations: {}
+
+
+## Pod Disruption Budget configuration
+## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
+##
+pdb:
+  ## Annotations for Pod Disruption Budget
+  ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  ##
+  annotations: {}
+  ## Set to true to enable a Pod Disruption Budget
+  ##
+  create: false
+  ## Max number of pods that can be unavailable after the eviction
+  ##
+  # maxUnavailable: 1
+  ## Min number of pods that must still be available after the eviction
+  ##
+  minAvailable: 1
+
+
 podLabels: {}
 podSecurityContext:
   fsGroup: 1000
@@ -209,6 +247,23 @@ rbac:
   create: true
   serviceAccountAnnotations: {}
   serviceAccountName: default
+
+
+## Readiness Probe. The block is directly forwarded into the deployment, so you can use whatever readinessProbe configuration you want.
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
+##
+readinessProbe:
+  httpGet:
+    path: /health/readyz
+    port: 8080
+    scheme: HTTPS
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+
+
 replicaCount: 1
 resources:
   requests:

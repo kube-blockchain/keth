@@ -1,0 +1,23 @@
+{{- if .Values.pdb.create }}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  {{- if .Values.pdb.annotations }}
+  annotations:
+    {{ .Values.pdb.annotations | toYaml | indent 4 | trim }}
+  {{- end }}
+  name: {{ template "geth.fullname" . }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{ include "geth.labels" . | indent 4  | trim }}
+spec:
+  {{- if .Values.pdb.minAvailable }}
+  minAvailable: {{ .Values.pdb.minAvailable }}
+  {{- end }}
+  {{- if .Values.pdb.maxUnavailable }}
+  maxUnavailable: {{ .Values.pdb.maxUnavailable }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{ include "geth.labels" . | indent 6  | trim }}
+{{- end }}
